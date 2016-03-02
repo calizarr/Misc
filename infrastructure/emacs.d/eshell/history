@@ -1,0 +1,128 @@
+ls
+ls -lh
+scripts=/home/clizarraga/Encode/Sarit_Reads/Scripts/PyATAC/
+perl ~/Encode/Sarit_Reads/Scripts/PyATAC/getFragmentBed.pl -h
+perl ~/Encode/Sarit_Reads/Scripts/PyATAC/getFragmentBed.pl 25-ATAC-NA-0.1-nuclei-1.sorted.rmdup.bam 25-ATAC-NA-0.1-nuclei-1_fragment.bed
+ls -lh
+bamToBed -i 25-ATAC-NA-0.1-nuclei-1.sorted.rmdup.bam > "test.rand.bed"
+bamToBed -i 25-ATAC-NA-0.1-nuclei-1.sorted.rmdup.bam > test.rand.bed
+ls -lh
+rm test.rand.bed~
+ls
+ls- lh
+ls -lh
+less test.rand.bed 
+ls
+ls -lh
+less test.rand.bed 
+less test.rand.bed 
+ls -lh
+ls
+ls -lh
+test ! -r callpeaks && mkdir callpeaks
+ls
+rmdir callpeaks/
+cd ..
+ls
+rmdir callpeaks/
+cd callpeaks/
+ls
+cd ..
+rm -rf callpeaks/
+ls
+cd Test/
+ls
+cd ..
+ls
+cd Test/
+ls
+ls callpeaks/
+ls
+ls callpeaks/
+rmdir callpeaks/
+ls
+ls -lh
+ls
+ls
+cd callpeaks/
+ls
+cd ..
+ls
+ls
+rm *
+ls
+rm -rf callpeaks/
+ls
+rm -rf callpeaks/
+man awk
+exit
+ls
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+less accession_read_qualities.txt
+ls
+man awk
+awk '{print sprintf("%.9f", $5);}'
+awk '{print sprintf("%.9f", $5);}' accession_read_qualities.txt
+awk '{print sprintf("%d", $5);}' accession_read_qualities.txt
+awk '{print sprintf("%d", $5);}' accession_read_qualities.txt
+man sprintf
+awk '{print sprintf("%e", $5);}' accession_read_qualities.txt
+awk '{$5=sprintf("%e", $5);}' accession_read_qualities.txt
+less accession_read_qualities.txt
+awk '{$5=sprintf("%e", $5); print}' accession_read_qualities.txt
+awk 'NR=1 print {$5=sprintf("%e", $5); print}' accession_read_qualities.txt
+awk '{NR=1 {print;next};$5=sprintf("%e", $5); print}' accession_read_qualities.txt
+awk '{NR=1 next};$5=sprintf("%e", $5); print}' accession_read_qualities.txt
+awk '{$5=sprintf("%e", $5); print}' accession_read_qualities.txt
+awk 'NR>1;print' accession_read_qualities.txt
+awk '{NR>1;print}' accession_read_qualities.txt
+awk 'NR == 1' accession_read_qualities.txt
+awk 'if(NR == 1) print else $5=sprintf("%e",$5);rpint' accession_read_qualities.txt
+awk '{if(NR == 1) print else $5=sprintf("%e",$5);print}' accession_read_qualities.txt
+awk '{if(NR == 1) {print} else {$5=sprintf("%e",$5);print}}' accession_read_qualities.txt
+awk '{if(NR == 1) {print} else {$5=sprintf("%e",$5);print}}' accession_read_qualities.txt > accession_read_qualities_sn.txt
+ls
+ls
+less accession_read_qualities_sn.txt
+ls
+awk 'FS=" ",OFS=","' accession_read_qualities_sn.txt
+awk 'FS="\s",OFS=","' accession_read_qualities_sn.txt
+awk 'FS="\\s",OFS=","' accession_read_qualities_sn.txt
+ls
+sed 's/\s/,/g' accession_read_qualities_sn.txt
+sed 's/\s*/,/g' accession_read_qualities_sn.txt
+sed 's/\s./,/g' accession_read_qualities_sn.txt
+sed 's/\s/,/g' accession_read_qualities_sn.txt
+sed 's/[[:space:]]\{1,\}/,/g' accession_read_qualities_sn.txt
+sed 's/[[:space:]]\{1,\}/,/g' accession_read_qualities_sn.txt > accession_read_qualities_sn.csv
+ls
+less accession_read_qualities_sn.csv
+exit
+ls
+python trim_adapters.py -h
+exit
+ls
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
+sh test.sh /home/clizarraga/bdaccessions/Combined/
