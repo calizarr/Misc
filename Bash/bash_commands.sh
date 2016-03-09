@@ -33,4 +33,8 @@ sed -i -- 's/xrange/range/g' *
 ## find . -type f -exec awk '/^#!.*bash/{print FILENAME} {nextfile}' {} +
 find . -type f -exec awk '/^#!.*<program>/{print FILENAME} {nextfile}' {} +
 
-
+# Remove all files and folders in a directory owned by user
+# I used it for /tmp/ probably, bad to use in any other circumstance.
+directory=/tmp/
+user=clizarraga
+rm -rf `ls -la $directory | grep $user | awk -v dir="$directory" '{print dir$9}'`
