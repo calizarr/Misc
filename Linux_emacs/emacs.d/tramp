@@ -1,0 +1,28 @@
+;; -*- emacs-lisp -*- <15/06/11 09:38:01 c:/Users/clizarraga/AppData/Roaming/.emacs.d/tramp>
+;; Tramp connection history.  Don't change this file.
+;; You can delete it, forcing Tramp to reapply the checks.
+
+((["pscp" nil "plink" nil nil]
+  nil)
+ (["plink" "clizarraga" "apollo.ddpsc.org" nil nil]
+  ("uname" "Linux 2.6.32-504.8.1.el6.x86_64")
+  ("test" "test")
+  ("remote-path"
+   ("/bin" "/usr/bin" "/sbin" "/usr/sbin" "/usr/local/bin" "/usr/local/sbin"))
+  ("remote-shell" "/bin/sh")
+  ("locale" "LC_ALL=en_US.utf8")
+  ("~" "/home/clizarraga")
+  ("readlink" "\\readlink")
+  ("file-exists" "test -e")
+  ("stat" "\\stat")
+  ("ls" "/bin/ls --color=never")
+  ("id" "/usr/bin/id")
+  ("gid-string" "tmockler")
+  ("gid-integer" 502)
+  ("perl-file-spec" t)
+  ("perl-cwd-realpath" t)
+  ("perl" "\\perl")
+  ("uid-integer" 605)
+  ("tmpdir" "/plink:clizarraga@apollo.ddpsc.org:/tmp")
+  ("touch-t" t)
+  ("touch" "\\touch")))

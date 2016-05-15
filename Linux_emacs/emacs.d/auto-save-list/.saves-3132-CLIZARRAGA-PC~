@@ -1,0 +1,10 @@
+/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Tools/findFastq.pl
+#_aplink_bclizarraga@apollo.ddpsc.org_b_ashares_atmockler__share_aclizarraga_ascripts_aTools_afindFastq.pl#
+/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/Pre_Deinterleave.pl
+#_aplink_bclizarraga@apollo.ddpsc.org_b_ashares_atmockler__share_aclizarraga_ascripts_aPipeline_aPre__Deinterleave.pl#
+/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/RUN2_ManageFiltering_byDirectoryCAL.pl
+#_aplink_bclizarraga@apollo.ddpsc.org_b_ashares_atmockler__share_aclizarraga_ascripts_aPipeline_aRUN2__ManageFiltering__byDirectoryCAL.pl#
+/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/SampleConfigCesar.txt.control
+#_aplink_bclizarraga@apollo.ddpsc.org_b_ashares_atmockler__share_aclizarraga_ascripts_aPipeline_aSampleConfigCesar.txt.control#
+/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/locations.txt
+#_aplink_bclizarraga@apollo.ddpsc.org_b_ashares_atmockler__share_aclizarraga_alocations.txt#

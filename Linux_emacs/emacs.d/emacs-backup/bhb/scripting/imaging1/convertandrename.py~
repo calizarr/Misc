@@ -1,0 +1,75 @@
+import os, sys, shutil, csv
+from PIL import Image
+from subprocess import call
+
+
+def cropImage(path, box):
+    """ Crops an image at the specified rectangle. The Box is a 4-tuple
+    (left, upper, right, lower) for the rectangle. From ImageJ Coordinates
+    it is x,y,width,height."""
+    dimensions = box[0], box[1], box[0]+box[2], box[1]+box[3]
+    im = Image.open(path)
+    region = im.crop(dimensions)
+    region.save(path)
+
+
+def convertRename(path):
+    """ Finds all files and only files within a path. Returns the files in a list with full directory path.
+    This version also removes the old file after saving the new converted file."""
+    if not path.endswith("\\"):
+        path = path+"\\"
+    files = []
+    for f in os.listdir(path):
+        if os.path.isfile(path+f):
+            if f[-3:] not in ["jpg", "png"]:
+                continue
+            fixed = f.replace(" ", "_")
+            try:
+                int(fixed[-6:-4])
+            except ValueError:
+                fixed = fixed[:-5]+"0"+fixed[-5:]
+            os.rename(path+f, path+fixed)
+            im = Image.open(path+fixed)
+            im.save(path+fixed[:-3], "PNG")
+            os.remove(path+fixed)
+
+
+def findDirectories(path):
+    """ Finds all directories in a folder to later iterate through them. """
+    if not path.endswith("\\"):
+        path = path+"\\"
+    dirs = []
+    for d in os.listdir(path):
+        if not os.path.isfile(path+d):
+            dirs.append(path+d+"\\")
+    return dirs
+
+
+def quickDirty(path):
+    if not path.endswith("\\"):
+        path = path+"\\"
+    for f in os.listdir(path):
+        if os.path.isfile(path+f):
+            fixed = f+".png"
+            os.rename(path+f, path+fixed)
+
+
+def filePaths(path):
+    """ Returns a list of files in the directory. """
+    files = []
+    if not path.endswith("\\"):
+        path = path+"\\"
+    for f in os.listdir(path):
+        if os.path.isfile(path+f):
+            files.append(path+f)
+    return files
+
+path = "d:\\bhb\\Experiments\\Exp_9\\Images\\2014_10_10_week_1_MTM\\"
+dirs = findDirectories(path)
+#for dir in dirs:
+#    files = filePaths(dir)
+#    for f in files:
+#        cropImage(f, [254, 0, 1414, 1360])
+f = "My_Snapshot41.jpg"
+box = [254, 0, 1414, 1360]
+dimensions = box[0], box[1], box[0]+box[2], box[1]+box[3]

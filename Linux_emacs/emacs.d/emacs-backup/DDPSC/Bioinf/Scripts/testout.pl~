@@ -1,0 +1,21 @@
+#!usr/bin/perl
+use warnings;
+use strict;
+
+# my $n = "d:/DDPSC/Genes/\"FastQ Testing\"/Bis-1.1883.7.1652.fastq";
+# my $cmd = "wc -l $n";
+# open(CMD, "-|",$cmd);
+# my @output = <CMD>;
+# close CMD;
+# my $outsize = @output;
+# print "How many items? $outsize items\n";
+# foreach my $i (@output) {
+#     print "Item: $i\n";
+#     print $output[0];
+# }
+# my $num = $output[0];
+# my $numa;
+my $num = "81900824 d:/DDPSC/Genes/FastQ Testing/Bis-1.1883.7.1652.fastq";
+my $numa;
+($numa = $num) =~ s/\s+.+//;
+print "Original: $num\n Altered: $numa\n";
