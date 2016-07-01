@@ -1,0 +1,154 @@
+import os, sys, shutil
+from PIL import Image
+from subprocess import call
+
+
+def cropImage(path, box):
+    """ Crops an image at the specified rectangle. The Box is a 4-tuple
+    (left, upper, right, lower) for the rectangle. From ImageJ Coordinates
+    it is x,y,x+width,y+height."""
+    im = Image.open(path)
+    region = im.crop(box)
+    region.save(path)
+
+
+def cropLabel(path, box=(810, 1188, 804+262, 1188+92)):
+    # Getting Image Path
+    directory = path
+#    directory = input("Enter the path to your image: ")
+#    imagename = input("Enter image name: ")
+    image = directory
+    # Opening image, making crop region, cropping, and naming label.
+    im = Image.open(image)
+#    box = (810, 1188, 804+262, 1188+92)
+    region = im.crop(box)
+    region.show()
+    name = image[:len(image)-4] + "label" + image[-4:]
+    # Saving label as an image file.
+    region.save(name)
+    # Calling tesseract on cmd to OCR label.
+    call(["tesseract", name, directory+"label", "nobatch", "digits"])
+    # Opening the new label text file, processing and taking in the label.
+    with open(directory+"label.txt", "r") as myfile:
+        label = myfile.readline()
+    label.strip()
+    if len(label) > 6:
+        label = label[1:]
+        label = label[:-1]
+    # May be useful later for scrolling through directories for the csv files.
+    folders = []
+    folders.append(label)
+    # Deleting the label and file so as not to disturb the future iterators.
+    os.remove(path+"label.txt")
+    os.remove(name)
+    return label
+
+
+def handleFiles(path, crop=False):
+    """ This is the heavy duty function of the imaging analysis pipeline part 1.
+    It iterates over the files in the directory, finds the label makes a
+    directory with the PID, then renames and moves the plant photos into it.
+    It accords for side photos and top. It has 3 major assumption:
+    1. The first photo is always a side photo with the label.
+    2. The last photo is always the top photo.
+    3. There are a total of 5 photos per plant."""
+    files = paths(path)
+    files.sort()
+    print("We got a list of files!")
+    print(files[:10])
+    for i in range(len(files)):
+        if i % 5 == 0:
+            print("This is the path: ", path)
+            # print("This is the file: ", files[i])
+            question = "What are the dimensions to crop for the label? Please input: x,width,y,height. "
+            boxb = input(question)
+            if boxb == "make":
+                lbl = input("What is the new directory name?")
+            else:
+                dimensions = boxb.split(",")
+                dimensions = [int(x) for x in dimensions]
+                print(dimensions)
+                boxb = (dimensions[0], dimensions[2], dimensions[0]+dimensions[1], dimensions[2]+dimensions[3])
+                lbl = cropLabel(files[i], boxb)
+                lbl = lbl[:-1]
+            # Cropping image if areas too large need to be made smaller.
+            if crop is True:
+                boxa = input(question)
+                if boxa == "Default":
+                    cropImage(files[i])
+                else:
+                    dimensions = boxa.split(",")
+                    dimensions = [int(x) for x in dimensions]
+                    boxa = (dimensions[0], dimensions[2], dimensions[0]+dimensions[1], dimensions[2]+dimensions[3])
+                    cropImage(files[i], boxa)
+            #Cropping section over.
+            # print(lbl)
+            # print(path+lbl)
+            os.makedirs(path+lbl, exist_ok=True)
+            print("This is the new directory: ", path+lbl)
+            prevName = files[i]
+            if i < 10:
+                newName = lbl+"-0"+str(i)+"-side.png"
+            else:
+                newName = lbl+"-"+str(i)+"-side.png"
+            # print(path+"\\"+lbl+"\\"+newName)
+            # print(prevName)
+            shutil.move(prevName, path+"\\"+lbl+"\\"+newName)
+            try:
+                os.remove(prevName)
+            except OSError:
+                pass
+        elif i % 4 == 0:
+            prevName = files[i]
+            if i < 10:
+                newName = lbl+"-0"+str(i)+"-top.png"
+            else:
+                newName = lbl+"-"+str(i)+"-top.png"
+            shutil.move(prevName, path+"\\"+lbl+"\\"+newName)
+            try:
+                os.remove(prevName)
+            except OSError:
+                pass
+        else:
+            prevName = files[i]
+            if i < 10:
+                newName = lbl+"-0"+str(i)+"-side.png"
+            else:
+                newName = lbl+"-"+str(i)+"-side.png"
+            shutil.move(prevName, path+"\\"+lbl+"\\"+newName)
+            try:
+                os.remove(prevName)
+            except OSError:
+                pass
+
+# Helper functions
+
+
+def paths(path):
+    """ Finds all files and only files within a path. Returns the files in a list with full directory path. """
+    if not path.endswith("\\"):
+        path = path+"\\"
+    files = []
+    for f in os.listdir(path):
+        if os.path.isfile(path+f):
+            if f[-3:] not in ["jpg", "png"]:
+                continue
+            fixed = f.replace(" ", "_")
+            try:
+                int(fixed[-6:-4])
+            except ValueError:
+                fixed = fixed[:-5]+"0"+fixed[-5:]
+            os.rename(path+f, path+fixed)
+            files.append(path+fixed)
+    return files
+
+#path = "d:\\bhb\\imaging\\"
+#img = "MySnapshot01.png"
+#lbl = CL(path, img)
+#print(lbl)
+#print(paths(path))
+#path = input("What is the directory with the files? ")
+#print(path)
+path = "d:\\bhb\\experiments\\Exp_9\\Images\\2014_10_10_week_1_MTM\\"
+handleFiles(path)
+#print(paths(path)[:10])

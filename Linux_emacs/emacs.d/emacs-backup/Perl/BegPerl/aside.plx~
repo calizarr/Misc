@@ -1,0 +1,4 @@
+#!usr/bin/perl
+use warnings;
+
+print 'ex\\ er\\', ' ci\', ' se\'', "\n";

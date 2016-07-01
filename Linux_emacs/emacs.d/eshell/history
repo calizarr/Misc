@@ -1,0 +1,128 @@
+cd Scripts
+ls
+cd pip3.4.exe
+pip3.4.exe
+pip3.4 
+pip
+ls
+cd bhb
+ls
+cd ..
+cd bhb
+rm dbtest
+rm -r dbtest
+ls
+cd ..
+ls
+pyvenv d:/dbtest/
+python -m venv dbtest
+ls
+c:
+d:
+ls
+pip
+pip list
+cd dbtest
+ls
+ls
+pip list
+ls
+source /bin/activate
+cd ..
+source /dbtest/bin/activate
+ls
+cd dbtest
+ls
+cd Scripts
+ls
+activate.bat
+cd ..
+cd ..
+ls
+cd ..
+k
+ls
+pip list
+ssh
+uname -a
+cd
+ls
+cd /ssh:uname
+uname
+echo $PATH
+cd /ssh:clizarraga@apollo.ddpsc.org /home/clizarraga
+ssh
+cd ssh
+cd ssh:clizarraga@apollo.ddpsc.org
+diff
+perl hexadec.plx 
+ls
+cd d:/perl/begperl
+ls
+perl convert1.plx
+ls
+ssh
+ls
+plink
+plink clizarraga@apollo.ddpsc.org
+ls
+find-file guessnum.plx 
+ls
+plink clizarraga@apollo.ddpsc.org
+ls
+ediff quotes.plx quotes2.plx
+ls
+head
+ls
+perl QC_GetLibrarySizesCAL.pl
+perl
+perl --h
+ls
+cd scripting/
+ls
+virtualenv
+cd virtualenvs/
+ls
+virtualenv imaging
+ls
+cd imaging/
+ls
+pip list
+ls
+source Scripts/activate_this.py
+cd scripting/
+ls
+cd virtualenvs/
+cd imaging/
+ls
+cd Scripts/
+ls
+activate
+ls
+ls -lh
+less activate_this.py
+less
+ls
+./activate.bat 
+pip list
+which pip
+ls
+./imaging/Scripts/activate.bat 
+pip list
+which pip
+ls
+cd /
+ls
+D:
+U:
+exit
+ls
+less SnapshotInfo.csv 
+more
+more SnapshotInfo.csv 
+gc SnapshotInfo.csv 
+exit
+ls
+$(pwd)
+pwd
+exit

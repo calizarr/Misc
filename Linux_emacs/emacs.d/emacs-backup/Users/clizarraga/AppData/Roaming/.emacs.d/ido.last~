@@ -1,0 +1,251 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("d:/bhb/Experiments/Exp_9/Images/" . "2014_10_10_week_1_MTM/")
+ ("d:/bhb/Experiments/Exp_9/" . "Images/")
+ ("d:/bhb/Experiments/" . "Exp_9/")
+ ("d:/bhb/HTPHeno Configurations/" . "Exp9/")
+ ("c:/cygwin64/" . "bin/")
+ ("c:/Users/clizarraga/AppData/Roaming/.emacs.d/elpa/" . "setup-cygwin-20150105.48/")
+ ("c:/Users/clizarraga/AppData/Roaming/.emacs.d/" . "elpa/")
+ ("/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/Lib/" . "Config/")
+ ("/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/" . "Lib/")
+ ("/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/" . "Pipeline/")
+ ("/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/" . "scripts/")
+ ("d:/bhb/scripting/" . "imaging1/")
+ ("d:/DDPSC/Genes/" . "FastQ Testing/")
+ ("/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/" . "clizarraga/")
+ ("c:/Program Files (x86)/" . "Tesseract-OCR/")
+ ("d:/Perl/BegPerl/" . "Code/")
+ ("d:/Perl/" . "BegPerl/")
+ ("d:/bhb/Imaging/" . "Testing2/")
+ ("c:/Users/clizarraga/Downloads/Image Analysis/sources/sources/" . "src/")
+ ("c:/Users/clizarraga/Downloads/Image Analysis/sources/" . "sources/")
+ ("c:/Users/clizarraga/Downloads/Image Analysis/" . "sources/")
+ ("/clizarraga@apollo.ddpsc.org:localperl/" . "bin/")
+ ("/clizarraga@apollo.ddpsc.org:" . "localperl/")
+ ("/clizarraga@apollo.ddpsc.org:/home/" . "abasaro/")
+ ("/clizarraga@apollo.ddpsc.org:/" . "bin/")
+ ("c:/Users/clizarraga/AppData/Roaming/" . ".emacs.d/")
+ ("c:/Users/clizarraga/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/" . "Gnu Emacs/")
+ ("d:/bhb/" . "HTPHeno Configurations/")
+ ("c:/Users/clizarraga/Downloads/" . "emacs/")
+ ("c:/Users/clizarraga/" . "Downloads/")
+ ("c:/Users/" . "clizarraga/")
+ ("d:/DDPSC/Bioinf/" . "Scripts/")
+ ("d:/DDPSC/" . "Perl/")
+ ("c:/Program Files/ImageJ/plugins/HTPheno/" . "ConfigStandard/")
+ ("c:/Program Files/ImageJ/plugins/" . "HTPheno/")
+ ("c:/Program Files/ImageJ/" . "plugins/")
+ ("c:/Program Files/" . "ImageJ/")
+ ("c:/" . "cygwin64/")
+ ("d:/dbtest/" . "Include/")
+ ("d:/" . "DDPSC/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "c:/Users/clizarraga/AppData/Roaming/"
+ "/plink:"
+ "d:/DDPSC/Perl/"
+ "/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/"
+ "d:/DDPSC/Bioinf/"
+ "d:/DDPSC/"
+ "d:/DDPSC/Bioinf/Scripts/"
+ "d:/bhb/HTPHeno Configurations/Exp9/"
+ "d:/bhb/Experiments/Exp_9/Images/2014_10_10_week_1_MTM/"
+ "d:/bhb/HTPHeno Configurations/WorkingConfigNew/"
+ "d:/bhb/scripting/imaging1/"
+ "c:/Users/clizarraga/AppData/Roaming/.emacs.d/"
+ "c:/cygwin64/bin/"
+ "c:/Users/clizarraga/AppData/Roaming/.emacs.d/elpa/setup-cygwin-20150105.48/"
+ "c:/Users/clizarraga/Downloads/emacs/"
+ "/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/Lib/"
+ "/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/Lib/Config/"
+ "d:/bhb/scripting/imaging1/Scripts/"
+ "c:/Fiji.app/"
+ "d:/bhb/scripting/"
+ "d:/DDPSC/Genes/FastQ Testing/"
+ "c:/Program Files/ImageJ/plugins/HTPheno/"
+ "/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/"
+ "/ssh:clizarraga@"
+ "/ssh:"
+ "/plink:clizarraga@"
+ "/clizarraga@"
+ "d:/bhb/Imaging/testing2/"
+ "d:/bhb/Imaging/testing3/"
+ "d:/bhb/Imaging/"
+ "c:/Program Files (x86)/Tesseract-OCR/"
+ "c:/Program Files/ImageJ/plugins/PhotoDoc/"
+ "d:/DDPSC/Progress updates/"
+ "d:/Perl/BegPerl/"
+ "d:/perl/begperl/"
+ "c:/Users/clizarraga/Downloads/Image Analysis/sources/sources/"
+ "c:/Program Files/"
+ "d:/Perl/"
+ "/"
+ "/::"
+ "c:/Program Files/ImageJ/plugins/HTPheno/ConfigStandard/"
+ "c:/Users/clizarraga/Downloads/Image Analysis/sources/sources/src/"
+ "c:/Users/clizarraga/"
+ "/clizarraga@apollo.ddpsc.org:/bin/"
+ "c:/Users/clizarraga/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Gnu Emacs/"
+ "/apollo.ddpsc.org:/"
+ "/clizarraga:"
+ "/apollo.ddpsc.org:"
+ "/clizarraga@apollo.ddpsc.org:localperl/bin/"
+ "/clizarraga@apollo.ddpsc.org:"
+)
+
+;; ----- ido-work-file-list -----
+(
+ ".emacs"
+ ":"
+ "helloworld.pl"
+ "QC_AssessDuplicationCAL.pl"
+ "locations.txt"
+ "config_scaling_top.csv"
+ "config_regions_top.csv"
+ "config_scaling_side.csv"
+ "config_regions_side.csv"
+ "croplabel.py"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("c:/Users/clizarraga/AppData/Roaming/" (21677 32128 0 0) "winscp.rnd" "WebStorage/" "TTYPlus/" "sp_data.sys" "RStudio/" "pip/" "Panda Security/" "Oracle/" "MySQL/" "Mozilla/" "Microsoft/" "Macromedia/" "jEdit/" "Jedi/" "IrfanView/" "HpUpdate/" "GitHub/" "ClassicShell/" "Atheros/" "Adobe/" ".history" ".flake8" ".emacs~" ".emacs.d/" ".emacs" ".bash_history" "../" "./")
+
+ ("/plink:clizarraga@apollo.ddpsc.org:/shares/tmockler_share/clizarraga/scripts/Pipeline/" (ftp . 394626.1038888889) "./" "../" ".git/" "ContigDepths.txt" "GetMaxPerContig.pl" "Lib/" "PipelineConfig.txt" "QC_AssessDuplication.pl" "QC_GetLibrarySizes.pl" "README.md" "RUN0_PrepareExclusions.pl" "RUN1_PrepareReferences.pl" "RUN2_ManageFiltering_byDirectory.pl" "RUN3_AlignToReferences.pl" "RUN4_WrapDelly.pl" "RUN5_CallSNPs.pl" "RUN6_ParseOutput.pl" "RunDelly.bestN.pl" "SampleConfig.txt" "SampleConfig.txt.test" "Scripts/" "bin/" "temp/" "accessions.txt" "SampleConfigCesar.txt" "SampleConfigCesar.txt.test" "QC_GetLibrarySizesCAL.pl" "QC_AssessDuplicationCAL.pl" "#_aplink_bclizarraga@apollo.ddpsc.org_b_ashares_atmockler__share_aclizarraga_ascripts_aPipeline_aQC__GetLibrarySizesCAL.pl#")
+
+ ("c:/Users/clizarraga/AppData/Roaming/.emacs.d/" (21677 25989 0 0) "tramp" "image-dired/" "ido.last~" "ido.last" "eshell/" "emacs-backup/" "elpa/" "elisp/" "auto-save-list/" "abbrev_defs" "%backup%~" "../" "./")
+
+ ("d:/DDPSC/Perl/" (21677 25968 0 0) "helloworld.pl" "errors.txt" "BegPerl/" "../" "./")
+
+ ("c:/Users/clizarraga/" (21677 24550 0 0) "Videos/" "Templates/" "Start Menu/" "SendTo/" "Searches/" "Saved Games/" "Recent/" "PrintHood/" "pip/" "Pictures/" "ntuser.ini" "NTUSER.DAT{bbed3e3b-0b41-11e3-8249-d6927d06400b}.TMContainer00000000000000000002.regtrans-ms" "NTUSER.DAT{bbed3e3b-0b41-11e3-8249-d6927d06400b}.TMContainer00000000000000000001.regtrans-ms" "NTUSER.DAT{bbed3e3b-0b41-11e3-8249-d6927d06400b}.TM.blf" "ntuser.dat.LOG2" "ntuser.dat.LOG1" "NTUSER.DAT" "NetHood/" "My Documents/" "Music/" "Local Settings/" "Links/" "IntelGraphicsProfiles/" "Google Drive/" "Favorites/" "Downloads/" "Documents/" "differences.txt" "Desktop/" "Cookies/" "Contacts/" "Application Data/" "AppData/" ".VirtualBox/" ".ssh/" ".imagej/" ".idlerc/" ".gitconfig" "../" "./")
+
+ ("c:/Fiji.app/" (21676 18376 0 0) "WELCOME.md" "testpheno.ijm" "scripts/" "retro/" "README.md" "plugins/" "macros/" "luts/" "java/" "jars/" "images/" "ImageJ-win64.exe" "db.xml.gz" "Contents/" ".checksums" "../" "./")
+
+ ("d:/bhb/scripting/imaging1/Scripts/" (21676 20047 0 0) "__pycache__/" "_tkinter.pyd" "_testimportmultiple.pyd" "_testcapi.pyd" "_testbuffer.pyd" "_ssl.pyd" "_sqlite3.pyd" "_socket.pyd" "_overlapped.pyd" "_multiprocessing.pyd" "_msi.pyd" "_lzma.pyd" "_hashlib.pyd" "_elementtree.pyd" "_decimal.pyd" "_ctypes_test.pyd" "_ctypes.pyd" "_bz2.pyd" "winsound.pyd" "unicodedata.pyd" "tk86t.dll" "tcl86t.dll" "sqlite3.dll" "select.pyd" "pythonw.exe" "python3.dll" "python.exe" "pyflakes.exe" "pyexpat.pyd" "pip3.exe" "pip3.4.exe" "pip.exe" "pilprint.py" "pilfont.py" "pilfile.py" "pildriver.py" "pilconvert.py" "pep8.exe" "nosetests.exe.manifest" "nosetests.exe" "nosetests-script.py" "nosetests-3.4.exe.manifest" "nosetests-3.4.exe" "nosetests-3.4-script.py" "flake8.exe" "easy_install.exe" "easy_install-3.4.exe" "django-admin.py" "django-admin.exe" "deactivate.bat" "croplabel.py" "Activate.ps1" "activate.bat" "../" "./")
+
+ ("d:/bhb/HTPHeno Configurations/Exp9/" (21676 28150 0 0) "config_scaling_top.csv" "config_scaling_side.csv" "config_regions_top.csv" "config_regions_side.csv" "config_number2color.csv" "config_color2class_top.csv" "config_color2class_top.2014-12-19--16-27-36.csv" "config_color2class_side.csv" "config_color2class_side.2014-12-19--14-49-57.csv" "config_class2number.csv" "../" "./")
+
+ ("d:/bhb/HTPHeno Configurations/WorkingConfigNew/" (21676 27265 0 0) "config_scaling_top.csv" "config_scaling_side.csv" "config_regions_top.csv" "config_regions_side.csv" "config_number2color.csv" "config_color2class_top.csv" "config_color2class_top.2014-12-19--16-27-36.csv" "config_color2class_side.csv" "config_color2class_side.2014-12-19--14-49-57.csv" "config_class2number.csv" "../" "./")
+
+ ("d:/bhb/HTPHeno Configurations/" (21676 27240 0 0) "WorkingConfigNew/" "NewConfig/" "Exp9/" "ConfigStandard/" "../" "./")
+
+ ("d:/bhb/Experiments/Exp_9/Images/2014_10_10_week_1_MTM/" (21676 15499 0 0) "101769/" "101768/" "101767/" "101766/" "101765/" "101764/" "101763/" "101762/" "101761/" "101755/" "101751/" "101746/" "101745/" "101737/" "101731/" "101730/" "101729/" "101717/" "101713/" "101710/" "101708/" "101664/" "101653/" "101645/" "101642/" "101639/" "101638/" "101637/" "101636/" "101635/" "101634/" "101630/" "101623/" "101621/" "101611/" "101610/" "101602/" "101599/" "101570/" "101550/" "101524/" "101522/" "101509/" "101496/" "101466/" "101463/" "101458/" "101448/" "101443/" "101441/" "101439/" "101437/" "../" "./")
+
+ ("d:/bhb/Experiments/Exp_9/Images/" (21675 4650 0 0) "2014_11_20_week_7_BSG/" "2014_11_14_week_6_BSG/" "2014_11_07_week_5_BSG/" "2014_10_30_week_4_BSG/" "2014_10_24_week_3_BSG/" "2014_10_17_week_2_BSG/" "2014_10_10_week_1_MTM/" "../" "./")
+
+ ("d:/bhb/Experiments/Exp_9/" (21675 3589 0 0) "Images/" "2014_11_20_imaging_week_7_BSG.xlsx" "2014_11_14_imaging_week_6_BSG.xlsx" "2014_11_07_imaging_week_5_BSG.xlsx" "2014_10_30_imaging_week_4_BSG.xlsx" "2014_10_24_imaging_week_3_BSG.xlsx" "2014_10_17_imaging_week_2_BSG.xlsx" "2014_10_10_imaging_week_1_MTM.xlsx" "2014_10_10_imaging_week_1_MTM.csv" "../" "./")
+
+ ("d:/bhb/Experiments/" (21676 21404 0 0) "Exp_9-2014-12-31.zip" "Exp_9/" "2014_10_10_week_1_MTM/" "../" "./")
+
+ ("d:/bhb/scripting/imaging1/" (21676 26569 0 0) "__pycache__/" "setup.cfg" "Scripts/" "pyvenv.cfg" "man/" "Lib/" "label.txt" "label.jpg" "Include/" "croplabel.py" "convertandrename.py" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/emacs/" (21676 10442 0 0) "zlib-1.2.3.exe" "zip-3.0-setup.exe" "xpm-3.5.1-1.exe" "unzip-5.51-1.exe" "TmpInstall/" "tiff-3.8.2-1.exe" "texinfo-4.13a-setup.exe" "tar-1.13-1-bin.exe" "setup-cygwin.el" "patch-2.5.9-7-setup.exe" "packageactivatedlist.txt~" "packageactivatedlist.txt" "make-3.81.exe" "libpng-1.2.37-setup.exe" "lha-1.14i-1.exe" "jpeg-6b-4.exe" "gzip-1.3.12-1-setup.exe" "grep-2.5.1-2-bin.exe" "giflib-4.1.4-1.exe" "findutils-4.2.20-2.exe" "emacswin.txt" "emacs.txt" "Emacs-PDE-0.2.16.tar.gz" "diffutils-2.8.7-1.exe" "coreutils-5.3.0.exe" "compface-1.5.2.exe" "bzip2-1.0.5-setup.exe" "Aspell-en-0.50-2-3.exe" "arc-5.21j-1.exe" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/Roaming/.emacs.d/elpa/setup-cygwin-20150105.48/" (21676 6908 0 0) "setup-cygwin.elc" "setup-cygwin.el" "setup-cygwin-pkg.elc" "setup-cygwin-pkg.el" "setup-cygwin-autoloads.el" "../" "./")
+
+ ("c:/cygwin64/bin/" (21676 10796 0 0) "[.exe" "zsoelim.exe" "znew" "zmore" "zless" "zipsplit.exe" "zipnote.exe" "zipinfo" "zipgrep" "zipcloak.exe" "zip.exe" "zgrep" "zforce" "zfgrep" "zegrep" "zdiff" "zcmp" "zcat" "yes.exe" "xzmore" "xzless" "xzgrep" "xzfgrep" "xzegrep" "xzdiff" "xzdec.exe" "xzcmp" "xzcat" "xz.exe" "xsubpp" "xmllint.exe" "xmlcatalog.exe" "xargs.exe" "x86_64-w64-mingw32-windres.exe" "x86_64-w64-mingw32-windmc.exe" "x86_64-w64-mingw32-strip.exe" "x86_64-w64-mingw32-strings.exe" "x86_64-w64-mingw32-size.exe" "x86_64-w64-mingw32-readelf.exe" "x86_64-w64-mingw32-ranlib.exe" "x86_64-w64-mingw32-objdump.exe" "x86_64-w64-mingw32-objcopy.exe" "x86_64-w64-mingw32-nm.exe" "x86_64-w64-mingw32-ld.exe" "x86_64-w64-mingw32-ld.bfd.exe" "x86_64-w64-mingw32-gprof.exe" "x86_64-w64-mingw32-gcov.exe" "x86_64-w64-mingw32-gcc.exe" "x86_64-w64-mingw32-gcc-ranlib.exe" "x86_64-w64-mingw32-gcc-nm.exe" "x86_64-w64-mingw32-gcc-ar.exe" "x86_64-w64-mingw32-gcc-4.8.3.exe" "x86_64-w64-mingw32-g++.exe" "x86_64-w64-mingw32-elfedit.exe" "x86_64-w64-mingw32-dllwrap.exe" "x86_64-w64-mingw32-dlltool.exe" "x86_64-w64-mingw32-cpp.exe" "x86_64-w64-mingw32-c++filt.exe" "x86_64-w64-mingw32-c++.exe" "x86_64-w64-mingw32-as.exe" "x86_64-w64-mingw32-ar.exe" "x86_64-w64-mingw32-addr2line.exe" "x86_64-pc-cygwin-gcc.exe" "x86_64-pc-cygwin-gcc-ranlib.exe" "x86_64-pc-cygwin-gcc-nm.exe" "x86_64-pc-cygwin-gcc-ar.exe" "x86_64-pc-cygwin-gcc-4.8.3.exe" "x86_64-pc-cygwin-g++.exe" "x86_64-pc-cygwin-c++.exe" "windres.exe" "windmc.exe" "whoami.exe" "who.exe" "which.exe" "whereis.exe" "whatis.exe" "wc.exe" "watch.exe" "w.exe" "vmstat.exe" "vi.exe" "vdir.exe" "uuidgen.exe" "users.exe" "urxvtd.exe" "urxvtd-X" "urxvtc.exe" "urxvtc-X" "urxvt.exe" "urxvt-X" "uptime.exe" "updatedb" "update-mime-database.exe" "update-desktop-database.exe" "update-ca-trust" "unzipsfx.exe" "unzip.exe" "unxz" "unlzma" "unlink.exe" "uniq.exe" "unexpand.exe" "uname.exe" "umount.exe" "ul.exe" "tzset.exe" "tty.exe" "tsort.exe" "trust.exe" "truncate.exe" "true.exe" "troff.exe" "tr.exe" "touch.exe" "top.exe" "tload.exe" "timeout.exe" "tfmtodit.exe" "texi2any" "test.exe" "telnet.exe" "tee.exe" "tcsh.exe" "tbl.exe" "tar.exe" "talk.exe" "tailf.exe" "tail.exe" "tac.exe" "syslogd-config" "sync.exe" "sum.exe" "stty.exe" "strip.exe" "strings.exe" "strace.exe" "stat.exe" "ssp.exe" "ssh.exe" "ssh-user-config" "ssh-keyscan.exe" "ssh-keygen.exe" "ssh-host-config" "ssh-copy-id" "ssh-agent.exe" "ssh-add.exe" "split.exe" "splain" "sort.exe" "soelim.exe" "snice.exe" "smtpd.py" "slogin" "sleep.exe" "slabtop.exe" "skill.exe" "size.exe" "shuf.exe" "shred.exe" "shasum" "sha512sum.exe" "sha384sum.exe" "sha256sum.exe" "sha224sum.exe" "sha1sum.exe" "sh.exe" "sftp.exe" "setsid.exe" "setmetamode.exe" "setfacl.exe" "set-emacs-default-w32.sh" "seq.exe" "sed.exe" "sdiff.exe" "scriptreplay.exe" "script.exe" "scp.exe" "s2p" "rvi" "runcon.exe" "run.exe" "rmdir.exe" "rm.exe" "rev.exe" "renice.exe" "rename.exe" "regtool.exe" "refer.exe" "rebaseall" "rebase.exe" "realpath.exe" "readshortcut.exe" "readlink.exe" "readelf.exe" "rcs2log" "ranlib.exe" "python2.7.exe" "python2.7-config" "python2-config" "python2" "python-config" "python" "pygettext.py" "pydoc" "pwdx.exe" "pwd.exe" "ptx.exe" "ptargrep" "ptardiff" "ptar" "pstruct" "psed" "ps.exe" "prove" "procps.exe" "prockill.exe" "printf.exe" "printenv.exe" "preconv.exe" "pre-grohtml.exe" "pr.exe" "post-grohtml.exe" "podselect" "podchecker" "pod2usage" "pod2text" "pod2texi" "pod2man" "pod2latex" "pod2html" "pmap.exe" "pldd.exe" "pl2pm" "pkill.exe" "pinky.exe" "ping.exe" "piconv" "pic2graph" "pic.exe" "pgrep.exe" "pg.exe" "pfbtops.exe" "perlthanks" "perlivp" "perldoc" "perlbug" "perl5.14.4.exe" "perl.exe" "peflagsall" "peflags.exe" "pdfroff" "pathchk.exe" "paste.exe" "passwd.exe" "pango-view.exe" "pango-querymodules.exe" "p11-kit.exe" "openssl.exe" "oldfind.exe" "od.exe" "objdump.exe" "objcopy.exe" "numfmt.exe" "nroff" "nproc.exe" "nohup.exe" "nm.exe" "nl.exe" "nice.exe" "neqn" "namei.exe" "mv.exe" "msgfmt.py" "mount.exe" "more.exe" "mktemp.exe" "mkshortcut.exe" "mkpasswd.exe" "mknod.exe" "mkgroup.exe" "mkfifo.exe" "mkdir.exe" "mintty.exe" "minidumper.exe" "md5sum.exe" "mcookie.exe" "manpath.exe" "manlint" "mandb.exe" "man.exe" "makeinfo" "make.exe" "make-emacs-shortcut" "m4.exe" "lzmore" "lzmainfo.exe" "lzmadec.exe" "lzma" "lzless" "lzgrep" "lzfgrep" "lzegrep" "lzdiff" "lzcmp" "lzcat" "lynx.exe" "ls.exe" "lookbib.exe" "look.exe" "logname.exe" "login.exe" "logger.exe" "locate.exe" "locale.exe" "ln.exe" "lkbib.exe" "link.exe" "libpython2.7.dll" "libnetcfg" "lexgrog.exe" "lesskey.exe" "lessecho.exe" "less.exe" "ldh.exe" "ldd.exe" "ld.exe" "ld.bfd.exe" "lastlog.exe" "kill.exe" "json_pp" "join.exe" "iu-config" "isosize.exe" "ipcs.exe" "ipcrm.exe" "ipcmk.exe" "instmodsh" "install.exe" "install-info.exe" "infokey.exe" "info.exe" "indxbib.exe" "igawk" "ifnames-2.69" "ifnames-2.13" "ifnames" "id.exe" "iconv.exe" "hpftodit.exe" "hostname.exe" "hostid.exe" "hexdump.exe" "head.exe" "h2xs" "h2ph" "gzip.exe" "gzexe" "gunzip" "gsettings.exe" "groups.exe" "grotty.exe" "grops.exe" "grolj4.exe" "grolbp.exe" "groff.exe" "grodvi.exe" "grn.exe" "grep.exe" "grep-changelog" "grap2graph" "gprof.exe" "gobject-query.exe" "glib-compile-schemas.exe" "gkill.exe" "gio-querymodules.exe" "getopt.exe" "getfacl.exe" "getent.exe" "getconf.exe" "gdk-pixbuf-query-loaders.exe" "gdiffmk" "gdbus.exe" "gdbserver.exe" "gdb.exe" "gcov.exe" "gcc.exe" "gcc-ranlib.exe" "gcc-nm.exe" "gcc-ar.exe" "gawk.exe" "gawk-4.1.1.exe" "g++.exe" "funzip.exe" "ftp.exe" "free.exe" "fold.exe" "fmt.exe" "flock.exe" "find2perl" "find.exe" "file.exe" "fgrep" "false.exe" "factor.exe" "expr.exe" "expand.exe" "ex" "eqn2graph" "eqn.exe" "env.exe" "enc2xs" "emacsclient-w32.exe" "emacsclient-nox.exe" "emacsclient" "emacs.ico" "emacs-w32.exe" "emacs-nox.exe" "emacs" "elfedit.exe" "egrep" "editrights.exe" "echo.exe" "ebrowse.exe" "dumper.exe" "du.exe" "dprofpp" "domainname" "dnsdomainname" "dllwrap.exe" "dlltool.exe" "dirname.exe" "dircolors.exe" "dir.exe" "diff3.exe" "diff.exe" "df.exe" "desktop-file-validate.exe" "desktop-file-install.exe" "desktop-file-edit" "dd.exe" "date.exe" "dash.exe" "cygzip-2.dll" "cygz.dll" "cygXt-6.dll" "cygXrender-1.dll" "cygXpm-noX-4.dll" "cygXpm-4.dll" "cygXmu-6.dll" "cygxml2-2.dll" "cygXft-2.dll" "cygXext-6.dll" "cygXdmcp-6.dll" "cygxcb-util-1.dll" "cygxcb-shm-0.dll" "cygxcb-render-0.dll" "cygxcb-glx-0.dll" "cygxcb-1.dll" "cygXaw-7.dll" "cygXau-6.dll" "cygX11-xcb-1.dll" "cygX11-6.dll" "cygwrap-0.dll" "cygwin1.dll" "cygwin-console-helper.exe" "cyguuid-1.dll" "cygtiffxx-6.dll" "cygtiffxx-5.dll" "cygtiff-6.dll" "cygtiff-5.dll" "cygticw-10.dll" "cygthai-0.dll" "cygtasn1-6.dll" "cygstdc++-6.dll" "cygstartup-notification-1-0.dll" "cygstart.exe" "cygssp-0.dll" "cygssl-1.0.0.dll" "cygssh2-1.dll" "cygsqlite3-0.dll" "cygsmartcols-1.dll" "cygSM-6.dll" "cygserver-config" "cygsasl2-3.dll" "cygrunsrv.exe" "cygrsvg-2-2.dll" "cygreadline7.dll" "cygquadmath-0.dll" "cygpstoedit-0.dll" "cygpopt-0.dll" "cygpng15-15.dll" "cygplotter-2.dll" "cygpixman-1-0.dll" "cygpipeline-1.dll" "cygperl5_14.dll" "cygpcre-1.dll" "cygpath.exe" "cygpaper-1.dll" "cygpangoxft-1.0-0.dll" "cygpangoft2-1.0-0.dll" "cygpangocairo-1.0-0.dll" "cygpango-1.0-0.dll" "cygpanelw-10.dll" "cygp11-kit-0.dll" "cygOpenVG-1.dll" "cygnettle-4.dll" "cygncursesw-10.dll" "cygncurses++w-10.dll" "cygmpfr-4.dll" "cygmpc-3.dll" "cygming-1.dll" "cygmenuw-10.dll" "cygman-2-6-7.dll" "cygMagickWand-5.dll" "cygMagickCore-5.dll" "cygMagick++-5.dll" "cygmagic-1.dll" "cyglzo2-2.dll" "cyglzma-5.dll" "cygltdl-7.dll" "cyglsa64.dll" "cyglsa-config" "cygLLVM-3.4.dll" "cygldap_r-2-4-2.dll" "cygldap-2-4-2.dll" "cyglcms2-2.dll" "cyglber-2-4-2.dll" "cygkrb5support-0.dll" "cygkrb5-3.dll" "cygk5crypto-3.dll" "cygjpeg-8.dll" "cygjbig85-2.dll" "cygjbig-2.dll" "cygjasper-1.dll" "cygisl-10.dll" "cygintl-8.dll" "cygidn-11.dll" "cygicuuc51.dll" "cygiculx51.dll" "cygicule51.dll" "cygicuio51.dll" "cygicui18n51.dll" "cygicudata51.dll" "cygiconv-2.dll" "cygICE-6.dll" "cyghogweed-2.dll" "cyghistory7.dll" "cygharfbuzz-icu-0.dll" "cygharfbuzz-0.dll" "cyggthread-2.0-0.dll" "cyggssapi_krb5-2.dll" "cyggs-9.dll" "cyggraphite2-3.dll" "cyggomp-1.dll" "cyggobject-2.0-0.dll" "cyggnutlsxx-28.dll" "cyggnutls-xssl-0.dll" "cyggnutls-openssl-27.dll" "cyggnutls-28.dll" "cyggmp-10.dll" "cyggmodule-2.0-0.dll" "cygglib-2.0-0.dll" "cygglapi-0.dll" "cygGL-1.dll" "cyggio-2.0-0.dll" "cyggif-4.dll" "cyggdk_pixbuf-2.0-0.dll" "cyggdbm_compat-4.dll" "cyggdbm-4.dll" "cyggd-2.dll" "cyggcc_s-seh-1.dll" "cygfreetype-6.dll" "cygfpx-1.dll" "cygformw-10.dll" "cygfontconfig-1.dll" "cygfftw3_threads-3.dll" "cygfftw3f_threads-3.dll" "cygfftw3f-3.dll" "cygfftw3-3.dll" "cygffi-6.dll" "cygfam-0.dll" "cygexpat-1.dll" "cygEMF-1.dll" "cygEGL-1.dll" "cygedit-0.dll" "cygdb_sql-5.3.dll" "cygdb_cxx-5.3.dll" "cygdbus-1-3.dll" "cygdb-5.3.dll" "cygdatrie-1.dll" "cygcurl-4.dll" "cygcrypto-1.0.0.dll" "cygcrypt-0.dll" "cygcroco-0.6-3.dll" "cygcom_err-2.dll" "cygcloog-isl-4.dll" "cygcheck.exe" "cygcatgets1.dll" "cygcairo-script-interpreter-2.dll" "cygcairo-gobject-2.dll" "cygcairo-2.dll" "cygbz2-1.dll" "cygblkid-1.dll" "cygautotrace-3.dll" "cygattr-1.dll" "cygatomic-1.dll" "cygargp-0.dll" "cygarchive-13.dll" "cvsbug" "cvs.exe" "cut.exe" "ctest.exe" "csplit.exe" "csh" "cpp.exe" "cpanp-run-perl" "cpanp" "cpan2dist" "cpan" "cpack.exe" "cp.exe" "corelist" "config_data" "comm.exe" "column.exe" "colrm.exe" "colcrt.exe" "col.exe" "cmp.exe" "cmake.exe" "cksum.exe" "chroot.exe" "chown.exe" "chmod.exe" "chgrp.exe" "chcon.exe" "ccmake.exe" "cc" "catman.exe" "cat.exe" "cal.exe" "ca-legacy" "c99" "c89" "c2ph" "c++filt.exe" "c++.exe" "bzmore" "bzless" "bzip2recover.exe" "bzip2.exe" "bzgrep" "bzfgrep" "bzegrep" "bzdiff" "bzcmp" "bzcat.exe" "bunzip2.exe" "bashbug" "bash.exe" "basename.exe" "base64.exe" "awk" "autoupdate-2.69" "autoupdate-2.13" "autoupdate" "autoscan-2.69" "autoscan-2.13" "autoscan" "autoreconf-2.69" "autoreconf-2.13" "autoreconf" "autom4te-2.69" "autom4te" "autoheader-2.69" "autoheader-2.13" "autoheader" "autoconf-2.69" "autoconf-2.13" "autoconf" "ash.exe" "as.exe" "arch.exe" "ar.exe" "apropos" "addr2line.exe" "addftinfo.exe" "a2p.exe" "2to3" "../" "./")
+
+ ("c:/cygwin64/" (21633 57174 0 0) "var/" "usr/" "tmp/" "lib/" "home/" "etc/" "dev/" "Cygwin.ico" "Cygwin.bat" "Cygwin-Terminal.ico" "bin/" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/Roaming/.emacs.d/elpa/" (21676 4232 0 0) "yasnippet-0.8.0/" "setup-cygwin-readme.txt" "setup-cygwin-20150105.48/" "s-20140910.334/" "rainbow-mode-readme.txt" "rainbow-mode-0.10/" "rainbow-delimiters-readme.txt" "rainbow-delimiters-20141221.925/" "pyvenv-readme.txt" "pyvenv-20140921.816/" "pyvenv-1.4/" "python-environment-20140321.1116/" "pp+-readme.txt" "powershell-readme.txt" "powershell-20140826.1811/" "popup-20141215.349/" "markchars-readme.txt" "json-rpc-20140602.806/" "jedi-readme.txt" "jedi-direx-readme.txt" "jedi-direx-20140310.236/" "jedi-20140321.1323/" "idomenu-0.1/" "highlight-indentation-0.5.0/" "flymake-python-pyflakes-readme.txt" "flymake-python-pyflakes-20131127.6/" "flymake-easy-20140818.55/" "find-file-in-project-3.3/" "f-20140828.716/" "epc-20140609.2234/" "elpy-readme.txt" "elpy-1.6.0/" "direx-20141214.2059/" "deferred-20141208.1613/" "dash-20141220.1452/" "cygwin-mount-20131111.2146/" "ctable-20140304.1659/" "concurrent-20140609.1940/" "company-0.8.7/" "basic-theme-readme.txt" "auto-complete-20141228.633/" "archives/" "anaconda-mode-readme.txt" "anaconda-mode-20141225.702/" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/" (21674 50924 0 0) "Virtualizing/" "upd-pcl6-x64-5.9.0.18326.exe" "UFRII_v21.30_INF_x64.exe" "UFRII_v21.30_INF_x64/" "TOSHIBA_e-STUDIO_Universal_Printer_Driver_2_v7.131.3450.7/" "SSH/" "Server Installations/" "Security/" "Rob_LemnaTec1.xls" "putty/" "Programs/" "Programming/" "OJ6700_1315-1.exe" "Keymapping/" "jd-gui-0.3.7-RC-1.windows.zip" "Image Analysis/" "GitHubSetup.exe" "Executables/" "emacs/" "desktop.ini" "Bioinformatics/" "bhb info.txt" "../" "./")
+
+ ("c:/Users/clizarraga/Documents/" (21656 36141 0 0) "Rob_LemnaTec1.xls" "R/" "My Videos/" "My Pictures/" "My Music/" "GitHub/" "gImageReader_crash-save.txt" "desktop.ini" "Custom Office Templates/" "Bluetooth Folder/" ".Rhistory" "../" "./")
+
+ ("d:/DDPSC/Bioinf/" (21676 4229 0 0) "Scripts/" "Pipeline/" "locations.txt" "../" "./")
+
+ ("d:/DDPSC/Bioinf/Scripts/" (21676 4230 0 0) "testout.pl" "brachyoutline.txt" "../" "./")
+
+ ("c:/Program Files/" (21671 3378 0 0) "WindowsPowerShell/" "WindowsApps/" "Windows Sidebar/" "Windows Portable Devices/" "Windows Photo Viewer/" "Windows NT/" "Windows Multimedia Platform/" "Windows Media Player/" "Windows Mail/" "Windows Journal/" "Windows Defender/" "Uninstall Information/" "RStudio/" "Reference Assemblies/" "Realtek/" "R/" "Oracle/" "MySQL/" "MSBuild/" "Microsoft Office 15/" "Microsoft Office/" "jEdit/" "Internet Explorer/" "Intel/" "ImageJ/" "HP/" "Hewlett-Packard/" "emacs/" "DIFX/" "desktop.ini" "Common Files/" "Classic Shell/" "7-Zip/" "../" "./")
+
+ ("d:/bhb/Imaging/" (21671 194 0 0) "Testing3/" "Testing2/" "MySnapshot05.png" "MySnapshot04.png" "MySnapshot03.png" "MySnapshot02.png" "MySnapshot01.png" "../" "./")
+
+ ("d:/bhb/" (21670 64223 0 0) "Weekly Meetings/" "Timesheets/" "scripting/" "Pictures for Cesar/" "MySnapshot05.png" "MySnapshot04.png" "MySnapshot03.png" "MySnapshot02.png" "MySnapshot01.png" "Imaging/" "HTPHeno Configurations/" "Experiments/" "Database/" "../" "./")
+
+ ("d:/DDPSC/" (21670 49845 0 0) "w3_safetyrefresher_2014_SaveSurvey.pdf" "Progress updates/" "Perl/" "Papers/" "Lab Stuff/" "Genes/" "Bioinf/" "2014 Annual Safety Refresher Training.docx" "../" "./")
+
+ ("d:/bhb/scripting/" (21668 24504 0 0) "jshtphenocommands.txt" "imagingpipeline.txt" "imaging1/" "../" "./")
+
+ ("d:/DDPSC/Genes/FastQ Testing/" (21667 4882 0 0) "testing.txt" "tail.txt" "head.txt" "Bis-1.1883.7.1652.fastq.gz" "Bis-1.1883.7.1652.fastq" "../" "./")
+
+ ("d:/DDPSC/Genes/" (21667 2797 0 0) "FastQ Testing/" "Brachypodium_distachyon.v1.0.24.dna.toplevel.fa" "Brachypodium_distachyon.v1.0.24.dna.genome.fa.gz" "../" "./")
+
+ ("d:/bhb/Imaging/testing2/" (21657 56221 0 0) "test.txt" "My Snapshot30-top.zip" "My Snapshot30-top.png" "My Snapshot29-side.zip" "My Snapshot29-side.png" "My Snapshot28-side.zip" "My Snapshot28-side.png" "My Snapshot27-side.zip" "My Snapshot27-side.png" "My Snapshot26-side.zip" "My Snapshot26-side.png" "My Snapshot10-top.zip" "My Snapshot10-top.png" "My Snapshot09-side.zip" "My Snapshot09-side.png" "My Snapshot08-side.zip" "My Snapshot08-side.png" "My Snapshot07-side.zip" "My Snapshot07-side.png" "My Snapshot06-side.zip" "My Snapshot06-side.png" "My Snapshot05-top.zip" "My Snapshot05-top.png" "My Snapshot04-side.zip" "My Snapshot04-side.png" "My Snapshot03-side.zip" "My Snapshot03-side.png" "My Snapshot02-side.zip" "My Snapshot02-side.png" "My Snapshot01-sidetext.png" "My Snapshot01-side.zip" "My Snapshot01-side.png" "Log.txt" "HTPheno_analysis_results_2014-12-19--17-01-08.csv" "HTPheno_analysis_results_2014-12-19--17-00-17.csv" "HTPheno_analysis_results_2014-12-19--16-21-35.csv" "../" "./")
+
+ ("d:/bhb/Imaging/testing3/" (21656 41641 0 0) "test.txt" "Plants-top28.png" "Plants-top27.png" "Plants-top26.png" "Plants-top25.png" "Plants-top24.png" "Plants-top23.png" "Plants-top22.png" "Plants-top21.png" "Plants-top20.png" "Plants-top19.png" "Plants-top18.png" "Plants-top17.png" "Plants-top16.png" "Plants-top15.png" "Plants-top14.png" "Plants-top13.png" "Plants-top12.png" "Plants-top11.png" "Plants-top10.png" "Plants-top09.png" "Plants-top08.png" "Plants-top07.png" "Plants-top06.png" "Plants-top05.png" "Plants-top04.png" "Plants-top03.png" "Plants-top02.png" "Plants-top01.png" "Plants-top00.png" "Plant-side28.png" "Plant-side27.png" "Plant-side26.png" "Plant-side25.png" "Plant-side24.png" "Plant-side23.png" "Plant-side22.png" "Plant-side21.png" "Plant-side20.png" "Plant-side19.png" "Plant-side18.png" "Plant-side17.png" "Plant-side16.png" "Plant-side15.png" "Plant-side14.png" "Plant-side13.png" "Plant-side12.png" "Plant-side11.png" "Plant-side10.png" "Plant-side09.png" "Plant-side08.png" "Plant-side07.png" "Plant-side06.png" "Plant-side05.png" "Plant-side04.png" "Plant-side03.png" "Plant-side02.png" "Plant-side01.png" "Plant-side00text.png" "Plant-side00.png" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/Image Analysis/sources/sources/src/" (21656 37198 0 0) "SearchUnclassified.java" "RegionFill.java" "modifiedImagesToStack.java" "HTPprocessor.java" "HTPoutput.java" "HTPinputopenfile.java" "HTPinputdirectory.java" "HTPinput.java" "HTPconfig.java" "HTPcalib.java" "HTPcalculator.java" "HTP.java" "Diameter.java" "../" "./")
+
+ ("c:/Program Files/ImageJ/plugins/HTPheno/" (21652 42674 0 0) "Tutorial files/" "HTPheno_.jar" "config_scaling_top.csv" "config_scaling_side.csv" "config_regions_top.csv" "config_regions_side.csv" "config_number2color.csv" "config_color2class_top.csv" "config_color2class_top.2014-12-19--16-27-36.csv" "config_color2class_side.csv" "config_color2class_side.2014-12-19--14-49-57.csv" "config_class2number.csv" "../" "./")
+
+ ("d:/DDPSC/Progress updates/" (21656 34668 0 0) "Update1.txt" "../" "./")
+
+ ("c:/Program Files (x86)/Tesseract-OCR/" (21656 35781 0 0) "wordlist2dawg.exe" "Uninstall.exe" "unicharset_extractor.exe" "tesseract.exe" "tesseract-ocr/" "tessdata/" "tar.exe" "shapeclustering.exe" "mftraining.exe" "liblept168d.dll" "liblept168.dll" "lib/" "java/" "include/" "gzip.exe" "doc/" "dawg2wordlist.exe" "combine_tessdata.exe" "cntraining.exe" "classifier_tester.exe" "APIExample/" "ambiguous_words.exe" "../" "./")
+
+ ("c:/Program Files (x86)/" (21656 35752 0 0) "WinSCP/" "WindowsPowerShell/" "Windows Sidebar/" "Windows Portable Devices/" "Windows Photo Viewer/" "Windows NT/" "Windows Multimedia Platform/" "Windows Media Player/" "Windows Mail/" "Windows Defender/" "WildTangent Games/" "Tesseract-OCR/" "Temp/" "Reference Assemblies/" "Realtek/" "Qualcomm Atheros/" "PuTTY/" "MySQL/" "MTPuTTY/" "MSECache/" "MSBuild/" "Mozilla Maintenance Service/" "Mozilla Firefox/" "Microsoft.NET/" "Microsoft Silverlight/" "Microsoft Office/" "mcafee.com/" "McAfee/" "Java/" "IrfanView/" "Internet Explorer/" "Intel/" "InstallShield Installation Information/" "HP/" "Google/" "GnuWin32/" "gImageReader/" "desktop.ini" "Common Files/" "Bluetooth Suite/" "ASUS/" "../" "./")
+
+ ("c:/Program Files/ImageJ/plugins/PhotoDoc/" (18162 8358 0 0) "YenChangChangThreshold2.class" "WuLuThreshold2.class" "ThresholdPlot2.class" "Thresholding_Techniques.class" "ThresholdApplier2.class" "PunThreshold2.class" "Perspective_Correction.class" "Perspective_Correction$Corners.class" "OtsuThreshold2.class" "OCR_.class" "mlibwrapper_jai.jar" "MixtureModeling2.class" "MelloLinsThreshold2.class" "JohannsenBilleThreshold2.class" "jai_core.jar" "jai_codec.jar" "Image_Enhancement.class" "GrayLevelClassMixtureModeling2.class" "GrayLevelClass2.class" "EntropyThreshold2.class" "Edge_Detection.class" "Edge_Detection$PointComparator.class" "Edge_Detection$Borders.class" "Edge_Detection$AandB.class" "daSilvaLinsRochaThreshold2.class" "../" "./")
+
+ ("c:/Program Files/ImageJ/plugins/" (21656 35538 0 0) "Tools/" "Stacks/" "siox_.jar" "Scripts/" "README.txt" "PhotoDoc/" "jars/" "Input-Output/" "HTPheno/" "Graphics/" "Filters/" "Examples/" "Analyze/" "3D/" "../" "./")
+
+ ("d:/Perl/BegPerl/" (21652 32293 0 0) "whatsargv.plx" "walkies.plx" "varint1.plx" "test.plx" "scope1.plx" "ranges.plx" "quotes5.plx" "quotes4.plx" "quotes3.plx" "quotes2.plx" "quotes.plx" "quicksum.plx" "number4.plx" "number3.plx" "number1.plx" "newline.plx" "months.plx" "mixedlist.plx" "hexadec.plx" "heredoc.plx" "helloworld.plx" "hello2.plx" "guessnum.plx" "goodnums.plx" "dectobin.plx" "currency2.plx" "currency1.plx" "convert1.plx" "Code/" "badnums.plx" "badlist.plx" "aside.plx" "arraylen.plx" "../" "./")
+
+ ("c:/Program Files/ImageJ/" (21651 31759 0 0) "unins000.exe" "unins000.dat" "README.html" "plugins/" "macros/" "luts/" "jre/" "ImageJ.exe" "ImageJ.cfg" "ij.jar" "hs_err_pid9560.log" "../" "./")
+
+ ("d:/perl/begperl/" (21652 32293 0 0) "whatsargv.plx" "walkies.plx" "varint1.plx" "test.plx" "scope1.plx" "ranges.plx" "quotes5.plx" "quotes4.plx" "quotes3.plx" "quotes2.plx" "quotes.plx" "quicksum.plx" "number4.plx" "number3.plx" "number1.plx" "newline.plx" "months.plx" "mixedlist.plx" "hexadec.plx" "heredoc.plx" "helloworld.plx" "hello2.plx" "guessnum.plx" "goodnums.plx" "dectobin.plx" "currency2.plx" "currency1.plx" "convert1.plx" "Code/" "badnums.plx" "badlist.plx" "aside.plx" "arraylen.plx" "../" "./")
+
+ ("d:/Perl/BegPerl/Code/" (21649 53890 0 0) "013847 C19.zip" "013847 C18.zip" "013847 C17.zip" "013847 C16.zip" "013847 C15.zip" "013847 C14.zip" "013847 C13.zip" "013847 C12.zip" "013847 C11.zip" "013847 C10.zip" "013847 C09.zip" "013847 C08.zip" "013847 C07.zip" "013847 C06.zip" "013847 C05.zip" "013847 C04.zip" "013847 C03.zip" "../" "./")
+
+ ("d:/Perl/" (21649 52798 0 0) "helloworld.pl" "errors.txt" "BegPerl/" "../" "./")
+
+ ("c:/Program Files/ImageJ/plugins/HTPheno/ConfigStandard/" (21648 53056 0 0) "config_scaling_top.csv" "config_scaling_side.csv" "config_regions_top.csv" "config_regions_side.csv" "config_number2color.csv" "config_color2class_top.csv" "config_color2class_top.2014-12-12--14-35-38.csv" "config_color2class_side.csv" "config_color2class_side.2014-12-12--13-54-34.csv" "config_class2number.csv" "../" "./")
+
+ ("d:/bhb/Imaging/Testing2/" (21647 23605 0 0) "My Snapshot30-top.png" "My Snapshot29-side.png" "My Snapshot28-side.png" "My Snapshot27-side.png" "My Snapshot26-side.png" "My Snapshot10-top.png" "My Snapshot09-side.png" "My Snapshot08-side.png" "My Snapshot07-side.png" "My Snapshot06-side.png" "My Snapshot05-top.png" "My Snapshot04-side.png" "My Snapshot03-side.png" "My Snapshot02-side.png" "My Snapshot01-side.png" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/Image Analysis/sources/sources/" (21647 17222 0 0) "src/" "readme.txt" "license.txt" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/Image Analysis/sources/" (21647 17222 0 0) "sources/" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/Image Analysis/" (21647 17222 0 0) "sources.zip" "sources/" "siox_.jar" "ij148.zip" "ij148-jdk6-64bit-setup.exe" "HTPheno.zip" "../" "./")
+
+ ("c://" (21647 1969 0 0) "Windows/" "Users/" "System Volume Information/" "swapfile.sys" "strawberry/" "sqlite3.exe" "Rtools/" "Recovery/" "R64/" "R/" "Python34/" "Python27/" "ProgramData/" "Program Files (x86)/" "Program Files/" "PerfLogs/" "pagefile.sys" "Intel/" "HP Universal Print Driver/" "hiberfil.sys" "eSupport/" "Documents and Settings/" "cygwin64/" "BOOTNXT" "bootmgr" "Boot/" "$Recycle.Bin/")
+
+ ("c:/Users/clizarraga/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Gnu Emacs/" (21647 13115 0 0) "testing.py~" "testing.py" "Emacs.lnk" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/Roaming/Adobe/" (21629 12046 0 0) "Flash Player/" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/" (21647 1898 0 0) "System Tools/" "Strawberry Perl/" "Startup/" "Pictures.lnk" "MTPuTTY/" "Maintenance/" "IrfanView/" "Internet Explorer.lnk" "Golden Helix GenomeBrowse/" "Gnu Emacs/" "GitHub, Inc/" "Documents.lnk" "desktop.ini" "Administrative Tools/" "Accessories/" "Accessibility/" "../" "./")
+
+ ("d:/DDPSC/Bioinf/Pipeline/" (21643 11900 0 0) "temp/" "Scripts/" "SampleConfig.txt.test" "SampleConfig.txt" "RunDelly.bestN.pl" "RUN6_ParseOutput.pl" "RUN5_CallSNPs.pl" "RUN4_WrapDelly.pl" "RUN3_AlignToReferences.pl" "RUN2_ManageFiltering_byDirectory.pl" "RUN1_PrepareReferences.pl" "RUN0_PrepareExclusions.pl" "README.md" "QC_GetLibrarySizes.pl" "QC_AssessDuplication.pl" "PipelineConfig.txt" "Lib/" "GetMaxPerContig.pl" "ContigDepths.txt" "bin/" ".git/" "#QC_AssessDuplication.pl#" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/SSH/" (21643 13081 0 0) "putty-0.63-installer.exe" "MTPuTTY_setup.exe" "mtputty.zip" "igvita-desert.reg" "../" "./")
+
+ ("c:/Users/clizarraga/Downloads/Server Installations/" (21643 12798 0 0) "emacs-24.4.tar.gz" "../" "./")
+
+ ("c:/PerfLogs/" (21014 11451 0 0) "../" "./")
+
+ ("c:/Program Files/ImageJ/plugins/HTPheno/Copies/" (21642 3682 0 0) "config_scaling_top - Copy.csv" "config_scaling_side - Copy.csv" "config_regions_top - Copy.csv" "config_regions_side - Copy.csv" "config_number2color - Copy.csv" "config_color2class_top - Copy.csv" "config_color2class_side - Copy.csv" "config_class2number - Copy.csv" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/Roaming/Microsoft/" (21639 4503 0 0) "Word/" "Windows/" "Vault/" "UProof/" "Templates/" "SystemCertificates/" "Stationery/" "Spelling/" "Speech/" "Signatures/" "Protect/" "Proof/" "Outlook/" "Office/" "Network/" "MMC/" "Internet Explorer/" "Installer/" "InputMethod/" "IME/" "Excel/" "Document Building Blocks/" "Crypto/" "Credentials/" "Bibliography/" "AddIns/" "Access/" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/Roaming/Microsoft/Windows/" (21629 12072 0 0) "Themes/" "Templates/" "Start Menu/" "SendTo/" "Recent/" "Printer Shortcuts/" "Network Shortcuts/" "Libraries/" "AccountPictures/" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/Roaming/Microsoft/Windows/Start Menu/" (21630 14371 0 0) "Programs/" "desktop.ini" "../" "./")
+
+ ("d:/dbtest/Include/" (21634 5614 0 0) "../" "./")
+
+ ("d:/dbtest/" (21634 8143 0 0) "Scripts/" "pyvenv.cfg" "Lib/" "Include/" "code/" "../" "./")
+
+ ("c:/Users/" (21629 13412 0 0) "Public/" "desktop.ini" "Default User/" "Default/" "clizarraga/" "All Users/" "../" "./")
+
+ ("c:/Users/clizarraga/AppData/" (21629 12039 0 0) "Roaming/" "LocalLow/" "Local/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t

@@ -1,0 +1,150 @@
+;; Comment out/in region, maybe?
+
+(defun comment-or-uncomment-line-or-region ()
+  "Comments or uncomments the current line or region."
+  (interactive)
+  (if (region-active-p)
+      (comment-or-uncomment-region (region-beginning) (region-end))
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    )
+  )
+
+(global-set-key (kbd "C-c ;") 'comment-or-uncomment-line-or-region)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-idle-delay 2)
+ '(cursor-type t)
+ '(custom-enabled-themes (quote (wheatgrass)))
+ '(eldoc-idle-delay 2)
+ '(elpy-modules
+   (quote
+    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-sane-defaults)))
+ '(elpy-rpc-backend "jedi")
+ '(elpy-rpc-timeout 5)
+ '(elpy-test-runner (quote elpy-test-nose-runner))
+ '(markdown-command "pandoc")
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
+
+(if (display-graphic-p) nil
+  (progn
+    (custom-set-faces
+     ;; custom-set-faces was added by Custom.
+     ;; If you edit it by hand, you could mess it up, so be careful.
+     ;; Your init file should contain only one such instance.
+     ;; If there is more than one, they won't work right.
+     '(default ((t (:inherit nil :stipple nil :background "black" :foreground "wheat" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 80 :width normal :foundry "outline" :family "Consolas"))))
+     '(highlight-indentation-face ((t (:inherit fringe :background "forest green" :foreground "white"))))
+     )
+    '(ansi-color-names-vector
+      ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
+    )
+  (progn
+    (custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+     '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
+    )
+  )
+  
+   
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
+  )
+
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/") t)
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+;; Changing prompt to y/n instead of yes/no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+;;Show Parentheses!
+(show-paren-mode t)
+
+;; Interactively Do Everything
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode 1)
+
+;; Dired mode settings
+(add-hook 'dired-load-hook
+	  (lambda ()
+	    (load "dired-x")
+	    ;; Set dired-x global variables here.  For example:
+            ;; (setq dired-guess-shell-gnutar "gtar")
+            ;; (setq dired-x-hands-off-my-keys nil)
+	    ))
+(add-hook 'dired-mode-hook
+          (lambda ()
+            ;; Set dired-x buffer-local variables here.  For example:
+            ;; (dired-omit-mode 1)
+            ))
+
+;; Getting rid of tool bar mode.
+(tool-bar-mode -1)
+
+;; Python setup.
+;; elpy setup stuff (IDE for python)
+(require 'package)
+(add-to-list 'package-archives
+             '("elpy" . "http://jorgenschaefer.github.io/packages/"))
+
+(package-initialize)
+;; (setq elpy-rpc-backend "jedi")
+(elpy-enable)
+
+;; Python debugger
+(setq gud-pdb-command-name "python -m pdb")
+
+;; Removing annoying alarm bell.
+(setq visible-bell 1)
+
+;; Remove shell command echo
+(defun my-comint-init ()
+  (setq comint-process-echoes t))
+(add-hook 'comint-mode-hook 'my-comint-init)
+
+;; Testing
+(setq frame-title-format
+      (list (format "%s %%S: %%j " (system-name))
+        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+
+;; ESS Settings:
+;; (ess-toggle-underscore nil)
+
+(setq ess-default-style 'RStudio-)
+
+;; No more of your bullshit hiding
+;(defun bs-hiding ()
+;  (global-unset-key (kbd "C-z"))
+;  (global-unset-key (kbd "C-x C-z")))
+
+;; Org-mode
+
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 90 :width normal)))))
+
+(defun cur-file ()
+  (file-name-sans-extension
+   (file-name-nondirectory (buffer-file-name (current-buffer)))))
+
+(add-hook 'c++-mode-hook
+          (lambda()
+            (set (make-local-variable 'compile-command)
+                 (concat "make " (cur-file)))))

@@ -1,0 +1,6 @@
+#Javascript Commands for HTPheno
+#Single File run
+IJ.run("HTPheno (single file)", "pixels=548 millimeters=180 pixels=594 millimeters=180");
+#Directory Run
+IJ.run(imp, "HTPheno (complete directory)", "please=D:\\bhb\\Imaging\\ pixels=548 millimeters=180 pixels=594 millimeters=180");
+

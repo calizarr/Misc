@@ -1,0 +1,7 @@
+background-region,R,0,1379,0,1266,dbdbdb,background
+scale-region,R,488,972,140,234,fffdb9,scale
+stick-region,R,604,784,362,1004,0027b9,stick
+plant-region,R,412,964,354,1034,10b900,plant
+soil-region,R,548,810,1006,1044,8b3900,soil
+pot-region,R,526,844,1008,1266,dedede,pot
+label-region,R,598,782,1056,1126,404040,label
