@@ -21,7 +21,9 @@ plot.trait <- function(dfr, genotype, treatments, x, y, units, limits,
                        labels = c("22.5", "45", "Control", "Drought", "Primer", "Recovery"),
                        geno.col = "genotype",
                        treat.col = "treatment",
-                       facet = FALSE
+                       facet = FALSE,
+                       x.text.angle = 0,
+                       se = TRUE
                         ) {
   # Plot x vs y
   bplot <- ggplot(dfr[dfr[, geno.col] %in% genotype & (dfr[, treat.col] %in% treatments),], aes_string(x = x, y = y, color = "factor(treatment)")) +
@@ -31,7 +33,7 @@ plot.trait <- function(dfr, genotype, treatments, x, y, units, limits,
       )
   # Plot command
   bplot <- bplot +
-    geom_smooth(method="loess",size=1, se = TRUE) +
+    geom_smooth(method="loess",size=1, se = se) +
     ggtitle(genotype) +
     scale_x_continuous(name="Days") +
     scale_y_continuous(lim = limits, name= paste(capitalize(y), units, sep =" ")) +
@@ -46,6 +48,7 @@ plot.trait <- function(dfr, genotype, treatments, x, y, units, limits,
 
   if(facet) {
     formula <- as.formula(paste0("~ ", geno.col))
+    bplot <- bplot + theme(axis.text.x = element_text(angle = x.text.angle)) + ggtitle("Facet of Genotypes and Treatments")
     bplot <- bplot + facet_wrap(formula, ncol = length(genotypes) / 2)
   }
 
@@ -154,7 +157,7 @@ trait.heatmap <- function(dfr, diff1, diff2, title, measure,
 
   ## print(vis.mat)
 
-  hc <- hclust(as.dist(1-cor(t(vis.mat))))
+  ## hc <- hclust(as.dist(1-cor(t(vis.mat))))
   ## plot(hc)
   ## color.palette = colorRampPalette(c("darkorange1","gray","blue", "red", "green", "yellow", "cyan"),space="rgb")
   color.palette <- colorRampPalette(c("darkorange1","gray","blue", "green"), space = "rgb")(4*100-1)
@@ -184,7 +187,8 @@ trait.heatmap <- function(dfr, diff1, diff2, title, measure,
     eval(reorg$call)
     dev.off()
   }
-  return(list(vis.mat, reorg, hc))
+  ## return(list(vis.mat, reorg, hc))
+  return(list(vis.mat, reorg))
 }
 
 ################################# END: Heat Map Function ##################################################
@@ -513,14 +517,6 @@ drought.response <- function(dfr, genotypes, trait, func,
       drought.cmd <- paste0(func, "(dfr[dfr[, geno.col] == g & dfr[, treat.col] == treat2 & as.integer(dfr[, day.col]) == d, trait])")
       drought.resp[drought.resp$day == d, paste(control)] <- eval(parse(text = control.cmd))
       drought.resp[drought.resp$day == d, paste(drought)] <- eval(parse(text = drought.cmd))
-      ## drought.resp[drought.resp$day == d, paste(control)] <-
-      ##   median(dfr[dfr[, geno.col] == g &
-      ##                dfr[, treat.col] == treat1 &
-      ##                as.integer(dfr[, day.col]) == d, trait])
-      ## drought.resp[drought.resp$day == d, paste(drought)] <-
-      ##   median(dfr[dfr[, geno.col] == g &
-      ##                dfr[, treat.col] == treat2 &
-      ##                as.integer(dfr[, day.col]) == d, trait])
     }
   }
 
