@@ -1,0 +1,30 @@
+####################
+#
+# Example Vanilla Universe Job
+# Simple HTCondor submit description file
+#
+####################
+
+flag_file        = /shares/tmockler_share/clizarraga/Raspberry_Pi/Reconstruction/build_reconstruction_2_flags.txt
+universe         = vanilla
+getenv           = true
+executable       = /shares/bioinfo/installs/TheiaSfM/build/bin/build_reconstruction
+arguments        = -flagfile $(flag_file)
+log              = logs/reconstruction_2.log
+output           = logs/reconstruction_2.out
+error            = logs/reconstruction_2.error
+request_cpus     = 40
+request_memory   = 100G
+notification     = Always
+
+should_transfer_files = YES
+transfer_input_files = create_arguments.sh
+
++PostCmd         = "create_arguments.sh"
++PostArguments   = "$(log) $(output) $(error) $(flag_file)"
+
+##  Do not edit  ##
+accounting_group = $ENV(CONDOR_GROUP)
+###################
+
+queue

@@ -41,3 +41,6 @@ rm -rf `ls -la $directory | grep $user | awk -v dir="$directory" '{print dir$9}'
 
 # Search SnapshotInfo.csv for zoom levels and sort and only print uniques
 grep "VIS" SnapshotInfo.csv | grep -Po "_z[0-9]+_" | sort | uniq
+
+# Search for and acquire line 5001
+grep "VIS" SnapshotInfo.csv | sed '5001q;d'

@@ -1,0 +1,36 @@
+####################
+#
+# Example Vanilla Universe Job
+# Simple HTCondor submit description file
+#
+####################
+
+name             = VisualSFM_2016-06-09-16_number
+folder           = /shares/tmockler_share/clizarraga/Raspberry_Pi/Images/2016-06-09/2016-06-09/2016-06-09-16/number
+exec_folder      = /home/clizarraga/Downloads/Reconstruction/vsfm/bin
+pre_arguments    = $(folder) $(name)
+universe         = vanilla
+getenv           = true
+# executable       = $(exec_folder)/VisualSFM
+executable       = launch_vsfm.sh
+arguments        = $(pre_arguments)
+log              = /home/clizarraga/.logs/$(name).log
+output           = /home/clizarraga/.logs/$(name).out
+error            = /home/clizarraga/.logs/$(name).error
+request_cpus     = 40
+request_memory   = 100G
+notification     = Always
+
+should_transfer_files = YES
+transfer_libs         = $(exec_folder)/libpba.so, $(exec_folder)/libsiftgpu.so, $(exec_folder)/libvl.so            
+transfer_input_files  = vsfm_cm_dim_1D_km.gcp, nv.ini, $(exec_folder)/cmvs, $(exec_folder)/pmvs2, $(exec_folder)/genOption, $(exec_folder)/graclus, $(exec_folder)/sift, $(exec_folder)/VisualSFM, $(transfer_libs)
+
+transfer_output_files = run_dir
+# +PostCmd         = "create_arguments.sh"
+# +PostArguments   = "$(log) $(output) $(error) $(flag_file)"
+
+##  Do not edit  ##
+accounting_group = $ENV(CONDOR_GROUP)
+###################
+
+queue
