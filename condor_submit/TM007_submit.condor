@@ -1,0 +1,24 @@
+####################
+#
+# Example Vanilla Universe Job
+# Simple HTCondor submit description file
+#
+####################
+
+name             = PlantCV_TM007
+universe         = vanilla
+getenv           = true
+executable       = TM007_run.sh
+arguments        = 
+log              = /home/clizarraga/.logs/$(name).log
+output           = /home/clizarraga/.logs/$(name).out
+error            = /home/clizarraga/.logs/$(name).error
+request_cpus     = 40
+request_memory   = 100G
+notification     = Always
+
+##  Do not edit  ##
+accounting_group = $ENV(CONDOR_GROUP)
+###################
+
+queue

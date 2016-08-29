@@ -1,0 +1,32 @@
+####################
+#
+# Example Vanilla Universe Job
+# Simple HTCondor submit description file
+#
+####################
+
+name             = VisualSFM_2016-05-20-11_number
+folder           = /home/clizarraga/Raspberry_Pi/Images/2016-05-20/2016-05-20/2016-05-20-10/number/*.jpg
+pre_arguments    = sfm+add+shared+pmvs $(folder) $(name)_dense.nvm
+universe         = vanilla
+getenv           = true
+executable       = /home/clizarraga/Downloads/Reconstruction/vsfm/bin/VisualSFM
+arguments        = $(pre_arguments)
+log              = /home/clizarraga/.logs/$(name).log
+output           = /home/clizarraga/.logs/$(name).out
+error            = /home/clizarraga/.logs/$(name).error
+request_cpus     = 40
+request_memory   = 100G
+notification     = Always
+
+should_transfer_files = YES
+transfer_input_files = nv.ini
+
+# +PostCmd         = "create_arguments.sh"
+# +PostArguments   = "$(log) $(output) $(error) $(flag_file)"
+
+##  Do not edit  ##
+accounting_group = $ENV(CONDOR_GROUP)
+###################
+
+queue
