@@ -1,0 +1,119 @@
+## SNP Pipeline stuff:
+
+perl gtf2vep.pl -i ~/bdaccessions/Temp/Bdistachyon_283_v2.1.gene_exons.vep.gtf -f ~/bdaccessions/Ref/Bdistachyon_283_assembly_v2.0.fa -d 78 -s brachypodium_distachyon
+
+awk 'BEGIN { FS="\t"; OFS = FS};{print $1,"protein_coding",$3,$4,$5,$6,$7,$8,$9}' Bdistachyon_283_v2.1.gene_exons.gtf > Bdistachyon_283_v2.1.gene_exons.vep.gtf
+
+awk 'BEGIN {FS = OFS = "\t" };$1 ~ /^[0-9]/ { $1 = "Bd"$1 };{print $1,$2,$3,$4,$5,$6,$7,$8,$9}' Bdistachyon_283_v2.1.gene_exons.vep.gtf > Bdistachyon_283_v2.1.gene_exons.vep.1.gtf
+
+awk 'BEGIN {FS = OFS = "\t" };$1 ~ /^[0-9]/ { $1 = "Bd"$1 };{print $1,$2,$3,$4,$5,$6,$7,$8,$9}' Bdistachyon_283_v2.1.gene_exons.gtf > Bdistachyon_283_v2.1.gene_exons.1.gtf
+
+awk 'BEGIN {FS=OFS="\t"};$5 ~ /[^X]/ { print $0}' Koz-3.Alignments.raw.vcf > Koz-3.Alignments.NotX.raw.vcf
+
+## Filter out unmapped reads from bam:
+
+samtools view -h -F 4 -b <bamfile> > <mapped_onlybam>
+
+## Keep only properly paired reads
+
+samtools view -f 0x2 -b <bamfile> > <properly_mapped_bam>
+
+## Greatest Number in Column 6 starting at row 36:
+sed -n '36~1p' <file> | awk 'BEGIN {FS=OFS="\t"}; a <= $6 {a=$6} END{print a}'
+
+## Mean in Column 6 starting at row 36:
+sed -n '36~1p' <file> | awk 'BEGIN {FS=OFS="\t"}; {a+=$6} END{print a/NR}'
+
+## Match pattern in CLI:
+gawk 'match($0, /Name=(Bradi[0-9]g[0-9][0-9][0-9][0-9][0-9])/,ary) {print ary[1]}'
+gawk 'match($0, /<pattern/,ary) {print ary[1]}'
+
+## Pull out pattern from gff3:
+awk 'BEGIN {FS=OFS="\t"}; $9 ~ "Bradi5g" {print $0}' Bd5.genes.gff > Bd5.Bradi5.genes.gff
+awk 'BEGIN {FS=OFS="\t"}; $9 ~ <pattern> {print $0}' <file> > <outfile>
+
+## Pull out chromosome genes:
+grep Bd5 Bdistachyon_283_v2.1.genes_only.gff3 > Bd5/Bd5v2.1.genes_only.gff3
+
+## Select lines between two patterns including start pattern:
+awk '/>Bd5/ {flag=1}/>scaffold_12/{flag=0} flag' Brachypodium_distachyon.mainGenome.fasta > ~/bdmaker/Bdistachyon_v3.Bd5.fasta
+awk '/START/ {flag=1}/END/{flag=0} flag' file > outfile
+
+## Check if directories are different:
+diff <(ls -laR <firstdirectory/> | awk '{print $9}' ) <(ls -laR <seconddirectory/> | awk '{print $9}')
+
+## Concatenate files if they all have the same header:
+awk 'FNR==1 && NR!=1 { while (/^<header>/) getline; } 1 {print} ' file*.txt > all.txt
+
+## Prepend to column and print all other lines as well:
+awk 'BEGIN {FS=OFS="\t"} $<column>~/<regex>/ {$<column>="<string>"$<column>} {print $0}' <in> > <out>
+
+## Sort unix file ignore header (if 1 line, if header>1 line increment numbers after n by however many header lines there are)
+(head -n1 <file> && tail -n +2 <file> | sort) > <outfile>
+
+## Sort gtf/gff file by first column, then second column numeric and stable sort.:
+sort -s -k1,1 -k4,4n Brachypodium_distachyon.mainGenome.hq.gtf > Brachypodium_distachyon.mainGenome.sort.hq.gtf
+sort -s[stable] -k1,1[first column] -k4,4n[fourth column, numeric] <filein> > <fileout>
+
+## Count fasta sequence lengths in a fasta file:
+awk '/^>/ {if (seqlen){print seqlen}; print ;seqlen=0;next; } { seqlen = seqlen +length($0)}END{print seqlen}' file.fa
+
+## Find line number of match:
+sed -n '/pattern/=' filename
+
+## Pair with grep for specific occurrence of match within file:
+grep "overall pattern" filename | sed -n '/specific pattern/='
+
+## RepeatMasker CLI Args In Process:
+RepeatMasker -pa 16 -s -q -lib /home/clizarraga/bdRepeats/all_repeats.lib -dir /home/clizarraga/bdRepeats/ -a -html -source -gff /shares/tmockler_share/clizarraga/bdmaker/Brachypodium_distachyon.mainGenome.fasta
+
+## RepeatMasker buildSummary Output:
+## Needs work with the current hack of adding the entire lines. Maybe just extract the X-likes?
+perl buildSummary.pl -species "brachypodium distachyon" -genome ~/bdRepeats/BrachyV3_names_length.tsv ~/bdRepeats/archive/quick-run/Brachypodium_distachyon.mainGenome.fasta.out > ~/bdRepeats/archive/quick-run/custom_out.tbl
+
+## Testing
+bcftools view -g hom Adi-2.raw.snps.vcf -O v -o Adi-2.raw.snps.bcftools.hom.vcf
+
+## Remove all features of a length longer than actual chromosome length:
+awk -F'\t' '{FS=OFS="\t"} !($1 == "Bd3" && $5 > 59640145) && !($1 == "Bd2" && $5 > 59130575) && !($1 == "Bd4" && $5 > 48594894) && !($1 == "Bd5" && $5 > 28630136) {print}' Brachypodium_distachyon.mainGenome.all.vep.fixed.gtf > temp.gtf
+
+## Epic Bash Script to change dummy sample name of vcf files using filename first delimiter.
+for x in *.raw.snps.hom.vcf; do xsub=$(echo $x | cut -d. -f1);sed -i -r "s/(#CHROM.*)JGI/\1$xsub/" $x;done
+
+## Bgzipping and indexing vcf files for bcftools merge (might be useful for other bgzip index needing files)
+for x in *.vcf; do bgzip -c $x > $x.gz && tabix $x.gz;done
+
+## Filtering by quality etc.
+bcftools filter -e "QUAL<500" Adi-12.raw.snps.hom.vcf | bcftools view -U -v snps -g ^miss -f "PASS" > Adi-12.vcf
+
+## Bash for loops to fix SICER output.
+
+## Wiggle files to proper chromosome names from chr1-5 to Bd1-5
+for x in *.wig;do xsub=$(echo $x | sed -r 's/(.*)\.(.*)/\1\.proper\.\2/');sed -r 's/(chrom=)chr([12345])/\1Bd\2/' $x > $xsub & done;wait;echo "BOIII"
+# Converting .wig to .bed:
+for x in *.proper.wig;do wig2bed < $x > $x.bed & done;wait;echo "BOI"
+
+## Bed files to proper chromosome names from chr1-5 to Bd1-5
+for x in *.bed;do xsub=$(echo $x | sed -r 's/(.*)(bed)/\1proper\.bed/');sed -r 's/chr/Bd/' $x > $xsub & done;wait;echo "BOI"
+
+## File types and listing in directories.
+# List all file extensions lower or uppercase AND count the amount of files that exist.
+find . -type f -name "*.*" | sed 's/.*\.//' | tr '[:upper:]' '[:lower:]' | sort | uniq -c
+# List all distinct file extensions.
+find . -type f -name "*.*" | sed 's/.*\.//' | sort -u
+
+## SICER run commands:
+# Random Background
+sh SICER-rb.sh ~/Encode/Sarit_Reads/ChIP_2015-07-21/filtered/Beds/masked/ ChIP_12_AC-9_0.4_masked_Aligned.out.chr.bed Output/masked/AC-9/0.4/ bdist 1 200 101 0.95 400 100
+sh SICER-rb.sh ~/Encode/Sarit_Reads/ChIP_2015-07-21/filtered/Beds/masked/ ChIP_12_AC-9_0.4_masked_Aligned.out.chr.bed Output/masked/AC-9/0.4/ bdist 1 200 240 0.95 400 100
+# Estimating fragment sizes
+sh fragment-size-estimation.sh ~/Encode/Sarit_Reads/ChIP_2015-07-21/filtered/Beds/ChIP_10_Kit_AC-9_0.2_Aligned.out.bam.chr.bed chr1 75071545
+
+## Convert sam/bam files in several folders under parent to bed using the original name.
+for sam in */*.sam;do dir=$(echo $sam | cut -d'/' -f1);fname=$(echo $sam | cut -d'/' -f2 | cut -d'.' -f1-6).am;convert2bed -i sam -m 12G < $sam > $dir/$fname;done
+
+## Replace word in all files in directory.
+sed -i -- 's/xrange/range/g' *
+
+## Get n first fasta sequences
+awk -v RS=">" 'NR>1 {gsub("\n", ";", $0); sub(";$", "", $0); print ">"$0}' contigs.fa | head -n20 | tr ';' '\n' > top20_contigs.fa

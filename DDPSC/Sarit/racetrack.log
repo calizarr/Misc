@@ -1,0 +1,48 @@
+/usr/libexec/mysqld, Version: 5.5.50 (MySQL Community Server (GPL) by Remi). started with:
+Tcp port: 3306  Unix socket: /data/mysql/mysql.sock
+Time                 Id Command    Argument
+160919 17:14:20	27494 Query	show variables like "general_log%"
+160919 17:15:23	27495 Connect	MocklerWeb@hazelnut.data.mocklerlab.org on C4
+		27495 Prepare	SELECT * FROM MapReference
+		27495 Prepare	SELECT G.name AS `source`,GN.id,GN.name AS `name`, AN.description, AN.name as aname, E.adjacency,M.modular_k_rank,M.modular_k, M.modular_mean_exp_rank,M.module,M.k,M.k_rank,M.mean_exp,M.mean_exp_rank FROM Zmays_Genes AS G LEFT JOIN Zmays_Adjacency AS A ON A.id = G.id LEFT JOIN Zmays_Edges AS E ON E.edgeId = A.edgeId LEFT JOIN Zmays_Metrics AS M ON M.id = CASE WHEN E.node1 = G.id THEN E.node2 ELSE E.node1 END LEFT JOIN Zmays_Genes AS GN ON GN.id = CASE WHEN E.node1 = G.id THEN E.node2 ELSE E.node1 END LEFT JOIN Zmays_Annotation AS AN ON AN.id = CASE WHEN E.node1 = G.id THEN E.node2 ELSE E.node1 END  WHERE G.name IN ('GRMZM2G305851_T01','GRMZM2G174107_T02','GRMZM2G127591_T03','GRMZM2G083841_T01','GRMZM2G359038_T03','GRMZM2G066413_T01','GRMZM2G156356_T01','GRMZM2G138258_T01','GRMZM2G086258_T01') ORDER BY E.adjacency DESC LIMIT 5000
+		27495 Close stmt	
+160919 17:15:25	27495 Execute	SELECT G.name AS `source`,GN.id,GN.name AS `name`, AN.description, AN.name as aname, E.adjacency,M.modular_k_rank,M.modular_k, M.modular_mean_exp_rank,M.module,M.k,M.k_rank,M.mean_exp,M.mean_exp_rank FROM Zmays_Genes AS G LEFT JOIN Zmays_Adjacency AS A ON A.id = G.id LEFT JOIN Zmays_Edges AS E ON E.edgeId = A.edgeId LEFT JOIN Zmays_Metrics AS M ON M.id = CASE WHEN E.node1 = G.id THEN E.node2 ELSE E.node1 END LEFT JOIN Zmays_Genes AS GN ON GN.id = CASE WHEN E.node1 = G.id THEN E.node2 ELSE E.node1 END LEFT JOIN Zmays_Annotation AS AN ON AN.id = CASE WHEN E.node1 = G.id THEN E.node2 ELSE E.node1 END  WHERE G.name IN ('GRMZM2G305851_T01','GRMZM2G174107_T02','GRMZM2G127591_T03','GRMZM2G083841_T01','GRMZM2G359038_T03','GRMZM2G066413_T01','GRMZM2G156356_T01','GRMZM2G138258_T01','GRMZM2G086258_T01') ORDER BY E.adjacency DESC LIMIT 5000
+		27495 Close stmt	
+		27495 Quit	
+160919 17:15:51	27494 Query	select * from general_log limit 5
+160919 17:15:53	27494 Query	SELECT DATABASE()
+		27494 Init DB	mysql
+		27494 Query	show databases
+		27494 Query	show tables
+		27494 Field List	columns_priv 
+		27494 Field List	db 
+		27494 Field List	event 
+		27494 Field List	func 
+		27494 Field List	general_log 
+		27494 Field List	help_category 
+		27494 Field List	help_keyword 
+		27494 Field List	help_relation 
+		27494 Field List	help_topic 
+		27494 Field List	host 
+		27494 Field List	ndb_binlog_index 
+		27494 Field List	plugin 
+		27494 Field List	proc 
+		27494 Field List	procs_priv 
+		27494 Field List	proxies_priv 
+		27494 Field List	servers 
+		27494 Field List	slow_log 
+160919 17:15:54	27494 Field List	tables_priv 
+		27494 Field List	time_zone 
+		27494 Field List	time_zone_leap_second 
+		27494 Field List	time_zone_name 
+		27494 Field List	time_zone_transition 
+		27494 Field List	time_zone_transition_type 
+		27494 Field List	user 
+160919 17:15:55	27494 Query	select * from general_log limit 5
+160919 17:16:02	27494 Quit	
+160919 17:16:48	27496 Connect	clizarraga@localhost on 
+		27496 Connect	Access denied for user 'clizarraga'@'localhost' (using password: YES)
+160919 17:16:57	27497 Connect	clizarraga@localhost on 
+		27497 Query	select @@version_comment limit 1
+160919 17:17:14	27497 Query	show variables like "general_log%"
+160919 17:17:23	27497 Query	set global general_log = 'OFF'
