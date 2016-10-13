@@ -1,206 +1,56 @@
 #################### PlantCV Output Analysis Script ####################################
-source("plantcv_analysis_helper.R")
+## source("plantcv_analysis_helper.R")
+snapshot.file <- "SnapshotInfo.csv"
+barcode.file <- "TM015_barcodes.csv"
+plantcv.file <- "TM015_results.csv"
+outlier.removal <- FALSE
+filter.zeros <- FALSE
+source("plantcv_data_stub.R")
 
 ########################################################################################
 # Analyze VIS data
 ########################################################################################
-
-############################################
-# Read data and format for analysis
-############################################
-# Filenames
-snapshot.file <- "SnapshotInfo.csv"
-barcode.file <- "TM007_E_082415_barcodes.csv"
-plantcv.file <- "TM007_E_082415.csv"
-
-# Read VIS data
-snapshot.data <- read.table(file=snapshot.file, sep=",", header=TRUE)
-barcode.data <- read.table(file=barcode.file, sep =",", header=TRUE)
-plantcv.data <- read.table(file=plantcv.file, sep = ",", header=TRUE)
-
-## Fixing plantcv.data's plantbarcode header
-## All the datasets require a column named genotype, treatment, and plantbarcode
-names(plantcv.data)[1] <- "plantbarcode"
-names(barcode.data) <- c("plantbarcode", "genotype", "treatment", "replicate")
-names(snapshot.data)[3] <- "plantbarcode"
-
-## Cleaning snapshot.data.
-## Testing massive removal.
-
-snapshot.data <- snapshot.data[, names(snapshot.data) %in% c("plantbarcode", "timestamp", "weight.before", "weight.after", "water.amount")]
-
-snapshot.data <- snapshot.data[snapshot.data$weight.before != -1, ]
-
-## Merging snapshot info and genotype treatment data from barcode.data, test to figure out which rows do not merge
-snapshot.gt.data <- merge(barcode.data, snapshot.data, all = TRUE)
-excluded <- snapshot.gt.data[rowSums(is.na(snapshot.gt.data)) > 0,]
-
-## Fully merging once non-merged rows are inspected
-snapshot.gt.data <- merge(barcode.data, snapshot.data, all = FALSE)
-
-## Testing merging with plantcv.data and snapshot.gt.data
-plantcv.gt.data <- merge(barcode.data, plantcv.data, all = TRUE)
-
-excluded <- plantcv.gt.data[rowSums(is.na(plantcv.gt.data)) > 0, ]
-
-## Fully merging once non-merged rows are inspected
-plantcv.gt.data <- merge(barcode.data, plantcv.data, all = FALSE)
-
-vis.data <- plantcv.gt.data
-
-## Zoom-calibration
-## Zoom correction
-############################################
-zoom.lm <- lm(zoom.camera ~ zoom, data=data.frame(zoom=c(1,6000), zoom.camera=c(1,6)))
-
-# Download data for a reference object imaged at different zoom levels
-if (!file.exists('zoom_calibration_data.txt')) {
-  download.file('http://files.figshare.com/2084101/zoom_calibration_data.txt',
-                'zoom_calibration_data.txt')
-}
-
-# Read zoom calibrartion data
-z.data <- read.table(file="zoom_calibration_data.txt", sep="\t", header=TRUE)
-
-# Calculate px per cm
-z.data$px_cm <- z.data$length_px / z.data$length_cm
-
-# Calculate area for each row
-z.data$area_cm <- ifelse(z.data$reference == z.data$reference[[1]], (13.2*13.2), (13.2*3.7))
-
-# Calculate px**2 per cm**2
-z.data$px2_cm2 <- z.data$area_px / z.data$area_cm
-
-# Convert LemnaTec zoom units to camera zoom units
-z.data$zoom.camera <- predict(object = zoom.lm, newdata=z.data)
-
-# Zoom correction for area
-area.coef <- coef(nls(log(rel_area) ~ log(a * exp(b * zoom.camera)),
-                     z.data, start = c(a = 1, b = 0.01)))
-area.coef <- data.frame(a=area.coef[1], b=area.coef[2])
-area.nls <- nls(rel_area ~ a * exp(b * zoom.camera),
-               data = z.data, start=c(a=area.coef$a, b=area.coef$b))
-
-# Zoom correction for length
-len.poly <- lm(px_cm ~ zoom.camera + I(zoom.camera^2),
-  data=z.data[z.data$camera == 'VIS SV',])
-
-# Experimental zoom correction for area
-area.poly <- lm(px2_cm2 ~ zoom.camera + I(zoom.camera^2),
-  data = z.data)
-
-# Convert LemnaTec zoom units to camera zoom units
-vis.data$zoom <- vis.data$tv0_zoom
-vis.data$zoom <- as.integer(gsub('z', '', vis.data$zoom))
-vis.data$zoom.camera <- predict(object = zoom.lm, newdata = vis.data)
-vis.data$rel_area <- predict(object = area.nls, newdata = vis.data)
-vis.data$px_cm <- predict(object = len.poly, newdata = vis.data)
-vis.data$px2_cm2 <- predict(object = area.poly, newdata = vis.data)
-
-# Planting date
-planting_date <- as.POSIXct("2015-08-10")
-
-# Date-time from Unix time
-vis.data$date <- as.POSIXct(vis.data$timestamp, origin = "1970-01-01")
-
-# Days after planting
-vis.data$dap <- as.numeric(vis.data$date - planting_date)
-vis.data$day <- as.integer(vis.data$dap)
-
-# Adjusted day for odd and even image days
-vis.data$imageday <- 0
-vis.data$imageday <- vis.data$day
-
-############################################
-# Build traits table
-############################################
-traits <- data.frame(plantbarcode = vis.data$plantbarcode, timestamp = vis.data$timestamp,
-  genotype = vis.data$genotype, treatment = vis.data$treatment, replicate = vis.data$replicate,
-  dap = vis.data$dap, day = vis.data$day, imageday = vis.data$imageday)
-
-## # Zoom correct TV and SV area
-## traits$tv_area <- vis.data$tv0_area / vis.data$rel_area
-## traits$sv_area <- (vis.data$sv0_area / vis.data$rel_area) +
-##                  (vis.data$sv90_area / vis.data$rel_area)
-## traits$area <- traits$tv_area + traits$sv_area
-
-# Experimental zoom correct TV and SV area
-traits$tv_area <- vis.data$tv0_area / vis.data$px2_cm2
-traits$sv_area <- (vis.data$sv0_area / vis.data$px2_cm2) +
-  (vis.data$sv90_area / vis.data$px2_cm2)
-traits$area <- traits$tv_area + traits$sv_area
-
-# Adding in hull area
-traits$tv_hull.area <- vis.data$tv0_hull.area / vis.data$px2_cm2
-traits$sv_hull.area <- (vis.data$sv0_hull.area / vis.data$px2_cm2) +
-  (vis.data$sv90_hull.area / vis.data$px2_cm2)
-traits$hull.area <- traits$tv_hull.area + traits$sv_hull.area
-
-# Zoom correct height
-traits$height <- ((vis.data$sv0_height_above_bound / vis.data$px_cm) +
-                    (vis.data$sv90_height_above_bound / vis.data$px_cm)) / 2
-
-traits$group <- paste(traits$genotype,'-',traits$treatment,sep='')
-
-barcodes <- unique(sort(traits$plantbarcode))
-
-######################################## BEGIN: Outlier Detection And Removal #####################################
-
-## Removing outliers.
-## get the image dataset without outliers
-## traits <- c("solidity", "sv_area", "tv_area", "extent_x", "extent_y", "height_above_bound", "wue", "volume")
-trait.vec <- c("sv_area", "tv_area", "area", "height")
-traits.out <- traits
-
-for(trait in trait.vec) {
-    traits.out[, trait][which(traits.out[, trait]==0)] <- NA
-}
-
-system.time(
-dataset <- outlier.detection(traits.out, col.day="imageday", fill=TRUE)
-    )
-
-no.outliers <- sum(traits.out[, trait.vec]!=dataset[, trait.vec], na.rm=TRUE)
-
-traits <- dataset
-
-######################################## END: Outlier Detection And Removal #######################################
-
-#################### Making an average of the replicates ####################
-traits.avg <- aggregate(cbind(tv_area, sv_area, area, height, hull.area)~genotype+treatment+day+imageday, traits, mean)
-
-## Cool statement that can be used as internal function to pass and
-## aggregate within function instead of creating many aggregate data frames
-## dfr <- aggregate(as.formula(paste(x, " ~ genotype + treatment + day +imageday", sep = "")), dfr, mean)
-
+## The main data frames are: traits (main df), traits.avg (aggregate mean df),
+## wue.data (water use efficiency), wue.data.agg (water use efficiency aggregate mean), rgr (Relative Growth Rate)
+big <- TRUE
+first.day <-traits$day[1]
+last.day <- traits$day[length(traits$dap)]
+first.num.col <- grep("tv_area", names(traits))
+last.num.col <- ncol(traits)
 ######################################## BEGIN: Trait Plotting Function ###########################################
 
-breaks = c("25", "50", "75", "100")
-labels = c("25", "50", "75", "100")
-treatments <- unique(sort(as.character(traits$treatment)))
-genotypes <- unique(sort(as.character(traits$genotype)))
 dir.create("pdf_images")
 dir.create("images")
+dir.create("pdf_images/aggregate")
 
 ## Plot trait for each genotype
+trait <- "height"
+units <- "cm"
 
-## pdf(file=file.path("pdf_images","all_height_day.pdf"),height=6,width=6, useDingbats=FALSE)
-pdf(file=file.path("pdf_images","all_height_day_independent_scaling.pdf"),height=6,width=6, useDingbats=FALSE)
-## pdf(file=file.path("pdf_images","all_area_day.pdf"),height=6,width=6, useDingbats=FALSE)
-## pdf(file=file.path("pdf_images","all_area_day_independent_scaling.pdf"),height=6,width=6, useDingbats=FALSE)
+## pdf(file=file.path("pdf_images", paste("all", trait, "day.pdf", sep = "_"),height=6,width=6, useDingbats=FALSE)
+pdf(file=file.path("pdf_images", paste("all", trait, "day", "independent", "scaling.pdf", sep = "_"),height=7,width=7, useDingbats=FALSE)
 for(genotype in genotypes) {
-  plot.trait(traits, genotype, treatments, "dap", "height", "(cm)", limits = c(), breaks = breaks, labels = labels)
-  ggsave(paste0("images/",paste(genotype,"height","cm",sep="_"),".png"), dpi = 600, width = 7, height = 7, units = "in")
-  ## plot.trait(traits, genotype, treatments, "dap", "area", "(cm^2)", limits = c(), breaks = breaks, labels = labels)
-  ## ggsave(paste0("images/",paste(genotype,"area","cm^2",sep="_"),".png"),  dpi = 600, width = 7, height = 7, units="in" )
+  ## plot.trait(traits, genotype, treatments, "dap", "height", "(cm)", limits = c(), breaks = breaks, labels = labels, x.scale = "Days After Planting", print.plot = TRUE)
+  ## ggsave(paste0("images/",paste(genotype,"height","cm",sep="_"),".png"), dpi = 100, width = 7, height = 7, units = "in")
+  plot.trait(traits, genotype, treatments, "dap", "area", "(cm^2)", limits = c(), breaks = breaks, labels = labels, x.scale = "Days After Planting", print.plot = TRUE)
+  ggsave(paste0("images/",paste(genotype,"area","cm^2",sep="_"),".png"),  dpi = 100, width = 7, height = 7, units="in")
 }
 dev.off()
 
 ## Facet plot of all genotype traits.
-## plot.trait(traits, genotypes, treatments, "dap", "height", "(cm)", limits = c(), facet = TRUE, x.text.angle = 90, breaks = breaks, labels = labels)
-## ggsave(paste0("images/",paste("all","height","cm","facet",sep="_"),".png"), dpi = 600, width = 14, height = 7, units = "in")
-plot.trait(traits, genotypes, treatments, "dap", "area", "(cm^2)", limits = c(), facet = TRUE, x.text.angle = 90, breaks = breaks, labels = labels)
-ggsave(paste0("images/",paste("all","area","cm^2","facet",sep="_"),".png"), dpi = 600, width = 14, height = 7, units = "in")
+p <- plot.trait(traits, genotypes, treatments, "dap", trait, paste0("(",units,")"), limits = c(), facet = TRUE, x.text.angle = 0, breaks = breaks, labels = labels, x.scale = "Days After Planting", facet.col = length(genotypes) / 10)
+if(big) {
+  ggsave(paste0("pdf_images/aggregate/",paste("all",trait, units,"facet",sep="_"),".png"), dpi = 200, width = 7*6, height = 7*3, units = "in", limitsize = FALSE)
+} else {
+  ggsave(paste0("pdf_images/aggregate/",paste("all",trait, units,"facet",sep="_"),".png"), dpi = 200, width = 7*2, height = 7, units = "in")
+}
+
+splits <- split(genotypes, ceiling(seq_along(genotypes)/8))
+for( index in seq_along(splits) ) {
+  p <- plot.trait(traits, splits[[index]], treatments, "dap", trait, paste0("(,"units,")"), limits = c(-5, 270), facet = TRUE, x.text.angle = 90, breaks = breaks, labels = labels, x.scale = "Days After Planting", print.plot = FALSE)
+  ggsave(paste0("pdf_images/aggregate/",paste("all", trait, "geno", index, units,"facet",sep="_"),".png"), dpi = 300, width = 14, height = 7, units = "in")
+}
+
 
 ######################################## END: Trait Plotting Function #############################################
 
@@ -209,74 +59,92 @@ ggsave(paste0("images/",paste("all","area","cm^2","facet",sep="_"),".png"), dpi 
 dir.create("pdf_images")
 dir.create("images")
 
-mean.ratio.area.100to25 <- trait.heatmap(traits.avg, "100", "25", "Ratio of 100 to 25", "area", "ratio",
-  save = TRUE, save.name = "images/mean.ratio.area.100to25")
-
-mean.ratio.area.100to50 <- trait.heatmap(traits.avg, "100", "50", "Ratio of 100 to 50", "area", "ratio",
-  save = TRUE, save.name = "images/mean.ratio.area.100to50")
-
-mean.ratio.area.100to75 <- trait.heatmap(traits.avg, "100", "75", "Ratio of 100 to 75", "area", "ratio",
-  save = TRUE, save.name = "images/mean.ratio.area.100to75")
+mean.ratio.area.100to30 <- trait.heatmap(traits.avg, "100", "30", "Ratio of 100 to 30", "area", "ratio",
+  save = TRUE, save.name = "mean.ratio.area.100to30")
 
 ######################################## END: Heat Map Plotting ###################################################
 
 ######################################## BEGIN: Water Use Efficiency Plots ########################################
 
-water.data <- snapshot.gt.data
-
-## Add a genotype x treatment group column.
-water.data$group <- paste(water.data$genotype,'-',water.data$treatment,sep='')
-
-## Add a column for days after planting since the planting date.
-water.data$date <- as.POSIXct(water.data$timestamp, origin = "1970-01-01")
-water.data$dap = as.numeric(water.data$date - planting_date)
-water.data$day <- as.integer(water.data$dap)
-water.data$imageday <- water.data$day
-## water.data[water.data$day %% 2 == 0,]$imageday <- water.data[water.data$day %% 2 == 0,]$day-1
-
-## Fixing the initial watering amount of 0 to be 0.001 or 0.0001
-## Not useful right now but maybe later
-## water.data[water.data$water.amount < 1 & water.data$dap <= 22, ]$water.amount <- 1
-
-wue.data <- wue.calculate(water.data, traits, genotypes, treatments, "area")
-wue.data$group <- paste(wue.data$genotype,'-',wue.data$treatment,sep='')
-## wue.data[wue.data$water == 0, ]$water <- wue.data[wue.data$water == 0, ]$water + 1
-wue.data$water <- wue.data$water + 1
-wue.data$WUE <- wue.data$area / wue.data$water
-wue.data <- wue.data[complete.cases(wue.data), ]
-
-wue.delta <- deltaWUE(wue.data, "area")
-wue.delta$group <- paste(wue.delta$genotype,'-',wue.delta$treatment,sep='')
-wue.delta$delta_water <- wue.delta$delta_water + 1
-wue.delta$WUE <- wue.delta$delta_area / wue.delta$delta_water
-
 #################### WUE Plots ####################################
 
 ## Plot WUE for each genotype
 ## dir.create("pdf_images")
-## pdf(file=file.path("pdf_images","all_wue.pdf"),height=6,width=6, useDingbats=FALSE)
-pdf(file=file.path("pdf_images","all_delta_wue.pdf"),height=6,width=6, useDingbats=FALSE)
+pdf(file=file.path("pdf_images","all_wue.pdf"),height=7,width=7, useDingbats=FALSE)
+## pdf(file=file.path("pdf_images","all_delta_wue.pdf"),height=6,width=6, useDingbats=FALSE)
 treatments <- unique(sort(as.character(traits$treatment)))
 genotypes <- unique(sort(as.character(traits$genotype)))
 for(genotype in genotypes) {
-  ## WUE.plot(wue.data, "dap", "WUE", genotype, treatments, "Days After Planting",
-  ##   "Water Use Efficiency (cm ^2 / g)", color.title = "Genotype-Treatment", main = paste0(capitalize(genotype)))
-  ## ggsave(paste0("images/",paste(genotype,"wue","unitless",sep="_"),".png"), width = 8, height = 6, dpi = 300, pointsize = 8)
-  WUE.plot(wue.delta, "dap", "WUE", genotype, treatments, "Days After Planting",
-    "Delta-Water Use Efficiency", color.title = "Genotype-Treatment", main = paste0(capitalize(genotype)))
-  ggsave(paste0("images/",paste(genotype,"wue_delta","unitless",sep="_"),".png"), width = 8, height = 6, dpi = 300, pointsize = 8)
+  p <- plot.trait(wue.data, genotype, treatments, "day", "WUE", "(cm^2 / g)", limits = c(), y.scale = "Water Use Efficiency", x.scale = "Days After Planting")
+  p <- p + scale_colour_discrete(name = "Treatment", breaks = breaks, labels = labels, limits = levels(as.factor(traits$treatment)))
+  print(p)
+  ggsave(paste0("images/",paste(genotype,"wue","cm^2_g",sep="_"),".png"),  dpi = 100, width = 7, height = 7, units="in")
 }
 dev.off()
 
+## Facet plot of the Water Use Efficiency
+trait <- "WUE"
+units <- "cm^2/g"
+print.units <- gsub("/", "_", units)
+p <- plot.trait(wue.data, genotypes, treatments, "dap", trait, paste0("(",units,")"), limits = c(), facet = TRUE, x.text.angle = 0, breaks = breaks, labels = labels, x.scale = "Days After Planting", facet.col = length(genotypes) / 10)
+if(big) {
+  ggsave(paste0("pdf_images/aggregate/",paste("all",trait, print.units,"facet",sep="_"),".png"), dpi = 200, width = 7*6, height = 7*3, units = "in", limitsize = FALSE)
+} else {
+  ggsave(paste0("pdf_images/aggregate/",paste("all",trait, print.units,"facet",sep="_"),".png"), dpi = 200, width = 7*2, height = 7, units = "in")
+}
 
-plot.trait(wue.data, genotypes, treatments, "dap", "WUE", "(cm^2 / g)", limits = c(), facet = TRUE, x.text.angle = 90, breaks = breaks, labels = labels, se = TRUE)
+## Facet plot of all genotype traits.
+splits <- split(genotypes, ceiling(seq_along(genotypes)/8))
+for( index in seq_along(splits) ) {
+  p <- plot.trait(wue.data, splits[[index]], treatments, "dap", "WUE", "(cm ^2 / g)", limits = c(), facet = TRUE, x.text.angle = 90, breaks = breaks, labels = labels, x.scale = "Days After Planting")
+  ggsave(paste0("pdf_images/aggregate/",paste("all","WUE", "geno", index, "cm^2_g","facet",sep="_"),".png"), dpi = 300, width = 14, height = 7, units = "in")
+}
+
+######################################## BEGIN: Heat Map Plotting #################################################
+
+dir.create("pdf_images")
+dir.create("images")
+
+mean.ratio.wue.100to30 <- trait.heatmap(wue.data.agg, "100", "30", "Ratio of 100 to 30", "WUE", "ratio",
+  save = TRUE, save.name = "mean.ratio.wue.100to30", day.col = "day")
+
+######################################## END: Heat Map Plotting ###################################################
+
+######################################## BEGIN: Relative Growth Rate ###############################################
+
+rgr.sub <- rgr[!(is.na(rgr$RGR.area)), ]
+
+for(genotype in genotypes) {
+  plot.trait(rgr.sub, genotype, treatments, "day", "RGR.area", "(cm^2/day)", limits = c(), breaks = breaks, labels = labels, x.scale = "Days After Planting", print.plot = TRUE)
+  ggsave(paste0("images/",paste(genotype,"RGR.area","(cm^2_day)",sep="_"),".png"),  dpi = 100, width = 7, height = 7, units="in" )
+}
+
+trait <- "RGR.area"
+units <- "(cm^2/day)"
+print.units <- "cm^2_day"
+## Facet plot of all genotype traits.
+p <- plot.trait(rgr.sub, genotypes, treatments, "day", trait, paste0("(",units,")"), limits = c(), facet = TRUE, x.text.angle = 0, breaks = breaks, labels = labels, x.scale = "Days After Planting", facet.col = length(genotypes) / 10)
+if(big) {
+  ggsave(paste0("pdf_images/aggregate/",paste("all",trait, print.units,"facet",sep="_"),".png"), dpi = 200, width = 7*6, height = 7*3, units = "in", limitsize = FALSE)
+} else {
+  ggsave(paste0("pdf_images/aggregate/",paste("all",trait, print.units,"facet",sep="_"),".png"), dpi = 200, width = 7*2, height = 7, units = "in")
+}
+
+splits <- split(genotypes, ceiling(seq_along(genotypes)/8))
+for( index in seq_along(splits) ) {
+  p <- plot.trait(rgr.sub, splits[[index]], treatments, "day", "RGR.area", "(cm ^2/day)", limits = c(), facet = TRUE, x.text.angle = 90, breaks = breaks, labels = labels, x.scale = "Days After Planting")
+  ggsave(paste0("pdf_images/aggregate/",paste("all","RGR.area", "geno", index, "cm^2_day","facet",sep="_"),".png"), dpi = 300, width = 14, height = 7, units = "in")
+}
+
 ######################################## BEGIN: Analysis Of Data ##################################################
 
 ## Get the mean and confidence interval of height per day
 height.per.day.100 <- trait.per.day(traits, "height", treatment = c("100"))
+height.per.day.30 <- trait.per.day(traits, "height", treatment = c("30"))
 
 ## Get the mean and confidence interval of area per day
 area.per.day.100 <- trait.per.day(traits, "area", treatment = c("100"))
+area.per.day.30 <- trait.per.day(traits, "height", treatment = c("30"))
 
 ## Get the trait differences per two days for each treatment specified
 bd21.height.results <- analyze.trait(traits, "height", "Bd21-0", "90", "22.5")
@@ -286,9 +154,166 @@ bd1.height.results <- analyze.trait(traits, "height", "Bd1-1", "90", "22.5")
 bd21.qvalues.height = p.adjust(bd21.height.results$pvalue, method="fdr")
 bd1.qvalues.height = p.adjust(bd1.height.results$pvalue, method="fdr")
 
-
 ######################################## END: Analysis Of Data #####################################################
 
+dir.create("histogram_gif")
+for(day in sort(unique(traits.avg$day))) {
+  p <- ggplot(traits.avg[traits.avg$day == day, ], aes(x = area, fill = as.factor(treatment))) + geom_density(alpha=0.3)
+  p <- p + ggtitle(paste0("Density Curve of Area By Treatment Per Day (",day,")")) +
+    scale_x_continuous( name = "Area", limits = c(0, 322)) +
+    scale_y_continuous(name = "Density", limits = c(0.00, 0.055)) +
+    theme(axis.title.x=element_text(face="bold"), axis.title.y=element_text(face="bold")) +
+    scale_fill_discrete(name = "Treatment", breaks = breaks, labels = labels) +
+    theme_minimal()
+  ggsave(paste0("histogram_gif/",day,"_histogram_area_v_density",".png"), width = 14, height = 7.88, dpi = 100, units = "in", pointsize = 10)
+}
 
-#################### Outputting final csv file ####################
+## ImageMagick command from VBox
+## convert -background white -alpha remove -layers OptimizePlus -delay 50 -quality 100 *.png all_histogram.gif
+
+## More ridiculous (PCA plots)
+dir.create("PCA.images")
+
+## Fancier plots with fviz_pca_biplot
+for( day in sort(unique(traits$day)) ) {
+  traits.day <- traits[traits$day == day, ]
+  shapes.pca <- PCA(traits.day[, c((first.num.col+1):last.num.col) ],graph = F)
+  p <- fviz_pca_biplot(shapes.pca, label="all", alpha.var = "contrib",
+    ## habillage=traits.day[, "treatment"],addEllipses = T, invisible = "ind") +
+    habillage= traits.day[, "treatment"],addEllipses = T) +
+    xlim(c(-6,11)) +
+    ylim(c(-4,4)) +
+    ggtitle(paste0("Biplot of variables and individuals on Day ", day)) +
+    theme_minimal()
+  ggsave(paste0("PCA.images/", paste("genotypes", "pca", "fviz_pca_biplot", paste0("day-", day), sep = "_"), ".png"), width = 14, height = 7.88, units = "in", dpi = 300)
+}
+
+#### Jberry PCA Plot
+sub <- traits
+#*************************************************************************************************
+# Making corr plot for shapes data continuous time
+#*************************************************************************************************
+cor.mat <- round(cor(sub[sub$day==first.day, c(first.num.col:last.num.col)]),3)
+corrplot(cor.mat, type="lower", order="original", tl.col="black", tl.srt=45)
+
+#*************************************************************************************************
+# Perfoming ANOVA to get variance explained
+#*************************************************************************************************
+## Forcing the ANOVA to be type 3 because defaults are wtf bbq
+options(contrasts = c("contr.sum","contr.poly"))
+## mod_lm <- lm(data=sub,area~0+(trait+treatment+treatment:trait):dap+dap)
+mod_lm <- lm(data=sub,area~0+(genotype+genotype:treatment):day+day)
+## drop1(mod_lm)
+mod1 <- Anova(mod_lm,type = 2)
+afss <- mod1$`Sum Sq`
+mod1$`Pr(>F)` <- round(mod1$`Pr(>F)`,4)
+print(cbind(mod1,PctExp=afss/sum(afss)*100))
+
+#*************************************************************************************************
+# Getting Slopes
+#*************************************************************************************************
+slope_mod <- glm(data=sub,height~0+treatment:genotype+(treatment:genotype):(as.numeric(day-12)))
+## Getting slopes that interact with dap (days after planting)
+interacting.dap <- grep("day", names(slope_mod$coefficient))
+num.of.treat <- length(unique(sub$treatment))
+slopes.of.interest <- slope_mod$coefficients[interacting.dap]
+## slopes <- matrix(slopes.of.interest ,ncol= num.of.treat ,byrow = T, rownames.force = T)
+slopes <- as.matrix(data.frame(slopes.of.interest), rownames.force = T)
+slopes.spl <- matrix(slopes, ncol = num.of.treat, byrow = T)
+rownames(slopes.spl) <- rownames(slopes)[seq(from = 1,to = nrow(slopes), by = 2)]
+slopes <- slopes.spl
+## rownames(slopes) <- sapply(sapply(names(slope_mod$coefficients[seq(from=91,to=length(slope_mod$coefficients),by=3)]),function(i) strsplit(i,":")[[1]][2]),function(j) strsplit(j,"name")[[1]][2])
+rownames(slopes) <- sapply(sapply(rownames(slopes), function(i) strsplit(i,":")[[1]][2]),function(j) strsplit(j,"type")[[1]][2])
+colnames(slopes) <- c("30", "100")
+slopes
+
+#*************************************************************************************************
+# Boxplots of treatments per day
+#*************************************************************************************************
+
+for( day in sort(unique(traits$day)) ) {
+  p <- ggplot(data=traits[traits$day == day, ],aes(genotype,area)) +
+    facet_wrap(~ treatment,scales = "free_x",as.table = F) +
+    xlab("Plant Age (days)") +
+    ylim(c(-5,300))+
+    geom_boxplot(aes(color=genotype))+
+    scale_color_discrete(breaks = unique(traits$genotype), labels = unique(traits$genotype)) +
+    theme_light()+
+    theme(strip.background=element_rect(fill="gray50"),
+      strip.text.x=element_text(size=14,color="white"),
+      strip.text.y=element_text(size=14,color="white"),
+      axis.title.x=element_blank(),
+      axis.text.x=element_blank(),
+      axis.ticks.x=element_blank()) +
+    ggtitle(paste0("Boxplot of genotypes within treatments - Day ", day))
+  if(big) {
+    p <- p + guides(color=FALSE, fill = FALSE)
+  }
+  ggsave(paste0("images/", paste("genotypes_within_treatments", paste0("day-", day), sep = "_"), ".png"), width = 14, height = 7.88, units = "in", dpi = 300)
+}
+
+#*************************************************************************************************
+# Testing water effects for each day and plotting
+#*************************************************************************************************
+traits.list <- split(traits,traits$genotype)
+days <- c(first.day:last.day)
+days <- days[!days %in% c(17)]
+
+## GTT = genotype treatment time
+area_gtt_effects <- data.frame(do.call("rbind",
+  lapply(traits.list,function(i){
+    sapply(days, function(j){
+      sub.gtt <- i[i$day==j & i$treatment %in% c(30, 100),]
+      mod_lm <- lm(data=sub.gtt,area~treatment)
+      mod_aov <- anova(mod_lm)
+      if(is.na(mod_aov$`Pr(>F)`[[1]])) {
+        return(FALSE)
+      } else if(mod_aov$`Pr(>F)`[1] < 0.05){
+        #TRUE
+        mod_coef <- as.numeric(c(mod_lm$coefficients[1],mod_lm$coefficients[1]+mod_lm$coefficients[2]))
+        if(all(mod_coef==cummax(mod_coef))|all(mod_coef==cummin(mod_coef))){
+          mod_aov$`Pr(>F)`[1]
+          #TRUE
+        }else{
+          FALSE
+        }
+      }else{
+        mod_aov$`Pr(>F)`[1]
+        #1
+        #FALSE
+      }
+    })
+  })
+))
+
+colnames(area_gtt_effects) <- as.character(days)
+area_gtt_effects$geno <- rownames(area_gtt_effects)
+area_gtt_effects_melt <- melt(area_gtt_effects,id="geno")
+area_gtt_effects_melt$adj <- p.adjust(area_gtt_effects_melt$value,method="BH")
+
+p <- ggplot(data=area_gtt_effects_melt,aes(x=variable,y=geno))+
+  ggtitle("Area by Watering-Effect Temporal Divergence")+
+  ylab("")+
+  xlab("Plant Age (Days)")+
+  scale_fill_gradientn(colors=rev(colorRampPalette(brewer.pal(9,"Greens"))(10)),"value")+
+  geom_tile(data=area_gtt_effects_melt,aes(x=variable,y=geno),fill="white",color="darkgray",size=0.5)+
+  geom_tile(data=area_gtt_effects_melt[area_gtt_effects_melt$adj < 0.05,],aes(x=variable,y=geno,fill=rescale(adj,to=c(0,1))),color="darkgray",size=0.5) +
+  scale_color_manual(values=c("black","black")) +
+  theme_light()+
+  theme(strip.background=element_rect(fill="gray50"),
+    strip.text=element_text(size=14,color="white"))
+
+if(big) {
+  ggsave(paste0("pdf_images/aggregate/",paste("Area_by_Watering-Effect_Temporal_Divergence", sep="_"),".png"), dpi = 200, width = 7*5, height = 7*4, units = "in", limitsize = FALSE)
+} else {
+  ggsave(paste0("pdf_images/aggregate/",paste("Area_by_Watering-Effect_Temporal_Divergence", sep="_"),".png"), dpi = 200, width = 7*2, height = 7, units = "in")
+}
+
+## g <- ggplot_build(p)
+## vtiles <- sapply(lapply(g$panel$ranges, "[[", "y.major"), length)
+## gt <- ggplot_gtable(g)
+## panels <- gt$layout$t[grepl("panel", gt$layout$name)]
+## gt$heights[panels] <-lapply(vtiles, unit, "null")
+## grid.newpage()
+## grid.draw(gt)
 

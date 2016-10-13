@@ -1,45 +1,60 @@
-#################### Helper Functions for PlantCV Analysis Script ####################
+#################### Helper functions for PlantCV Analysis Script ####################
 
 ######################################## BEGIN: Loading Libraries #################################################
 library(plyr)
+library(dplyr)
 library(ggplot2)
 library(RColorBrewer)
 library(gplots)
 library(scales)
 library(gtools)
+library(corrplot)
+library(FactoMineR)
+library(factoextra)
+library(car)
+library(reshape2)
+library(grid)
+library(stringr)
+library(gridExtra)
 ######################################## END: Loading Libraries ###################################################
 
 ######################################## BEGIN: Function Creation #################################################
 
+## Capitalize function
 capitalize <- function(x) { paste0(toupper(substring(x, 1, 1)), tolower(substring(x, 2))) }
+
+## Negation operator
+"%ni%" <- Negate( "%in%" )
 
 ################################# BEGIN: Trait plotting function ########################################
 
-plot.trait <- function(dfr, genotype, treatments, x, y, units, limits,
+plot.trait <- function(dfr, genotype, treatments, x, y, y.units, color = "factor(treatment)",
+                       limits = c(),
                        discrete = "Treatment",
                        breaks = c("22.5", "45", "90", "drought", "primer", "recovery"),
                        labels = c("22.5", "45", "Control", "Drought", "Primer", "Recovery"),
                        geno.col = "genotype",
                        treat.col = "treatment",
                        facet = FALSE,
+                       facet.col = length(genotypes) / 2,
                        x.text.angle = 0,
-                       se = TRUE
-                        ) {
+                       se = TRUE,
+                       y.scale = paste(capitalize(y)),
+                       x.scale = paste(capitalize(x)),
+                       print.plot = FALSE
+                       ) {
   # Plot x vs y
-  bplot <- ggplot(dfr[dfr[, geno.col] %in% genotype & (dfr[, treat.col] %in% treatments),], aes_string(x = x, y = y, color = "factor(treatment)")) +
-      scale_colour_discrete(name = discrete,
-        breaks = breaks,
-        labels = labels
-      )
+  bplot <- ggplot(dfr[dfr[, geno.col] %in% genotype & (dfr[, treat.col] %in% treatments),], aes_string(x = x, y = y, color = "factor(treatment)"))
+  bplot <- bplot + scale_colour_discrete(name = discrete,
+    breaks = breaks,
+    labels = labels
+  )
   # Plot command
   bplot <- bplot +
     geom_smooth(method="loess",size=1, se = se) +
     ggtitle(genotype) +
-    scale_x_continuous(name="Days") +
-    scale_y_continuous(lim = limits, name= paste(capitalize(y), units, sep =" ")) +
-    ## geom_vline(xintercept=unique(dfr[format(dfr$date, "%Y-%m-%d")==as.Date("2015-07-21"), ]$day), linetype=2) +
-    ## geom_vline(xintercept=unique(dfr[format(dfr$date, "%Y-%m-%d")==as.Date("2015-07-26"), ]$day), linetype=2) +
-    ## geom_vline(xintercept=unique(dfr[format(dfr$date, "%Y-%m-%d")==as.Date("2015-08-04"), ]$day), linetype=1) +
+    scale_x_continuous(name = x.scale) +
+    scale_y_continuous(lim = limits, name = paste(y.scale, y.units, sep =" ")) +
     theme_bw() +
     theme(
       axis.title.x=element_text(face="bold"),
@@ -49,11 +64,11 @@ plot.trait <- function(dfr, genotype, treatments, x, y, units, limits,
   if(facet) {
     formula <- as.formula(paste0("~ ", geno.col))
     bplot <- bplot + theme(axis.text.x = element_text(angle = x.text.angle)) + ggtitle("Facet of Genotypes and Treatments")
-    bplot <- bplot + facet_wrap(formula, ncol = length(genotypes) / 2)
+    bplot <- bplot + facet_wrap(formula, ncol = facet.col)
   }
 
   # Save file
-  print(bplot)
+  if( print.plot ) { print(bplot) }
   return(bplot)
 }
 
@@ -164,7 +179,7 @@ trait.heatmap <- function(dfr, diff1, diff2, title, measure,
   ## color.palette = colorRampPalette(c("darkorange1","gray","blue"),space="rgb")
   col_breaks <- c(seq(0,3, length = 100), seq(3.1,5, length = 100), seq(5.1, 10, length = 100), seq(10.1,74, length = 100))
   if(save) {
-    pdf(file = paste0("pdf_",save.name, ".pdf"), width = 8, height = 8, pointsize = 8, useDingbats = FALSE)
+    pdf(file = paste0("pdf_images/",save.name, ".pdf"), width = 8, height = 8, pointsize = 8, useDingbats = FALSE)
   }
   reorg <- heatmap.2(vis.mat,
     cellnote=vis.mat,
@@ -183,7 +198,7 @@ trait.heatmap <- function(dfr, diff1, diff2, title, measure,
     keysize=1.4)
   if(save) {
     dev.off()
-    png(file = paste0(save.name, ".png"), width = 1200, height = 900, res = 150, pointsize = 8)
+    png(file = paste0("pdf_images/aggregate/", save.name, ".png"), width = 1200, height = 900, res = 150, pointsize = 8)
     eval(reorg$call)
     dev.off()
   }
@@ -203,7 +218,8 @@ wue.calculate <- function(water, vis, genotypes, treatments, trait,
                           id.col = "plantbarcode",
                           dap.col = "dap",
                           water.col = "water.amount",
-                          group.col = "group"
+                          group.col = "group",
+                          rep.col = "replicate"
                           ) {
   # WUE data vectors
   dap.list <- c()
@@ -213,6 +229,7 @@ wue.calculate <- function(water, vis, genotypes, treatments, trait,
   treatment.list <- c()
   group.list <- c()
   genotype.list <- c()
+  replicate.list <- c()
 
   # Get unique barcodes for vis
   barcodes <- unique(vis[(vis[, geno.col] %in% genotypes) & (vis[, treat.col] %in% treatments), id.col])
@@ -228,7 +245,8 @@ wue.calculate <- function(water, vis, genotypes, treatments, trait,
       vis.list <- c(vis.list, snapshots[row, ][, trait])
       treatment.list <- c(treatment.list, as.character(snapshots[row, treat.col]))
       group.list <- c(group.list,snapshots[row, group.col])
-      genotype.list= c(genotype.list, as.character(snapshots[row, geno.col]))
+      genotype.list <- c(genotype.list, as.character(snapshots[row, geno.col]))
+      replicate.list <- c(replicate.list, snapshots[row, rep.col])
     }
   }
 
@@ -237,8 +255,10 @@ wue.calculate <- function(water, vis, genotypes, treatments, trait,
                         water=water.list,
                         trait=vis.list,
                         genotype=genotype.list,
-                        treatment=treatment.list)
-  colnames(wue.data) <- c("plantbarcode", "dap", "water", trait, "genotype", "treatment")
+                        treatment=treatment.list,
+                        replicate=replicate.list
+    )
+  colnames(wue.data) <- c("plantbarcode", "dap", "water", trait, geno.col, treat.col, rep.col)
 
   return(wue.data)
 }
@@ -247,7 +267,11 @@ wue.calculate <- function(water, vis, genotypes, treatments, trait,
 deltaWUE <- function(wue.data, trait,
                      id.col = "plantbarcode",
                      geno.col = "genotype",
-                     treat.col = "treatment"
+                     treat.col = "treatment",
+                     dap.col = "dap",
+                     water.col = "water.amount",
+                     group.col = "group",
+                     rep.col = "replicate"
                      ) {
     water.list <- c()
     trait.list <- c()
@@ -258,10 +282,11 @@ deltaWUE <- function(wue.data, trait,
     group.list <- c()
 
     delta_trait <- paste("delta", trait, sep = "_")
+    delta_water <- "delta_water"
     barcodes <- unique(sort(wue.data[, id.col]))
     for(barcode in barcodes) {
         gr <- wue.data[wue.data[, id.col] == barcode, ]
-        gr$delta_water <- c(0, diff(gr$water))
+        gr[, delta_water] <- c(0, diff(gr$water))
         gr[, delta_trait] <- c(0, diff(gr[, trait]))
 
         dap.list <- c(dap.list, as.numeric(gr$dap))
@@ -289,7 +314,7 @@ deltaWUE <- function(wue.data, trait,
 #################### WUE plotting function ####################
 
 WUE.plot <- function(dfr, x, y, genotypes, treatments, x.title, y.title,
-                     color = "factor(group)", limits = c(), color.title = color,
+                     color = "factor(treatment)", limits = c(), color.title = color,
                      main = "All treatments and genotypes",
                      geno.col = "genotype",
                      treat.col = "treatment"
@@ -537,3 +562,134 @@ drought.response <- function(dfr, genotypes, trait, func,
   dr.df = data.frame(day=days,response=response,genotype=as.factor(genotype))
   return(dr.df)
 }
+
+################################# END: Treatment Trait Difference Data Frame ######################################
+
+### Treatment differences in biomass
+treat.diff <- function(dfr, genotypes, trait, func,
+                             treat.col = "treatment", day.col = "imageday",
+                             treat1 = "90", treat2 = "22.5", geno.col = "genotype"
+                             ) {
+  allowed.funcs <- c("median", "mean")
+  if (! func %in% allowed.funcs ) {
+    writeLines(paste0("Please choose from: ", paste(allowed.funcs, collapse=', '), " for the appropriate function.\nThen, rerun the function"))
+    return(1)
+  }
+  # Initialize drought response data frame with days
+  drought.resp <- data.frame(day=c(
+    seq(min(as.integer(dfr[, day.col])),max(as.integer(dfr[, day.col])),2)))
+
+  # Initialize genotypes
+  for(g in genotypes) {
+    control <- paste(g,'control',sep='.')
+    drought <- paste(g,'drought',sep='.')
+
+    # Calculate median trait per treatment per day
+    drought.resp[, paste(control)] <- 0
+    drought.resp[, paste(drought)] <- 0
+
+    ## Estimated Pixel Area Measurements
+    for(d in seq(min(as.integer(dfr[, day.col])),max(as.integer(dfr[, day.col])),2)) {
+      ## Using a complete
+      control.cmd <- paste0(func, "(dfr[dfr[, geno.col] == g & dfr[, treat.col] == treat1 & as.integer(dfr[, day.col]) == d, trait])")
+      drought.cmd <- paste0(func, "(dfr[dfr[, geno.col] == g & dfr[, treat.col] == treat2 & as.integer(dfr[, day.col]) == d, trait])")
+      drought.resp[drought.resp$day == d, paste(control)] <- eval(parse(text = control.cmd))
+      drought.resp[drought.resp$day == d, paste(drought)] <- eval(parse(text = drought.cmd))
+    }
+  }
+
+  # Calculate trait loss to drought
+  days = c()
+  response = c()
+  genotype=c()
+  for(r in 1:nrow(drought.resp)) {
+    days = c(days, rep(drought.resp[r, "day"], length(genotypes)))
+    for(g in genotypes) {
+      control = paste(g,'control',sep='.')
+      drought = paste(g,'drought',sep='.')
+      response = c(response, drought.resp[r,paste(control)] -
+                               drought.resp[r,paste(drought)])
+      genotype = c(genotype, g)
+    }
+  }
+  dr.df = data.frame(day=days,response=response,genotype=as.factor(genotype))
+  return(dr.df)
+}
+
+################################# END: Treatment Trait Difference Data Frame ######################################
+
+RGR.split <- function(dfr, trait.col = "area", rep.col = "replicate", day.col = "day", geno.col = "genotype", treat.col = "treatment", group.col = "group") {
+  dfr.final <- aggregate(as.formula(paste0(trait.col, " ~ ", paste(geno.col, treat.col, day.col, group.col, sep = "+"))), dfr, mean)
+  dfr <- dfr[order(dfr[, day.col]), ]
+  days <- sort(unique(dfr[, day.col]))
+  final <- data.frame(day = sort(unique(dfr[, day.col])))
+  final.names <- c("day")
+  reps <- sort(unique(dfr[, rep.col]))
+  for(rep in reps) {
+    df <- dfr[dfr[, rep.col] == rep, ]
+    rgr <- log(df[, trait.col])
+    df[, "RGR"] <- rgr
+    df.final <- merge(df, final, all = TRUE)
+    final.names <- c(final.names, paste0("rep.",rep))
+    final <- cbind(final, df.final[, "RGR"])
+  }
+  names(final) <- final.names
+  if( ncol(final) < 2 ) {
+    final[, "bar.ln.area"] <- final[, -1]
+  } else {
+    final[, "bar.ln.area"] <- rowMeans(final[, -1], na.rm = TRUE)
+  }
+  final[, "RGR"] <- c(NA, diff(final[, "bar.ln.area"]))
+  dfr.final[, "RGR.area"] <- final[, "RGR"]
+  return(dfr.final)
+}
+
+tplot.make <- function(plt, filename, ...) {
+
+  ## The rest of the passed in arguments go to ggplot
+  ## Standard ones are: width = 14, height = 7, units = "in", dpi = 100, pointsize = 10
+  ## Making a transparent plot
+  tplot <- plt + theme(
+  ## panel.border = element_blank(),
+  ## legend.key = element_blank(),
+  ## axis.ticks = element_blank(),
+  ## axis.text.y = element_blank(),
+  ## axis.text.x = element_blank(),
+  panel.grid = element_blank(),
+  panel.grid.minor = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.background = element_blank(),
+  plot.background = element_rect(fill = "transparent",colour = NA))
+  ggsave(filename, bg = "transparent", ...)
+  return(tplot)
+}
+
+################ Function to create a circle ################
+circle <- function(center = c(0, 0), npoints = 100) {
+  r = 1
+  tt = seq(0, 2 * pi, length = npoints)
+  xx = center[1] + r * cos(tt)
+  yy = center[1] + r * sin(tt)
+  return(data.frame(x = xx, y = yy))
+}
+
+################ Function to grab legend from ggplot ################
+g_legend<-function(a.gplot){
+    tmp <- ggplot_gtable(ggplot_build(a.gplot))
+    leg <- which(sapply(tmp$grobs, function(x) x$name) == "guide-box")
+    legend <- tmp$grobs[[leg]]
+    legend
+}
+
+################ Function to make a biplot from one day ################
+
+makeBiplot <- function(dfr, trait, day, treat.col = "treatment", geno.col = "genotype", day.col = "day") {
+  df <- dfr[dfr[, day.col] == day,]
+  head(df)
+
+  ## Remove non-numeric columns
+  shapes.pca <- PCA(df[, c((first.num.col+1):last.num.col) ],graph = F)
+  fviz_pca_biplot(shapes.pca,label="var",alpha.var = "contrib",habillage=df$treatment,addEllipses = T,invisible = "ind")+
+    ## xlim(c(-10,15))+
+    theme_minimal()
+
