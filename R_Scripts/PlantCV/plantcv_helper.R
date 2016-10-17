@@ -637,7 +637,9 @@ RGR.split <- function(dfr, trait.col = "area", rep.col = "replicate", day.col = 
     final <- cbind(final, df.final[, "RGR"])
   }
   names(final) <- final.names
-  if( ncol(final) < 2 ) {
+  if(ncol(final) == 1) {
+    return(NULL)
+  } else if( ncol(final) <= 2 ) {
     final[, "bar.ln.area"] <- final[, -1]
   } else {
     final[, "bar.ln.area"] <- rowMeans(final[, -1], na.rm = TRUE)

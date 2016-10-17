@@ -1,11 +1,12 @@
 #################### PlantCV Output Analysis Script ####################################
 ## source("plantcv_analysis_helper.R")
 snapshot.file <- "SnapshotInfo.csv"
-barcode.file <- "TM007_E_082415_barcodes.csv"
-plantcv.file <- "TM007_E_082415.csv"
+barcode.file <- "TM016_barcodes.csv"
+plantcv.file <- "TM016_results.csv"
 outlier.removal <- FALSE
 filter.zeros <- FALSE
-planting_date <- as.POSIXct("2015-08-10")
+planting_date <- as.POSIXct("2016-05-16")
+project.code <- "TM016"
 source("plantcv_data_stub.R")
 
 ########################################################################################
@@ -13,7 +14,7 @@ source("plantcv_data_stub.R")
 ########################################################################################
 ## The main data frames are: traits (main df), traits.avg (aggregate mean df),
 ## wue.data (water use efficiency), wue.data.agg (water use efficiency aggregate mean), rgr (Relative Growth Rate)
-big <- FALSE
+big <- TRUE
 first.day <-traits$day[1]
 last.day <- traits$day[length(traits$dap)]
 first.num.col <- grep("tv_area", names(traits))
@@ -339,3 +340,12 @@ if(big) {
 ## grid.newpage()
 ## grid.draw(gt)
 
+## Print out data frame csv for scott, merging all of the data frames.
+merge.traits.wue <- merge(traits.avg, wue.data.agg, all = TRUE, by = c("genotype", "treatment", "day", "area"))
+final.merge <- merge(merge.traits.wue, rgr, all = TRUE)
+final.merge.order <- final.merge[with(final.merge, order(group, day)), ]
+final.non.num <- names(final.merge.order)[names(final.merge.order) %ni% grep("area|height|WUE|water", names(final.merge.order), value = T)]
+final.merge.order <- final.merge.order[, c(final.non.num, setdiff(names(final.merge.order), final.non.num))]
+
+final.merge.name <- paste0("all_traits_mean_", project.code, ".csv")
+write.csv(final.merge.order, final.merge.name, row.names = FALSE)
