@@ -1,12 +1,12 @@
 #################### PlantCV Output Analysis Script ####################################
 ## source("plantcv_analysis_helper.R")
 snapshot.file <- "SnapshotInfo.csv"
-barcode.file <- "TM016_barcodes.csv"
-plantcv.file <- "TM016_results.csv"
+barcode.file <- "TM008_barcodes.csv"
+plantcv.file <- "TM008_E_090415.csv"
 outlier.removal <- FALSE
 filter.zeros <- FALSE
-planting_date <- as.POSIXct("2016-05-16")
-project.code <- "TM016"
+planting_date <- as.POSIXct("2015-08-21")
+project.code <- "TM008"
 source("plantcv_data_stub.R")
 
 ########################################################################################
@@ -14,7 +14,7 @@ source("plantcv_data_stub.R")
 ########################################################################################
 ## The main data frames are: traits (main df), traits.avg (aggregate mean df),
 ## wue.data (water use efficiency), wue.data.agg (water use efficiency aggregate mean), rgr (Relative Growth Rate)
-big <- TRUE
+big <- FALSE
 first.day <-traits$day[1]
 last.day <- traits$day[length(traits$dap)]
 first.num.col <- grep("tv_area", names(traits))
@@ -173,8 +173,10 @@ bd1.qvalues.height = p.adjust(bd1.height.results$pvalue, method="fdr")
 ######################################## END: Analysis Of Data #####################################################
 
 dir.create("histogram_gif")
-xlim <- c(0, 250)
-ylim <- c(0.00, 0.06)
+xlim <- c(0, 350)
+ylim <- c(0.00, 0.07)
+## xlim <- c()
+## ylim <- c()
 for(day in sort(unique(traits.avg$day))) {
   p <- ggplot(traits.avg[traits.avg$day == day, ], aes(x = area, fill = as.factor(treatment))) + geom_density(alpha=0.3)
   p <- p + ggtitle(paste0("Density Curve of Area By Treatment Per Day (",day,")")) +
@@ -200,7 +202,7 @@ for( day in sort(unique(traits.avg$day)) ) {
   p <- fviz_pca_biplot(shapes.pca, label="all", alpha.var = "contrib",
     habillage=traits.avg.day[, "treatment"],addEllipses = T, invisible = "ind") +
     ## habillage= traits.avg.day[, "treatment"],addEllipses = T) +
-    xlim(c(-6,11)) +
+    xlim(c(-7,11)) +
     ylim(c(-4,4)) +
     ggtitle(paste0("Biplot of variables and individuals on Day ", day)) +
     theme_minimal()
@@ -255,7 +257,7 @@ for( day in sort(unique(traits$day)) ) {
   p <- ggplot(data=traits[traits$day == day, ],aes(genotype,area)) +
     facet_wrap(~ treatment,scales = "free_x",as.table = F) +
     xlab("Plant Age (days)") +
-    ylim(c(-5,330))+
+    ylim(c(-5,475))+
     geom_boxplot(aes(color=genotype))+
     scale_color_discrete(breaks = unique(traits$genotype), labels = unique(traits$genotype)) +
     theme_light()+
@@ -349,3 +351,4 @@ final.merge.order <- final.merge.order[, c(final.non.num, setdiff(names(final.me
 
 final.merge.name <- paste0("all_traits_mean_", project.code, ".csv")
 write.csv(final.merge.order, final.merge.name, row.names = FALSE)
+

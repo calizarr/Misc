@@ -145,6 +145,9 @@ traits <- traits[with(traits, order(day)), ]
 refcols <- c("plantbarcode", "timestamp", "genotype", "treatment", "replicate", "group", "dap", "day", "imageday")
 traits <- traits[, c(refcols, setdiff(names(traits), refcols))]
 
+## Quick and easy removal of duplicated extra day
+## traits <- traits[!duplicated(traits[, c("genotype", "treatment", "replicate", "group", "day")]), ]
+
 ######################################## BEGIN: Outlier Detection And Removal #####################################
 
 if(outlier.removal) {
