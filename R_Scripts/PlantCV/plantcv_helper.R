@@ -628,6 +628,9 @@ RGR.split <- function(dfr, trait.col = "area", rep.col = "replicate", day.col = 
   for(rep in reps) {
     df <- dfr[dfr[, rep.col] == rep, ]
     rgr <- log(df[, trait.col])
+    if(any(is.infinite(rgr))) {
+      next
+    }
     df[, "RGR"] <- rgr
     df.final <- merge(df, final, all = TRUE)
     final.names <- c(final.names, paste0("rep.",rep))
@@ -681,15 +684,4 @@ g_legend<-function(a.gplot){
     legend
 }
 
-################ Function to make a biplot from one day ################
-
-makeBiplot <- function(dfr, trait, day, treat.col = "treatment", geno.col = "genotype", day.col = "day") {
-  df <- dfr[dfr[, day.col] == day,]
-  head(df)
-
-  ## Remove non-numeric columns
-  shapes.pca <- PCA(df[, c((first.num.col+1):last.num.col) ],graph = F)
-  fviz_pca_biplot(shapes.pca,label="var",alpha.var = "contrib",habillage=df$treatment,addEllipses = T,invisible = "ind")+
-    ## xlim(c(-10,15))+
-    theme_minimal()
 

@@ -94,7 +94,7 @@ vis.data$px_cm <- predict(object = len.poly, newdata = vis.data)
 vis.data$px2_cm2 <- predict(object = area.poly, newdata = vis.data)
 
 # Planting date
-planting_date <- as.POSIXct("2016-05-05")
+## planting_date <- as.POSIXct("2016-05-05")
 
 # Date-time from Unix time
 vis.data$date <- as.POSIXct(vis.data$timestamp, origin = "1970-01-01")
@@ -175,6 +175,8 @@ if(filter.zeros) {
 
 #################### Making an average of the replicates ####################
 traits.avg <- aggregate(cbind(tv_area, sv_area, area, height, hull.area)~genotype+treatment+day+imageday, traits, mean)
+numeric.traits.avg <- grep("area|height", names(traits.avg))
+non.num.traits.avg <- seq_along(traits.avg)[seq_along(traits.avg) %ni% numeric.traits.avg]
 
 ## Cool statement that can be used as internal function to pass and
 ## aggregate within function instead of creating many aggregate data frames
