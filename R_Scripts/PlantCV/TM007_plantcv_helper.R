@@ -45,10 +45,7 @@ plot.trait <- function(dfr, genotype, treatments, x, y, y.units, color = "factor
                        ) {
   # Plot x vs y
   bplot <- ggplot(dfr[dfr[, geno.col] %in% genotype & (dfr[, treat.col] %in% treatments),], aes_string(x = x, y = y, color = "factor(treatment)"))
-  bplot <- bplot + scale_colour_discrete(name = discrete,
-    breaks = breaks,
-    labels = labels
-  )
+  bplot <- bplot + scale_colour_discrete(name = discrete, breaks = breaks, labels = labels)
   # Plot command
   bplot <- bplot +
     geom_smooth(method="loess",size=1, se = se) +

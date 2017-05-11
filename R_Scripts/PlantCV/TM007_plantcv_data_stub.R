@@ -1,4 +1,4 @@
-source("plantcv_analysis_helper.R")
+source("TM007_plantcv_helper.R")
 
 ############################################
 # Read data and format for analysis
@@ -114,23 +114,29 @@ traits <- data.frame(plantbarcode = vis.data$plantbarcode, timestamp = vis.data$
   genotype = vis.data$genotype, treatment = vis.data$treatment, replicate = vis.data$replicate,
   dap = vis.data$dap, day = vis.data$day, imageday = vis.data$imageday)
 
-## # Zoom correct TV and SV area
-## traits$tv_area <- vis.data$tv0_area / vis.data$rel_area
-## traits$sv_area <- (vis.data$sv0_area / vis.data$rel_area) +
-##                  (vis.data$sv90_area / vis.data$rel_area)
-## traits$area <- traits$tv_area + traits$sv_area
-
-# Experimental zoom correct TV and SV area
-traits$tv_area <- vis.data$tv0_area / vis.data$px2_cm2
-traits$sv_area <- (vis.data$sv0_area / vis.data$px2_cm2) +
-  (vis.data$sv90_area / vis.data$px2_cm2)
+# Zoom correct TV and SV area
+traits$tv_area <- vis.data$tv0_area / vis.data$rel_area
+traits$sv_area <- (vis.data$sv0_area / vis.data$rel_area) +
+                 (vis.data$sv90_area / vis.data$rel_area)
 traits$area <- traits$tv_area + traits$sv_area
 
 # Adding in hull area
-traits$tv_hull.area <- vis.data$tv0_hull.area / vis.data$px2_cm2
-traits$sv_hull.area <- (vis.data$sv0_hull.area / vis.data$px2_cm2) +
-  (vis.data$sv90_hull.area / vis.data$px2_cm2)
+traits$tv_hull.area <- vis.data$tv0_hull.area / vis.data$rel_area
+traits$sv_hull.area <- (vis.data$sv0_hull.area / vis.data$rel_area) +
+  (vis.data$sv90_hull.area / vis.data$rel_area)
 traits$hull.area <- traits$tv_hull.area + traits$sv_hull.area
+
+## # Experimental zoom correct TV and SV area
+## traits$tv_area <- vis.data$tv0_area / vis.data$px2_cm2
+## traits$sv_area <- (vis.data$sv0_area / vis.data$px2_cm2) +
+##   (vis.data$sv90_area / vis.data$px2_cm2)
+## traits$area <- traits$tv_area + traits$sv_area
+
+## # Adding in hull area
+## traits$tv_hull.area <- vis.data$tv0_hull.area / vis.data$px2_cm2
+## traits$sv_hull.area <- (vis.data$sv0_hull.area / vis.data$px2_cm2) +
+##   (vis.data$sv90_hull.area / vis.data$px2_cm2)
+## traits$hull.area <- traits$tv_hull.area + traits$sv_hull.area
 
 # Zoom correct height
 traits$height <- ((vis.data$sv0_height_above_bound / vis.data$px_cm) +
@@ -144,6 +150,9 @@ traits <- traits[with(traits, order(day)), ]
 
 refcols <- c("plantbarcode", "timestamp", "genotype", "treatment", "replicate", "group", "dap", "day", "imageday")
 traits <- traits[, c(refcols, setdiff(names(traits), refcols))]
+
+## Making pixels into a reasonable values
+traits[, grep("area", names(traits))] <- traits[, grep("area", names(traits))] / 10000
 
 ######################################## BEGIN: Outlier Detection And Removal #####################################
 
