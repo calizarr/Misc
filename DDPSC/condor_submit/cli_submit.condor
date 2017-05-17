@@ -16,6 +16,7 @@ error            = /home/clizarraga/.logs/$(name).error
 request_cpus     = 4
 request_memory   = 30G
 notification     = Always
+Rank             = cpus
 
 ##  Do not edit  ##
 accounting_group = $ENV(CONDOR_GROUP)
