@@ -115,9 +115,9 @@ if [ "$TRANSFER" = "true" ]; then
     # Getting the files and naming them file= and adding a queue afterwards
     # This also works for directories just have to make maxdepth be 1 and the glob just be the directory name exact
     if [[ -z $TYPE ]]; then
-	INPUT_LOG_SEP=`find ${FIND_DIR} -maxdepth ${FIND_MAX} -name ${FIND_GLOB} | xargs -I {} bash -c 'filename=$(basename {});printf "file=${filename}\ntransfer_input_files={}\nqueue\n"'`
+	INPUT_LOG_SEP=`find "$FIND_DIR" -maxdepth "$FIND_MAX" -name "$FIND_GLOB" | xargs -I {} bash -c 'filename=$(basename {});printf "file=${filename}\ntransfer_input_files={}\nqueue\n"'`
     else
-	INPUT_LOG_SEP=`find ${FIND_DIR} -maxdepth ${FIND_MAX} -type ${TYPE} -name ${FIND_GLOB} | xargs -I {} bash -c 'filename=$(basename {});printf "file=${filename}\ntransfer_input_files={}\nqueue\n"'`
+	INPUT_LOG_SEP=`find "$FIND_DIR" -maxdepth "$FIND_MAX" -type ${TYPE} -name "$FIND_GLOB" | xargs -I {} bash -c 'filename=$(basename {});printf "file=${filename}\ntransfer_input_files={}\nqueue\n"'`
     fi
     
     # Replacing the arguments of the bash script within the INPUT_2 variable
@@ -141,9 +141,9 @@ else
     # Getting the files and naming them file= and adding a queue afterwards
     # This also works for directories just have to make maxdepth be 1 and the glob just be the directory name exact
     if [[ -z $TYPE ]]; then
-	INPUT_LOG_SEP=`find ${FIND_DIR} -maxdepth ${FIND_MAX} -name ${FIND_GLOB} | xargs -I {} bash -c 'filename=$(basename {});printf "filename=${filename}\nfile={}\nqueue\n"'`
+	INPUT_LOG_SEP=`find "$FIND_DIR" -maxdepth "$FIND_MAX" -name "$FIND_GLOB" | xargs -I {} bash -c 'filename=$(basename {});printf "filename=${filename}\nfile={}\nqueue\n"'`
     else
-	INPUT_LOG_SEP=`find ${FIND_DIR} -maxdepth ${FIND_MAX} -type ${TYPE} -name ${FIND_GLOB} | xargs -I {} bash -c 'filename=$(basename {});printf "filename=${filename}\nfile={}\nqueue\n"'`
+	INPUT_LOG_SEP=`find "$FIND_DIR" -maxdepth "$FIND_MAX" -type ${TYPE} -name "$FIND_GLOB" | xargs -I {} bash -c 'filename=$(basename {});printf "filename=${filename}\nfile={}\nqueue\n"'`
     fi
             
     # Replacing the arguments of the bash script within the INPUT_2 variable
