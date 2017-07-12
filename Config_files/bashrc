@@ -1,0 +1,173 @@
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# # ssh-add and ssh-agent
+# if [ -z "$SSH_AUTH_SOCK" ] ; then
+#     eval `ssh-agent -s`
+#     ssh-add
+# fi
+
+# Using keychain for my ssh-agent and ssh-add
+eval `$HOME/usr/bin/keychain --eval --agents ssh universal/id_rsa`
+# eval $(ssh-agent -s)
+
+# User specific aliases and functions
+
+# LYNX_CFG=~/usr/local/lynx/etc/lynx.cfg; export LYNX_CFG
+
+# GREP_Options
+export GREP_OPTIONS="--color=auto"
+
+# Aliases
+alias ll='ls -lh --color=auto'
+
+# Emacs functions
+alias emacs='emacs -nw'
+
+alias ImageJ='sh /shares/tmockler_share/clizarraga/usr/local/ImageJ/run'
+
+# Messing with Prompts and PS1
+# get current git branch name
+function git_branch {
+    export gitbranch=[$(git rev-parse --abbrev-ref HEAD 2>/dev/null)]
+    if [ "$?" -ne 0 ]
+    then gitbranch=
+    fi
+    if [[ "${gitbranch}" == "[]" ]]
+    then gitbranch=
+    fi
+}
+
+# set usercolor based on whether we are running with Admin privs
+function user_color {
+    id | grep "Admin" > /dev/null
+    RETVAL=$?
+    if [[ $RETVAL == 0 ]]; then
+        usercolor="[0;35m";
+    else
+        usercolor="[0;32m";
+    fi
+}
+
+# set TTYNAME
+function ttyname() { export TTYNAME=$@; }
+
+# Set prompt and window title
+inputcolor='[0;37m'
+cwdcolor='[0;36m'
+gitcolor='[1;31m'
+user_color
+
+# Setup for window title
+export TTYNAME=$$
+function settitle() {
+    p=$(pwd);
+    let l=${#p}-25
+    if [ "$l" -gt "0" ]; then
+        p=..${p:${l}}
+    fi
+    host=$(echo $(hostname) | awk -F"[.]" '{print $1}')
+    t="$TTYNAME@$host $p"
+    echo -ne "\e]2;$t\a\e]1;$t\a";
+}
+
+PROMPT_COMMAND='settitle; git_branch; history -a;'
+export PS1='\[\e${usercolor}\][\u@\h]\[\e${gitcolor}\]${gitbranch}\[\e${cwdcolor}\][\W]\[\e${inputcolor}\]$ '
+
+case "$TERM" in
+    dumb)
+        PROMPT_COMMAND=
+        PS1="[\u@\h:\w]$ "
+esac
+
+# X11 Options
+if [ "$DISPLAY" ]; then
+    export LIBGL_ALWAYS_INDIRECT=1
+    echo "LIBGL set to $LIBGL_ALWAYS_INDIRECT"
+fi
+
+# Setting default editor
+EDITOR="emacs -nw -q"
+VISUAL=$EDITOR
+export EDITOR
+export VISUAL
+
+# Path Related Shenanigans
+
+# NGS Exports.
+## Library execution path
+export LD_LIBRARY_PATH=/shares/tmockler_share/clizarraga/usr/local/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/usr/local/Boost/boost_1_60_0:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/usr/local/Boost/boost_1_60_0/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$HOME/usr/local/Boost/boost_1_60_0/libs:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/local/salmon/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/usr/lib
+
+## Library linking path
+export LD_RUN_PATH=$LD_RUN_PATH:$HOME/usr/lib
+export BOOST_ROOT=$HOME/usr/local/Boost/boost_1_60_0/
+
+function pathClean() {
+    # Cleans path of duplicated portions.
+    NEWPATH=$(echo $1 | sed 's/:/\n/g' | perl -ne 'print unless $seen{$_}++' | paste -s -d':')
+    echo "$NEWPATH"
+    }
+    
+
+host=$(hostname -a)
+if [[ "$host" != "apollo" ]]; then
+    version=$(uname -r | awk -F"." '{print $1}')
+    # Setting environmenty variables for CentOS 7
+    if [[ "$version" = 3 ]]; then
+        # PlantCV for CentOS 6 & 7
+        export PYTHONPATH=$PYTHONPATH:$HOME/usr/local/plantcv-dev/
+        # Setting the PATH
+	# Re set later
+        PATH=$HOME/usr/bin:$HOME/usr/local/bin:$HOME/usr/local/Boost/boost_1_60_0/:$PATH
+        # PATH=$HOME/usr/local/texlive/bin/x86_64-linux:$PATH
+        PATH=$(pathClean $PATH)
+        # Setting the manpath and infopath
+        MANPATH=$MANPATH:$HOME/usr/local/man
+        MANPATH=$(pathClean $MANPATH)
+        INFOPATH=$INFOPATH:$HOME/usr/local/info
+        INFOPATH=$(pathClean $INFOPATH)
+	# # added by Miniconda3 4.3.11 installer
+	# export PATH="/home/clizarraga/miniconda3/bin:$PATH"
+	# # Adding BDS to my bashrc
+	# export PATH=$PATH:$HOME/.bds
+    fi
+    # Activating virtual python if in screen.
+    if [[ "$STY" != "" ]]; then
+        # Screw it using a python 2.7.9 virtualenv for now.
+        PATH=$(pathClean $PATH)
+        PYTHONPATH=$(pathClean $PYTHONPATH)
+        source $HOME/usr/virtualenvs/Py2VE/bin/activate
+    fi
+fi
+
+# export JAVA_HOME=/shares/tmockler_share/clizarraga/usr/local/jdk1.8.0_73
+
+# Adding R libraries
+export R_LIBS=/home/clizarraga/R/x86_64-redhat-linux-gnu-library/
+
+# Turning off Ctrl-S (XON) using XOFF
+stty -ixon
+
+# Setting special program variables:
+
+# Homer
+# PATH=$PATH:$HOME/usr/local/HOMER/bin
+
+# ## All of these are CEGMA variables
+# export CEGMA=$HOME/usr/local/CEGMA_v2.5
+# export PERL5LIB=$PERL5LIB:$HOME/usr/local/CEGMA_v2.5/lib
+# export WISECONFIGDIR=$HOME/usr/local/wisecfg
+
+# # Making my own Perl installation because damnit I'm done.
+# PERL5LIBBAK=$PERL5LIB
+# unset PERL5LIB
+# source ~/perl5/perlbrew/etc/bashrc

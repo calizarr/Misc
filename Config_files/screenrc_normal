@@ -1,0 +1,18 @@
+# hardstatus alwayslastline '%{= kg}[ %{G}%H %{g}][%= %{= kB}%?%-Lw%?%{+b r}(%{G}%n*%f %t%?(%u)%?%{r})%{-b B}%?%+Lw%?%?%= %{g}%]'
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c%{g}]'
+
+#bind the escape to C-z not C-a now.
+escape ^Zz
+#unbind ctrl+s from xoff in order to be able to search in emacs
+bind s
+bind ^S
+#unbind ctrl+x from lockscreen in order to be able to save in emacs
+bind x
+bind ^X
+
+shelltitle "$ |bash"
+
+term screen-256color
+
+defscrollback 100000
