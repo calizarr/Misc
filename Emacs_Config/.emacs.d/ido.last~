@@ -1,0 +1,185 @@
+;;; -*- coding: utf-8 -*-
+
+;; ----- ido-last-directory-list -----
+(
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/test/" . "scala-2.12/")
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/main/" . "java/")
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/" . "test/")
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/" . "src/")
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/" . "Module03/")
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/" . "Phrase_Matching/")
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/" . "Forwards/")
+ ("/Users/" . "clizarraga/")
+ ("/Users/clizarraga/Downloads/Argo/" . "Literature_Mining/")
+ ("/cibo/sandbox/brendon/src/test/scala/sandbox/brendon/" . "qable/")
+ ("/cibo/sandbox/brendon/src/test/scala/sandbox/" . "brendon/")
+ ("/cibo/sandbox/brendon/src/test/scala/" . "sandbox/")
+ ("/cibo/sandbox/brendon/src/test/" . "scala/")
+ ("/cibo/sandbox/brendon/src/" . "test/")
+ ("/Users/clizarraga/.sbt/0.13/" . "plugins/")
+ ("/Users/clizarraga/.sbt/" . "0.13/")
+ ("/" . "cibo/")
+ ("/Users/clizarraga/" . ".emacs.d/")
+ ("/cibo/" . "argo/")
+ ("/Users/clizarraga/Github_Repos/Misc/" . "Config_files/")
+ ("/Users/clizarraga/Github_Repos/" . "Misc/")
+ ("/Users/clizarraga/Downloads/" . "Argo/")
+)
+
+;; ----- ido-work-directory-list -----
+(
+ "/Users/clizarraga/.sbt/0.13/"
+ "/Users/clizarraga/.sbt/0.13/plugins/"
+ "/Users/clizarraga/.emacs.d/"
+ "/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module02/"
+ "/Users/clizarraga/"
+ "/Users/clizarraga/Documents/scalaFunCiBO/"
+ "/Volumes/RASEK/Pictures/Katherinejwh/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Phrase_Matching/Corn/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Phrase_Matching/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Scripts/Word_Matching/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Scripts/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Species_Trait_Query_Matching/NCBI/"
+ "/Users/clizarraga/Downloads/Argo/edirect/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/NCBI/"
+ "/Users/clizarraga/Downloads/Argo/Literature_Mining/Backwards/"
+ "/Users/clizarraga/Downloads/Argo/"
+ "/Users/clizarraga/Downloads/"
+ "/Users/clizarraga/Downloads/Argo/NCBI/"
+ "/Users/clizarraga/Downloads/Argo/Inari/"
+ "/cibo/argo/"
+ "/cibo/sandbox/brendon/src/test/scala/sandbox/brendon/qable/"
+ "/cibo/sandbox/"
+ "/Users/clizarraga/Documents/Argo/"
+ "/Users/clizarraga/Documents/"
+ "/cibo/RScripts/"
+ "/Users/clizarraga/Github_Repos/Misc/Config_files/"
+ "/Users/clizarraga/.ssh/"
+)
+
+;; ----- ido-work-file-list -----
+(
+ "global.sbt"
+ "plugins.sbt"
+ "init.el"
+ ".emacs"
+ "module01.scala"
+ "notes.txt"
+ "summarize_comparisons_normal.R"
+ "summarize_comparisons.R"
+ "xml_extraction.py"
+ "biominer.csv"
+)
+
+;; ----- ido-dir-file-cache -----
+(
+ ("/Users/clizarraga/Documents/" (22960 21992 0 0) "SetupValidator.zip" "SetupValidator/" "scalaFunCiBO.zip" "scalaFunCiBO/" "maize_edited_list.numbers" "exercise.zip" "exercise/" "Argo_Library_Stats.numbers" "Argo/" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/Downloads/" (22960 21982 0 0) "uniprot_sprot_plants_names.csv" "uniprot_sprot_plants_names (1).csv" "uniprot_combined_plants_names_matched.csv" "uniprot_combined_plants_names.csv" "TypesAgainstComplexity_JosephAbrahamson_2017July.pdf" "steam.dmg" "STARmanual.pdf" "SpotifyInstaller.zip" "Spectacle.app/" "Spectacle+1.2.zip" "snapgene_viewer_4.0.2_mac.dmg" "Screenhero.zip" "README 2" "README" "profile_picture.jpeg" "OryzabaseGeneListAll_20170724152716.txt" "ontrol_Reference_Set.txt~" "ontrol_Reference_Set.txt" "MightyText-v2.92.dmg" "MightyText-3.54.0.dmg" "Microsoft_Office_2016_15.23.0_160611_Volume_Installer.pkg" "matched_seq_summary.xlsx" "MaizeGDB_v3_v4.genes_10-20-16.u.csv" "MaizeGDB_v3_v4.genes.xlsx" "maize_edited_list.csv" "mailFilters.xml" "Lit_Trait_Terms_Brainstorm (2).xlsx" "Lit_Trait_Terms_Brainstorm (1).xlsx" "KeePassXC-2.2.0.dmg" "KeePassX-2.0.3.dmg" "KAPA_Hyper_Prep_Kit_TDS_KR0961_v5.16_A4.pdf" "Journal_Impact_factor_2017.csv" "Journal Impact factor_2017.xls" "iTerm2-3_0_15.zip" "iTerm.app/" "IP Fenwick July 28 2017.pptx" "installgoogledrive.dmg" "Install Spotify.app/" "indraniel-das-resume.pdf" "Inari_update_w_vision.key" "github-recovery-codes.txt" "github-recovery-codes (2).txt" "github-recovery-codes (1).txt" "Fundamentals of Statistical Testing.pdf" "Firefox 55.0.3.dmg" "FileZilla_3.27.0.1_macosx-x86.app.tar.bz2" "FileZilla_3.26.2_macosx-x86_setup_bundled.zip" "FileZilla-Installer.app/" "Employee Noncompete-Nonsolicit-CDA-Assignment Agreement-June 2016.pdf" "Employee Noncompete-Nonsolicit-CDA-Assignment Agreement-June 2016-CAL.pdf" "Emacs-25.2-universal.dmg" "Emacs-25.2-modified-2.dmg" "Copy of Lit_Trait_Terms_Brainstorm rbf.xlsx" "cookies.txt" "combined_gene_list_v2.xlsx" "CIC@4240_public+map_with+phonebooths.pdf" "Caffeine1.1.1.zip" "Caffeine.app/" "blast-results.tar.gz" "Backup-codes-clizarraga.txt" "argo_gene_names_corn" "Argo/" "accessKeys.csv" "51663824c4cf44b04cc3736fd847da09.pdf" "310817_Inari_Sprint_Demo.pdf" "310817_Inari_Sprint_Demo.key" "2017_07_13_CIBO_documents.xlsx" "170822_CiBOInari_Planning.key" "170817_Inari_Sprint_Demo.key" "170817_Inari_Sprint_Demo (1).key" "170810_IPexample_outline.key" ".localized" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/.emacs.d/" (22960 24132 0 0) "snippets/" "network-security.data" "init.el~" "init.el" "ido.last~" "ido.last" "elpa/" "auto-save-list/" ".emacs.desktop" "../" "./")
+
+ ("/Users/clizarraga/.sbt/0.13/plugins/" (22960 18995 0 0) "target/" "project/" "plugins.sbt~" "plugins.sbt" "idea.sbt" "../" "./")
+
+ ("/Users/clizarraga/" (22960 16778 0 0) "tmux_conf_normal~" "tmux_conf_normal" "test.R" "target/" "Public/" "project/" "Pictures/" "perl5/" "Music/" "Movies/" "Library/" "installation.sh" "Google Drive/" "Github_Repos/" "Downloads/" "Documents/" "Development/" "Desktop/" "Applications/" ".wget-hsts" ".viminfo" ".travis/" ".Trash/" ".tmux" ".ssh/" ".scala_history" ".sbt_config" ".sbt/" ".Rhistory" ".Rcache/" ".python_history" ".parallel/" ".oracle_jre_usage/" ".openvpn-connect.json" ".matplotlib/" ".lesshst" ".ivy2/" ".idea-build/" ".gnupg/" ".gitconfig" ".emacs~" ".emacs.desktop" ".emacs.d/" ".emacs" ".DS_Store" ".cups/" ".cpan/" ".coursier/" ".config/" ".CFUserTextEncoding" ".bashrc~" ".bashrc" ".bash_sessions/" ".bash_profile~" ".bash_profile" ".bash_history" ".aws/" ".android/" "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/" (22960 16126 0 0) "target/" "src/" "project/" "build.sbt" ".idea/" ".gitignore" ".ensime_cache/" ".ensime" "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/test/scala-2.12/" (22960 15719 0 0) "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/test/java/" (22960 15719 0 0) "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/test/" (22960 15719 0 0) "scala-2.12/" "scala/" "java/" "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/main/java/" (22960 15719 0 0) "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/main/" (22960 15719 0 0) "scala-2.12/" "scala/" "java/" "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/" (22960 15719 0 0) "test/" "main/" "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/" (22959 59624 0 0) "Module15/" "Module14/" "Module13/" "Module12/" "Module11/" "Module10/" "Module09/" "Module08/" "Module07/" "Module06/" "Module05/" "Module04/" "Module03/" "Module02/" "../" "./")
+
+ ("/cibo/argo/" (22948 21420 0 0) "tim_scripts/" "scripts/" "meme-image/" "justin/" "hmmer-base-image/" "docker/" "cesar-scripts/" "build-and-run-container.sh" "argo.iml" "argo-pipeline/" ".gitignore.bak" ".gitignore" ".git/" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/" (22960 4554 0 0) "uniprot_trembl_plants_names_no_empties.csv" "uniprot_trembl_plants_names.csv" "uniprot_trembl_plants.dat" "uniprot_sprot_plants_names.csv.bak" "uniprot_sprot_plants_names.csv" "uniprot_sprot_plants.fa" "uniprot_sprot_plants.dat" "Species_Trait_Query_Matching/" "Species_Trait_Gene_Query_Matching/" "setup.cfg~" "setup.cfg" "Scripts/" "Phrase_Matching/" "NCBI_Synonyms_List.json" "NCBI_Synonyms_Dict.json" "maize_edited_list.csv~" "maize_edited_list.csv" "Journal_Impact_factor_2017_maps.csv" "Journal_Impact_factor_2017.csv~" "Journal_Impact_factor_2017.csv" "folders_whoops.txt~" "folders_argo_noms.txt~" "folders.txt~" "count_list.txt~" "commands.txt~" "argo_gene_names_corn.txt~" "argo_gene_names_corn.txt" "All_Plants.gene_info" ".Rhistory" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/" (22960 3053 0 0) "slides/" "module01.scala~" "module01.scala" "exercises/" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module02/" (22960 5280 0 0) "target/" "src/" "project/" "build.sbt" ".idea/" ".gitignore" ".ensime" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Phrase_Matching/" (22957 61443 0 0) "Rice/" "Gene_Synonyms_Dict_Inverted.json" "Gene_Synonyms_Dict.json" "Corn/" "Argo_Dictionaries.tar.gz" ".Rhistory" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Phrase_Matching/Corn/" (22958 38704 0 0) "summarize_comparisons_normal.R" "summarize_comparisons.R~" "summarize_comparisons.R" "Output_Files/" "Maize_Wheat_Phrase_Matching_Case_8grams_randy.csv" "Maize_Wheat_Phrase_Matching_Case_8grams.csv" "Maize_Rice_Phrase_Matching_Case_8grams_randy.csv" "Maize_Rice_Phrase_Matching_Case_8grams.csv" "Maize_Gene_Dictionary_Inverted.json" "Maize_Gene_Dictionary.json" "Maize_Corn_Phrase_Matching_Case_8grams_randy.csv" "Maize_Corn_Phrase_Matching_Case_8grams.csv" "2017-09-04-Archive/" ".Rhistory" ".DS_Store" "../" "./")
+
+ ("/Volumes/RASEK/Pictures/Katherinejwh/" (22959 23428 0 0) "19051314_1320888837964538_52234159598338048_n.jpg" "18808807_736160079895664_5070369859712319488_n.jpg" "17333929_1848168808768425_3460222693872238592_n.jpg" "17333425_1734715386818453_442120020735033344_n.jpg" "._19051314_1320888837964538_52234159598338048_n.jpg" "13741177_137180916713344_1872769239_n.jpg" "._17333929_1848168808768425_3460222693872238592_n.jpg" "13525256_1035382043182672_34982533_n.jpg" "._18808807_736160079895664_5070369859712319488_n.jpg" "11373876_899528123464166_996700969_n.jpg" "._17333425_1734715386818453_442120020735033344_n.jpg" "11417311_398746383660784_337049577_n.jpg" "._13741177_137180916713344_1872769239_n.jpg" "10597375_1453117951618580_15935251_n.jpg" "._13525256_1035382043182672_34982533_n.jpg" "916030_621838847909918_2003180353_n.jpg" "._11373876_899528123464166_996700969_n.jpg" "20729052_10159436795155227_2009013444627413269_o.jpg" "._11417311_398746383660784_337049577_n.jpg" "10437419_10154935228070227_8806791949833435978_n.jpg" "._10597375_1453117951618580_15935251_n.jpg" "11119531_10155710783825227_8882695760274533731_o.jpg" "._20729052_10159436795155227_2009013444627413269_o.jpg" "11165279_10155722841690227_2181623144629814670_n.jpg" "._10437419_10154935228070227_8806791949833435978_n.jpg" "13123174_10157136934835227_712879430996192636_o.jpg" "._916030_621838847909918_2003180353_n.jpg" "._11119531_10155710783825227_8882695760274533731_o.jpg" "._11165279_10155722841690227_2181623144629814670_n.jpg" "._13123174_10157136934835227_712879430996192636_o.jpg" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Phrase_Matching/Rice/" (22958 38778 0 0) "summarize_comparisons.R~" "summarize_comparisons.R" "Output_Files/" "OryzabaseGeneListEn_20170724152952.tsv" "Oryza_Wheat_Phrase_Matching_Case_8grams_randy.csv" "Oryza_Wheat_Phrase_Matching_Case_8grams.csv" "Oryza_Rice_Phrase_Matching_Case_8grams_randy.csv" "Oryza_Rice_Phrase_Matching_Case_8grams.csv" "Oryza_Gene_Dictionary_Inverted.json" "Oryza_Gene_Dictionary.json" "Oryza_Corn_Phrase_Matching_Case_8grams_randy.csv" "Oryza_Corn_Phrase_Matching_Case_8grams.csv" ".Rhistory" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Species_Trait_Query_Matching/NCBI/" (22949 34237 0 0) "xml_extraction.log" "xml_csv.zip" "torun.txt" "test_case.csv" "species_second.txt~" "species_second.txt" "species.txt~" "species.txt" "runs_xml_bak/" "runs_xml/" "runs_randy/" "runs_backup/" "runs/" "phenotypes.txt~" "phenotypes.txt" "json_abstract.zip.1" "json_abstract.zip" "joint_gathering.log.1" "joint_gathering.log" "Control_Set_Reference.csv" "control_set.txt~" "common_species.txt~" "common_species.txt" "biominer_second.csv~" "biominer_second.csv" "biominer_commands.txt~" "biominer_commands.txt" "biominer.csv~" "biominer.csv.bak" "biominer.csv" "biominer.bak" "abstract_list_from_results_uniq.txt" "abstract_list.txt.bak" "abstract_list.txt" ".DS_Store" "#Control_Set_Reference.csv#" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Scripts/" (22949 34393 0 0) "xml_extraction.py~" "xml_extraction.py" "Word_Matching/" "Phrase_Matching/" "parse_trembl.py~" "parse_trembl.py" "joint_gathering.py" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Scripts/Word_Matching/" (22947 25114 0 0) "get_synonyms_as_list.py~" "get_synonyms_as_list.py" "create_setlist_matcher_xml.py~" "create_setlist_matcher_xml.py" "create_setlist_matcher_csv.py~" "create_setlist_matcher_csv.py" "create_setlist_matcher.py~" "create_setlist_matcher.py.bak" "create_ahocorasick_automaton.py~" "create_ahocorasick_automaton.py" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/edirect/" (22903 22574 0 0) "xy-plot" "xtract.pl" "xtract.go" "xtract.Darwin" "xtract" "word-at-a-time" "sort-uniq-count-rank" "sort-uniq-count" "setup.sh" "setup-deps.pl" "setup-deps.log" "run-ncbi-converter" "reorder-columns" "README" "nquire" "Mozilla-CA.tar.gz" "join-into-groups-of" "gbf2xml" "ftp-ls" "ftp-cp" "filter-stop-words" "esummary" "espell" "esearch" "eproxy" "epost" "entrez-phrase-search" "enotify" "elink" "einfo" "efilter" "efetch" "edirutil" "edirect.pl" "econtact" "ecitmatch" "eaddress" "between-two-genes" "aux/" "asp-ls" "asp-cp" "amino-acid-composition" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/NCBI/" (22940 20874 0 0) "xml_extraction.py~" "xml_extraction.py" "xml_extraction.log" "xml_csv.zip" "torun.txt" "test.sh~" "species_second.txt~" "species_second.txt" "species.txt~" "species.txt" "runs_xml_bak/" "runs_xml/" "runs_backup/" "runs/" "phenotypes.txt~" "phenotypes.txt" "json_gather.sh~" "json_gather.sh" "json_abstract.zip.1" "json_abstract.zip" "joint_gathering.sh~" "joint_gathering.sh" "joint_gathering.py~" "joint_gathering.py" "joint_gathering.log.1" "joint_gathering.log" "Control_Set_Reference.csv" "control_set.txt~" "biominer_second.csv~" "biominer_second.csv" "biominer_commands.txt~" "biominer_commands.txt" "biominer.csv~" "biominer.csv.bak" "biominer.csv" "biominer.bak" "abstract_list_from_results_uniq.txt" "abstract_list.txt.bak" "abstract_list.txt" "abstract_gather.sh~" "abstract_gather.sh" ".DS_Store" "#Control_Set_Reference.csv#" "../" "./")
+
+ ("/Users/clizarraga/.ssh/" (22933 1017 0 0) "known_hosts" "id_rsa.pub" "id_rsa" "config~" "config" "argo-stack.pem" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/" (22932 34471 0 0) "Forwards/" "Backwards/" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Backwards/" (22932 41618 0 0) "Zmays_Cluster_Translations.txt~" "Zmays_Cluster_Translations.txt" "Zmays_Cluster_Only_Nominations.txt" "Zmays_Cluster_Nominations.txt~" "Zmays_Cluster_Nominations.txt" "Zmays_Cluster_Annotation_Results.txt" "Zea_mays.AGPv4.36.gff3" "web_blast.pl" "test_protein.results" "test_protein.fasta~" "test_protein.fasta" "test.fasta" "rev_commands.txt~" "rev_commands.txt" "parse_uniprot_txt.py~" "parse_uniprot_txt.py" "MaizeGDB_v3_v4.genes_10-20-16.u.csv" "blast.results" "B6SMD29_refs.rdf" "B6SMD29.rdf" "B6SMD29.dat" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/" (22931 19350 0 0) "Zmays_download.zip" "Zea_mays.AGPv4.cdna.all.fa.gz" "Zea_mays-Zm00001d004021-Zm00001d004021.gbf.meme.gbk" "transfer_RNA-seq/" "species_tree_notung.phy" "References/" "Reads/" "Notung/" "Notes/" "mkiwala_file.txt" "MEME/" "Literature_Mining/" "gene_nominations.fa" "edirect.tar.gz" "edirect/" "data/" ".DS_Store" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/Inari/" (22904 45488 0 0) "inari_meeting_note.txt~" "inari_meeting_note.txt" "../" "./")
+
+ ("/Users/clizarraga/Downloads/Argo/NCBI/" (22915 32631 0 0) "xml_extraction.py~" "xml_extraction.py" "xml_extraction.log" "xml_csv.zip" "torun.txt" "test.sh~" "species.txt~" "species.txt" "runs_xml/" "runs_backup/" "runs/" "phenotypes.txt~" "phenotypes.txt" "json_gather.sh~" "json_gather.sh" "json_abstract.zip.1" "json_abstract.zip" "joint_gathering.sh~" "joint_gathering.sh" "joint_gathering.py~" "joint_gathering.py" "joint_gathering.log.1" "joint_gathering.log" "Control_Set_Reference.csv" "control_set.txt~" "biominer_commands.txt~" "biominer_commands.txt" "biominer.csv~" "biominer.csv" "abstract_list_from_results_uniq.txt" "abstract_list.txt.bak" "abstract_list.txt" "abstract_gather.sh~" "abstract_gather.sh" ".DS_Store" "#Control_Set_Reference.csv#" "../" "./")
+
+ ("/cibo/sandbox/" (22895 32013 0 0) "zpears/" "yi/" "win-local-build.bat" "timp/" "thepler/" "target/" "startup_scripts/" "src/" "ry/" "RunInDocker.sh" "Run TestExperimentErrors.bat" "README.md" "R/" "project/" "mcoffin/" "max/" "marisa/" "justin/" "joew/" "iurii/" "dgd/" "davet/" "daved/" "cesar/" "build.sbt" "brendon/" ".idea/" ".gitignore" ".git/" ".ensime_cache/" ".ensime" ".dockerignore" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/test/scala/sandbox/brendon/qable/" (22898 18367 0 0) "TransferringQueueableSpec.scala" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/test/scala/sandbox/brendon/" (22893 24856 0 0) "soil/" "qable/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/test/scala/sandbox/" (22892 43230 0 0) "brendon/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/test/scala/" (22892 43230 0 0) "sandbox/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/test/" (22895 31874 0 0) "scala-2.11/" "scala/" "java/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/" (22892 43230 0 0) "test/" "main/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/main/" (22895 31874 0 0) "scala-2.11/" "scala/" "resources/" "java/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/main/scala/" (22892 43230 0 0) "sandbox/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/main/scala/sandbox/" (22892 43230 0 0) "brendon/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/main/scala/sandbox/brendon/" (22892 54496 0 0) "ZoneReport.scala" "timpanosian/" "TifBits.scala" "ThreadsafeWriter.scala" "soil/" "scopt/" "Sample.scala" "qable/" "metrics/" "Memory.scala" "emdemo/" "elsie/" "continuum/" "bil/" "../" "./")
+
+ ("/cibo/sandbox/brendon/src/main/scala/sandbox/brendon/qable/" (22895 29892 0 0) "TransferringQueueable.scala" "S3Copier.scala" "../" "./")
+
+ ("/Users/clizarraga/.sbt/0.13/" (22887 52467 0 0) "target/" "staging/" "plugins/" "dependency/" "credentials.sbt" "../" "./")
+
+ ("/Users/clizarraga/.sbt/" (22887 51178 0 0) "preloaded/" "boot/" "0.13/" "../" "./")
+
+ ("/cibo/" (22892 43239 0 0) "sandbox/" "RScripts/" "continuum/" "argo/" ".idea/" "../" "./")
+
+ ("/Users/clizarraga/Documents/Argo/" (22891 46591 0 0) "key_personnel_bio.txt~" "key_personnel_bio.txt" "../" "./")
+
+ ("/Users/" (22869 2208 0 0) "Shared/" "clizarraga/" "admin_local/" ".localized" "../" "./")
+
+ ("/cibo/RScripts/" (22887 60793 0 0) "Weather/" "update-continuum-dl" "testSSURGO.R" "Shape Files/" "SaveShapeToJSON.R" "SaveBInfo.R" "RStudio-Dockerfile.txt" "RScripts.Rproj" "rscript-docker" "ReadShapeFromJSON.R" "README.md" "r-docker" "R-Base-Dockerfile.txt" "prepare-ldap-support.sh" "pInfo_info.csv" "LoadBInfo.R" "ldap-support-dockerfile.txt" "Install rPython.R" "Install Packages.R" "geojson2shp.sh" "genSoilStatistics.R" "Dockerfile" "docker-start.sh~" "docker-start" "docker-shell" "Crops/" "continuum-dl" "Compare Weather.R" "Compare Simulation Results.R" "Compare Simulation Results Post Rad Fix.R" "Compare Simulation Results By Version.R" "Check Prism 4k Weather.R" "Check LTER ResGrad Results.R" "Check LTER ResGrad Results Over Parameter Scan.R" "Check Calibration Improvement.R" "Analyze Weather Scenarios.R" "Analyze Tillage Runs.R" "Analyze Planting Temperatures.R" "Analyze Nitrogen Scenarios.R" "Analyze Nitrogen Scenarios with Weather.R" "Analyze BurnIn.R" ".gitignore" ".git/" ".dockerignore" "../" "./")
+
+ ("/Users/clizarraga/Github_Repos/Misc/Config_files/" (22886 11612 0 0) "tmux_conf_normal" "screenrc_normal" "nested_tmux.conf" "emacs_conf" "bashrc" "../" "./")
+
+ ("/Users/clizarraga/Github_Repos/Misc/" (22886 11613 0 0) "scratchsave.txt" "README.md" "R_Scripts/" "Linux_emacs/" "infrastructure_emacs/" "emacs_win_config" "DDPSC/" "Config_files/" "Bash/" ".git/" "../" "./")
+
+ ("/Users/clizarraga/Github_Repos/" (22886 11611 0 0) "shared-scripts/" "Misc/" "MacPass/" "Carthage/" "../" "./")
+)
+
+;; ----- ido-unc-hosts-cache -----
+t
