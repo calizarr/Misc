@@ -2,361 +2,130 @@
 
 ;; ----- ido-last-directory-list -----
 (
- ("/Users/clizarraga/.sbt/1.0/" . "plugins/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/resources/" . "pypeline/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/" . "resources/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/" . "scala/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/" . "main/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/" . "src/")
- ("/cibo/argo/argo-pipeline/src/it/" . "scala/")
- ("/Users/clizarraga/.emacs.d/" . "eshell/")
- ("/Users/clizarraga/Development/cibo/" . "argo/")
- ("/Users/clizarraga/bioinformatics2018/Output/" . "MCL/")
- ("/Users/clizarraga/bioinformatics2018/" . "Output/")
- ("/cibo/argo/argo-pipeline/src/test/resources/" . "pypeline/")
- ("/cibo/argo/argo-pipeline/src/test/" . "resources/")
- ("/cibo/argo/argo-pipeline/src/" . "test/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/cibo/argo/" . "pypeline/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/cibo/" . "argo/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/" . "cibo/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/" . "com/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/cibo/argo/" . "pypeline/")
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/cibo/" . "argo/")
- ("/Applications/IntelliJ IDEA CE.app/Contents/" . "bin/")
- ("/Applications/IntelliJ IDEA CE.app/" . "Contents/")
- ("/Applications/" . "IntelliJ IDEA CE.app/")
- ("/Users/clizarraga/.virtualenvs/LitMining/" . "bin/")
- ("/Users/clizarraga/.virtualenvs/LitMining/lib/" . "python3.6/")
- ("/Users/clizarraga/.virtualenvs/LitMining/lib/python3.6/site-packages/" . "Bio/")
- ("/Users/clizarraga/.virtualenvs/LitMining/lib/python3.6/site-packages/Bio/Entrez/" . "DTDs/")
- ("/Users/clizarraga/Documents/" . "Stan/")
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/phrasematching/" . "tests/")
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/" . "phrasematching/")
- ("/Users/clizarraga/Development/cibo/argo/pyText_Mining/" . "Phrase_Matching/")
- ("/Users/clizarraga/Development/cibo/argo/" . "argo-pipeline/")
- ("/Users/clizarraga/.config/" . "fish/")
- ("/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/" . "Tomato_Table_AK_2017-11-21/")
- ("/Users/clizarraga/.config/fish/" . "functions/")
- ("/cibo/argo/cesar-scripts/Literature_Mining/Scripts/" . "Phrase_Matching/")
- ("/Users/clizarraga/Development/Argo/Literature_Mining/Forwards/Phrase_Matching/" . "Corn/")
- ("/Users/clizarraga/Development/" . "Argo/")
- ("/Users/clizarraga/Development/cibo/argo/cesar-scripts/Literature_Mining/" . "Scripts/")
- ("/Users/clizarraga/Development/cibo/argo/cesar-scripts/" . "Literature_Mining/")
- ("/Users/clizarraga/Development/Argo/" . "Literature_Mining/")
- ("/Users/clizarraga/Development/Argo/Literature_Mining/Scripts/" . "Phrase_Matching/")
- ("/Users/clizarraga/Development/cibo/argo/cesar-scripts/Literature_Mining/Scripts/" . "Phrase_Matching/")
- ("/Users/clizarraga/Development/Argo/Literature_Mining/" . "IP_Generation/")
- ("/Users/clizarraga/Downloads/Argo/To_ODP_From_LitMining/" . "Rice/")
- ("/cibo/argo/tim_scripts/" . "gene_name_annotatons/")
- ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/Scripts/" . "Phrase_Matching/")
- ("/cibo/argo/cesar-scripts/Literature_Mining/Forwards/Scripts/" . "Phrase_Matching/")
- ("/cibo/argo/cesar-scripts/Literature_Mining/Forwards/" . "Scripts/")
- ("/cibo/argo/cesar-scripts/Literature_Mining/" . "Scripts/")
- ("/cibo/argo/cesar-scripts/" . "Literature_Mining/")
- ("/cibo/argo/" . "argo-pipeline/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module10/src/test/scala/com/artima/" . "simplyscalaworkshop/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module10/src/test/scala/com/" . "artima/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module10/src/test/scala/" . "com/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module10/src/test/" . "scala/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module10/src/" . "test/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/test/" . "scala-2.12/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/main/" . "java/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/src/" . "test/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/Module03/" . "src/")
- ("/Users/clizarraga/Documents/scalaFunCiBO/exercises/" . "Module03/")
- ("/Users/clizarraga/Downloads/Argo/Literature_Mining/Forwards/" . "Scripts/")
- ("/Users/clizarraga/Downloads/Argo/Literature_Mining/" . "Forwards/")
- ("/Users/" . "clizarraga/")
- ("/Users/clizarraga/Downloads/Argo/" . "To_ODP_From_LitMining/")
- ("/cibo/sandbox/brendon/src/test/scala/sandbox/brendon/" . "qable/")
- ("/cibo/sandbox/brendon/src/test/scala/sandbox/" . "brendon/")
- ("/cibo/sandbox/brendon/src/test/scala/" . "sandbox/")
- ("/cibo/sandbox/brendon/src/test/" . "scala/")
- ("/cibo/sandbox/brendon/src/" . "test/")
- ("/Users/clizarraga/.sbt/0.13/" . "plugins/")
- ("/Users/clizarraga/.sbt/" . "0.13/")
- ("/" . "Applications/")
- ("/Users/clizarraga/" . ".sbt/")
- ("/cibo/" . "BioScala/")
- ("/Users/clizarraga/Github_Repos/Misc/" . "Config_files/")
- ("/Users/clizarraga/Github_Repos/" . "Misc/")
- ("/Users/clizarraga/Downloads/" . "Argo/")
+ ("/cygdrive/c/Users/Dummy/Documents/" . "AutoHotKey/")
+ ("/cygdrive/c/Users/Dummy/" . "calizarr/")
+ ("/cygdrive/c/Users/Dummy/calizarr/" . ".emacs.d/")
+ ("c:/Users/Dummy/calizarr/emacs_backup/" . ".emacs.d/")
+ ("c:/Users/Dummy/calizarr/.config/" . "fish/")
+ ("c:/Users/Dummy/calizarr/.config/fish/" . "functions/")
+ ("c:/Users/Dummy/Documents/" . "AutoHotKey/")
+ ("c:/Users/Dummy/" . "Documents/")
+ ("c:/Users/Dummy/calizarr/" . ".config/")
+ ("d:/" . "cygwin64/")
+ ("c:/Users/caliz/AppData/Local/" . "Android/")
+ ("c:/Users/caliz/AppData/" . "Local/")
+ ("c:/Users/caliz/" . "AppData/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
- "/Users/clizarraga/Development/cibo/argo/"
- "/Users/clizarraga/Development/cibo/argo/pytextmining/ipgeneration/"
- "/Users/clizarraga/Development/cibo/whatbestatistics/"
- "/cibo/BioScala/"
- "/Users/clizarraga/Development/cibo/argo/argo-pipeline/"
- "/Users/clizarraga/.sbt/"
- "/Users/clizarraga/.sbt/1.0/plugins/"
- "/Users/clizarraga/.sbt/0.13/plugins/"
- "/Users/clizarraga/.sbt/1.0/"
- "/Users/clizarraga/.sbt/0.13/"
- "/Users/clizarraga/"
- "/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/resources/pypeline/"
- "/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/scala/com/cibo/argo/pypeline/"
- "/Users/clizarraga/.emacs.d/"
- "/Users/clizarraga/development/cibo/argo/argo-pipeline/"
- "/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/"
- "/cibo/argo/argo-pipeline/src/test/resources/pypeline/"
- "/Users/clizarraga/Development/cibo/BioScala/"
- "//cibo/argo/argo-pipeline/src/test/resources/pypeline/"
- "/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/scala/"
- "/cibo/argo/argo-pipeline/src/it/scala/"
- "/Users/clizarraga/Development/cibo/"
- "/Users/clizarraga/.emacs.d/eshell/"
- "/Users/clizarraga/bioinformatics2018/Output/MCL/"
- "/Users/clizarraga/bioinformatics2018/Scripts/"
- "/Users/clizarraga/Google Drive/bioinformatics2018/Scripts/"
- "/Users/clizarraga/.config/fish/"
- "/Users/clizarraga/Google Drive/bioinformatics2018/Output/MCL/"
- "/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/Tomato_Table_AK_2017-11-21/"
- "/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/scala/com/cibo/argo/"
- "/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/cibo/argo/pypeline/entrez/"
- "/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/cibo/argo/pypeline/"
- "/Applications/IntelliJ IDEA CE.app/Contents/bin/"
- "/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/Randy_Requested_GenBanks/"
- "/Users/clizarraga/Development/cibo/argo/pytextmining/phrasematching/"
- "/Users/clizarraga/Development/cibo/argo/pytextmining/xmlextraction/"
- "/Users/clizarraga/.virtualenvs/LitMining/lib/python3.6/site-packages/"
- "/Users/clizarraga/.virtualenvs/LitMining/lib/python3.6/site-packages/Bio/Entrez/"
- "/Users/clizarraga/Development/Argo/Literature_Mining/Testing_NCBI_Pull/"
- "~/Development/Argo/Literature_Mining/Forwards/Phrase_Matching/Tomato/2017-10-29/"
- "/Users/clizarraga/Development/Argo/Literature_Mining/Forwards/Phrase_Matching/Tomato/2017-10-29/"
- "/Users/clizarraga/.ssh/"
- "/Users/clizarraga/Documents/Stan/pooled/"
- "/Users/clizarraga/Development/cibo/EDA/src/main/scala/com/cibo/eda/examples/"
- "/Users/clizarraga/Documents/Stan/dist/"
- "/Users/clizarraga/Development/cibo/EDA/src/main/scala/com/cibo/eda/"
- "/cibo/EDA/"
- "/cibo/EDA/project/"
- "/cibo/argo/argo-pipeline/"
- "/Users/clizarraga/Documents/Stan/linear_regression/"
+ "/cygdrive/c/Users/Dummy/calizarr/.emacs.d/"
+ "/cygdrive/c/Users/Dummy/calizarr/"
+ "/cygdrive/c/Users/Dummy/Documents/AutoHotKey/"
+ "/cygdrive/c/Users/Dummy/calizarr/.emacs.d/elpa/"
+ "c:/Users/Dummy/calizarr/.config/fish/functions/"
+ "c:/Users/Dummy/calizarr/.emacs.d/"
+ "c:/Users/Dummy/calizarr/"
+ "c:/Users/Dummy/Documents/AutoHotKey/"
+ "c:/Users/Dummy/calizarr/emacs_backup/"
+ "c:/Users/Dummy/calizarr/GitHub_Repos/"
+ "c:/Users/Dummy/calizarr/.config/fish/"
+ "c:/Users/Dummy/calizarr/.config/"
+ "c:/Users/Dummy/calizarr/consolas-font-for-powerline/"
+ "d:/cygwin64/"
+ "c:/Users/caliz/AppData/Local/Android/Sdk/"
+ "c:/Users/caliz/AppData/Local/Android/"
 )
 
 ;; ----- ido-work-file-list -----
 (
- "geneID_To_RefSeqs.py"
- "test.R"
- "plugins.sbt"
- "build.sbt"
- "ensime.sbt"
- "global.sbt"
- ".sbt_config"
- "geneIdToNucleotide_Nucleotide.txt"
- "GeneIdToNucleotideWriter.scala"
+ "cygwin-conf.el"
+ "windows-conf.el"
  ".emacs"
+ "windows-super-hyper-info.txt"
+ "On_Startup.ahk"
+ "ido-conf.el"
+ "wslb.fish"
+ "start_agent.fish"
+ "test_identities.fish"
+ "config.fish"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/ipgeneration/" (23202 61823 754352 625000) "geneID_To_Nucleotide.py" "geneID_To_RefSeqs.py" "geneID_To_Nucleotide.pyc" "__init__.pyc" "geneID_To_RefSeqs.pyc" "geneID_To_PMID.py" "geneID_To_Symbol_Synonym.py" "__pycache__/" "__init__.py" "tests/" "../" "./")
+ ("/cygdrive/c/Users/Dummy/calizarr/" (23214 46975 571417 100000) "wslbridge.exe" "wslbridge-backend" "install" "GitHub_Repos/" "fatty/" "emacs_backup/" "emacs.lnk" "emacs" "consolas-font-for-powerline/" ".xsession-errors" ".Xauthority" ".tmux.conf" ".ssh/" ".serverauth.17288" ".serverauth.15708" ".minttyrc" ".local/" ".lesshst" ".history" ".gitconfig" ".emacs~" ".emacs.d/" ".emacs" ".dbus/" ".config/" ".cache/" ".bash_history" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/whatbestatistics/" (23198 49919 444903 788000) "src/" ".idea/" "build.sbt" ".git/" ".gitignore" "project/" "README.md" "HomeworkExercises.md" ".ensime" "target/" "test.R" "ensime.sbt" ".Rhistory" "../" "./")
+ ("/cygdrive/c/Users/Dummy/calizarr/.emacs.d/" (23214 45500 812067 800000) "windows-super-hyper-info.txt" "windows-conf.el" "vlf-conf.el" "var/" "tramp" "snippets/" "remove-bars.el" "recentf" "projectile-bookmarks.eld" "persp-projectile.el" "network-security.data" "neotree.el" "image-dired/" "ido.last~" "ido.last" "ido-conf.el" "git-conf.el" "eshell/" "ensime-conf.el" "elpy-conf.el" "elpa/" "eide/" "dired-conf.el" "dashboard-conf.el" "cygwin-conf.el" "company-conf.el" "calf-conf.el" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".emacs.desktop" "../" "./")
 
- ("/Users/clizarraga/" (23198 47365 676036 992000) "tmux_conf_normal" ".viminfo" ".bash_history" ".gitconfig" ".aws/" ".cache/" ".python_history" "Downloads/" ".Xauthority" ".bash_profile" "installation.sh" ".mysql_history" "Phrase_README.md" "Documents/" ".scala_history" ".travis/" "setup.cfg" ".Trash/" "tmux_conf_normal~" ".Rcache/" ".emacs~" ".parallel/" "Applications/" ".emacs" "Movies/" ".ssh/" "tmpDir/" "Github_Repos/" ".openvpn-connect.json" "Public/" ".sbt/" "Google Drive/" ".scalastan/" ".bash_sessions/" "testing/" ".cups/" ".gitignore_global" ".android/" "LitMining_VirtualEnvironment_Dependencies.json" ".emacs.d/" "LitMining_requirements" "Base_README.md" ".coursier/" ".oracle_jre_usage/" ".lesshst" ".matplotlib/" "Library/" "Desktop/" "bioinformatics2018/" ".cpan/" "Pictures/" ".psql_history" ".ivy2.bak/" ".local/" "XML_README.md" "target/" "LitMining_VirtualEnvironment_Dependencies_Full.json" ".bash_profile~" "Development/" ".bashrc" ".qgis2/" "bin/" ".wget-hsts" ".Rprofile" ".CFUserTextEncoding" ".ammonite/" ".lldb/" ".tmux.conf" ".gnupg/" "nltk_data/" ".R/" ".DS_Store" ".virtualenvs/" "perl5/" ".ivy2/" ".bashrc~" ".sciminfo" ".sbt_config" ".idea-build/" "Fish_Config/" "Music/" ".config/" ".Rhistory" "../" "./")
+ ("/cygdrive/c/Users/Dummy/Documents/AutoHotKey/" (23214 45159 264669 500000) "suspend.ahk~" "suspend.ahk" "On_Startup.ahk~" "On_Startup.ahk" "emacs.ahk~" "emacs.ahk" "../" "./")
 
- ("/Users/clizarraga/.sbt/1.0/" (23198 47850 175959 868000) "zinc/" "global.sbt" "project/" "credentials.sbt" "server/" ".ensime" "target/" "plugins/" "staging/" "../" "./")
+ ("/cygdrive/c/Users/Dummy/calizarr/.emacs.d/elpa/" (23213 49156 471471 0) "zoom-window-readme.txt" "zoom-readme.txt" "zoom-0.2.1/" "yasnippet-snippets-readme.txt" "yasnippet-snippets-20180307.518/" "yasnippet-0.12.2/" "xahk-mode-readme.txt" "xahk-mode-20170821.407/" "with-editor-2.7.1/" "window-layout-1.4/" "windata-20090830.340/" "vlf-readme.txt" "vlf-1.7.1/" "use-package-20180312.2335/" "undo-tree-20170706.246/" "tree-mode-20151104.531/" "stan-mode-readme.txt" "stan-mode-9.2.0/" "smartparens-1.11.0/" "scala-mode-1.0.0/" "sbt-mode-1.0.2/" "s-1.12.0/" "pyvenv-1.12/" "python-environment-0.0.2/" "projectile-0.14.0/" "pretty-mode-readme.txt" "pretty-mode-2.0.3/" "pos-tip-0.4.6/" "popup-imenu-0.6/" "popup-0.5.3/" "pkg-info-0.6/" "perspective-1.12/" "persp-projectile-readme.txt" "persp-projectile-0.2.0/" "pcache-0.4.2/" "page-break-lines-0.11/" "neotree-readme.txt" "neotree-0.5.2/" "memoize-1.1/" "markdown-mode-2.3/" "magithub-readme.txt" "magit-rockstar-readme.txt" "magit-readme.txt" "magit-popup-2.12.2/" "magit-2.11.0/" "logito-0.1/" "jedi-core-0.2.7/" "ivy-0.10.0/" "image-dired+-readme.txt" "image+-readme.txt" "ido-yes-or-no-1.4/" "ido-vertical-mode-readme.txt" "ido-vertical-mode-0.1.6/" "ido-ubiquitous-readme.txt" "ido-completing-read+-readme.txt" "ido-completing-read+-4.7/" "hook-helpers-readme.txt" "highlight-symbol-1.3/" "highlight-indentation-0.7.0/" "goto-chg-20180105.1033/" "gnupg/" "git-commit-2.11.0/" "ghub-1.3.0/" "ghub+-0.2.1/" "gh-0.10.0/" "flx-ido-0.6.1/" "flx-0.6.1/" "fish-mode-readme.txt" "fish-mode-0.1.4/" "fish-mode-0.1.3/" "find-file-in-project-5.5.2/" "exwm-readme.txt" "expand-region-0.11.0/" "exec-path-from-shell-20180224.1916/" "escreen-readme.txt" "epl-0.9/" "epc-0.1.1/" "ensime-readme.txt" "ensime-2.0.2/" "elscreen-separate-buffer-list-readme.txt" "elscreen-readme.txt" "elscreen-multi-term-readme.txt" "elscreen-mew-readme.txt" "elscreen-fr-readme.txt" "elscreen-buffer-group-readme.txt" "elscreen-20160613.251/" "elpy-1.18.0/" "eimp-readme.txt" "eimp-20120826.1339/" "eide-readme.txt" "e2wm-readme.txt" "e2wm-R-readme.txt" "e2wm-R-0.4/" "e2wm-1.4/" "doremi-readme.txt" "doremi-cmd-readme.txt" "doremi-20170221.1634/" "dirtree-readme.txt" "dirtree-20140129.32/" "dired+-readme.txt" "dired+-20170818.1411/" "deferred-0.5.1/" "dashboard-readme.txt" "dashboard-1.2.4/" "dash-2.13.0/" "ctable-0.1.2/" "csv-mode-readme.txt" "csv-mode-1.7.signed" "csv-mode-1.7/" "concurrent-0.5.1/" "company-quickhelp-readme.txt" "company-quickhelp-2.3.0/" "company-jedi-readme.txt" "company-jedi-0.4/" "company-0.9.6/" "calfw-readme.txt" "calfw-1.6/" "bind-key-20171210.2125/" "auto-complete-1.5.1/" "async-1.9.2/" "archives/" "apiwrap-0.4/" "ahk-mode-readme.txt" "ahk-mode-1.5.6/" "0blayout-readme.txt" "../" "./")
 
- ("/cibo/BioScala/" (23192 24461 919656 109000) "src/" "build.sbt" ".travis.yml" ".git/" ".travis/" ".gitignore" "project/" "README.md" ".ensime_cache/" "credentials.sbt.enc" ".ensime" "target/" "ensime.sbt" "../" "./")
+ ("/cygdrive/c/Users/Dummy/calizarr/.ssh/" (23207 10772 997518 100000) "known_hosts" "id_rsa.pub" "id_rsa" "environment" "config" "../" "./")
 
- ("/cibo/" (23198 43564 659404 375000) ".idea/" "argo_bak/" "argo/" "whatbestatistics/" "RScripts/" "sandbox/" "BioScala/" "continuum/" "biominer-services/" "EDA/" "../" "./")
+ ("/cygdrive/c/Users/Dummy/Documents/" (23210 55266 289874 200000) "temp/" "Reflect/" "My Videos/" "My Pictures/" "My Music/" "My Games/" "FeedbackHub/" "desktop.ini" "AutoHotKey/" "../" "./")
 
- ("/Users/clizarraga/Development/" (23072 24536 370662 630000) "cibo/" "Argo/" "LitMining_Scripts_Archived/" "../" "./")
+ ("/cygdrive/c/" (23210 31918 205661 100000) "../" "./" "xyplorer_full/" "Windows.old/" "Windows/" "Users/" "User Manual/" "System Volume Information/" "swapfile.sys" "Reflect_Install.log" "Recovery/" "ProgramData/" "Program Files (x86)/" "Program Files/" "PerfLogs/" "pagefile.sys" "OneDriveTemp/" "Intel/" "hiberfil.sys" "Documents and Settings/" "boot/" "$Recycle.Bin/")
 
- ("/cibo/argo/argo-pipeline/" (23193 52227 438999 618000) "src/" ".idea/" "build.sbt" "lib/" "scripts/" "project/" "README.md" ".ensime_cache/" ".ensime" "target/" "calibration.log" "ensime.sbt" "../" "./")
+ ("/cygdrive/" (23210 59880 0 0) "../" "./" "d/" "c/")
 
- ("/cibo/EDA/project/" (23198 43594 369210 103000) "plugins.sbt" "target/" "Versions.scala" "build.properties" "../" "./")
+ ("/cygdrive/c/Users/Dummy/calizarr//" (23209 60088 866817 900000) "wslbridge.exe" "wslbridge-backend" "install" "GitHub_Repos/" "fatty/" "emacs_backup/" "emacs.lnk" "consolas-font-for-powerline/" ".xsession-errors" ".Xauthority" ".tmux.conf" ".ssh/" ".serverauth.17288" ".serverauth.15708" ".minttyrc" ".local/" ".lesshst" ".history" ".gitconfig" ".emacs~" ".emacs.d/" ".emacs" ".dbus/" ".config/" ".cache/" ".bash_history" "../" "./")
 
- ("/cibo/EDA/" (23198 43594 378425 751000) "src/" "travis/" "build.sbt" ".travis.yml" ".git/" ".gitignore" "project/" "README.md" ".ensime_cache/" "credentials.sbt.enc" ".ensime" "target/" "ensime.sbt" "../" "./")
+ ("/cygdrive/c/Users/Dummy/calizarr///" (23209 60088 866817 900000) "wslbridge.exe" "wslbridge-backend" "install" "GitHub_Repos/" "fatty/" "emacs_backup/" "emacs.lnk" "consolas-font-for-powerline/" ".xsession-errors" ".Xauthority" ".tmux.conf" ".ssh/" ".serverauth.17288" ".serverauth.15708" ".minttyrc" ".local/" ".lesshst" ".history" ".gitconfig" ".emacs~" ".emacs.d/" ".emacs" ".dbus/" ".config/" ".cache/" ".bash_history" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/EDA/src/main/scala/com/cibo/eda/" (23198 43594 376263 804000) "structure/" "package.scala" "examples/" "plotting/" "LabNotebook.scala" "models/" "StanPlot.scala" "DescriptiveStats.scala" "../" "./")
+ ("/cygdrive/c/Users/" (23152 9242 543286 900000) "Public/" "Dummy/" "desktop.ini" "Default User/" "Default/" "All Users/" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/EDA/src/main/scala/com/cibo/eda/examples/" (23198 43594 367101 38000) "Heights.scala" "../" "./")
+ ("/cygdrive/c/Users/Dummy/" (23205 49829 575748 300000) "Videos/" "Templates/" "Start Menu/" "SendTo/" "Searches/" "Saved Games/" "Roaming/" "Recent/" "PrintHood/" "Pictures/" "OneDrive/" "ntuser.ini" "NTUSER.DAT{25f6577f-0592-11e8-8643-cc2f7146625b}.TMContainer00000000000000000002.regtrans-ms" "NTUSER.DAT{25f6577f-0592-11e8-8643-cc2f7146625b}.TMContainer00000000000000000001.regtrans-ms" "NTUSER.DAT{25f6577f-0592-11e8-8643-cc2f7146625b}.TM.blf" "ntuser.dat.LOG2" "ntuser.dat.LOG1" "NTUSER.DAT" "NetHood/" "My Documents/" "Music/" "MicrosoftEdgeBackups/" "Local Settings/" "Links/" "IntelGraphicsProfiles/" "Google Drive/" "Favorites/" "Downloads/" "Documents/" "Desktop/" "Cookies/" "Contacts/" "calizarr/" "Application Data/" "AppData/" "ansel/" "3D Objects/" ".emacs.d/" "../" "./")
 
- ("/Users/clizarraga/.ssh/" (23128 3755 232942 368000) "known_hosts" "id_rsa.pub" "id_rsa" "config" "known_hosts.old" "config~" "argo-stack.pem" "../" "./")
+ ("/cygdrive/c/Users/Dummy/calizarr/.config/" (23207 10069 432341 600000) "user-dirs.locale" "user-dirs.dirs" "omf/" "fish/" "../" "./")
 
- ("/Users/clizarraga/Development/Argo/Literature_Mining/Testing_NCBI_Pull/" (23092 19262 501122 788000) "pubmed_170101.dtd" "test.xml" "test_fetch.sh" "pubmed_180101.dtd" "../" "./")
+ ("c:/Users/Dummy/calizarr/.emacs.d/" (23209 60101 0 0) "windows-conf.el" "vlf-conf.el" "var/" "tramp" "snippets/" "remove-bars.el" "recentf" "projectile-bookmarks.eld" "persp-projectile.el" "network-security.data" "neotree.el" "image-dired/" "ido.last~" "ido.last" "ido-conf.el" "git-conf.el" "eshell/" "ensime-conf.el" "elpy-conf.el" "elpa/" "eide/" "dired-conf.el" "dashboard-conf.el" "company-conf.el" "calf-conf.el" "auto-save-list/" "ac-comphist.dat" "abbrev_defs" ".emacs.desktop" "../" "./")
 
- ("/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/Randy_Requested_GenBanks/" (23142 21474 570178 939000) "Randy_GeneIDs_Nucleotides.csv" "Randy_GenBank.tar.gz" "GBK/" "geneids.csv" "../" "./")
+ ("c:/Users/Dummy/calizarr/" (23209 60088 0 0) "wslbridge.exe" "wslbridge-backend" "install" "GitHub_Repos/" "fatty/" "emacs_backup/" "emacs.lnk" "consolas-font-for-powerline/" ".xsession-errors" ".Xauthority" ".tmux.conf" ".ssh/" ".serverauth.17288" ".serverauth.15708" ".minttyrc" ".local/" ".lesshst" ".history" ".gitconfig" ".emacs~" ".emacs.d/" ".emacs" ".dbus/" ".config/" ".cache/" ".bash_history" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/cibo/argo/pypeline/" (23193 52227 448157 21000) "GeneIDToRefSeqsSpec.scala" "CommonFunctionsSpec.scala" "GeneIdToNucleotideSpec.scala" "XmlParseSpec.scala" "../" "./")
+ ("c:/Users/Dummy/Documents/AutoHotKey/" (23208 18237 0 0) "suspend.ahk~" "suspend.ahk" "On_Startup.ahk~" "On_Startup.ahk" "emacs.ahk~" "emacs.ahk" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/scala/com/cibo/argo/" (23193 52227 439933 134000) "vsd/" "Router.scala" "odp/" "pypeline/" "curiosities/" "../" "./")
+ ("c:/Users/Dummy/calizarr/.emacs.d/elpa/exec-path-from-shell-20170508.4/" (23207 14902 0 0) "exec-path-from-shell.elc" "exec-path-from-shell.el" "exec-path-from-shell-pkg.el" "exec-path-from-shell-autoloads.el" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/" (23198 43564 659404 375000) ".idea/" "argo_bak/" "argo/" "whatbestatistics/" "RScripts/" "sandbox/" "BioScala/" "continuum/" "biominer-services/" "EDA/" "../" "./")
+ ("c:/Users/Dummy/calizarr/emacs_backup/.emacs.d/" (23207 55696 0 0) "ido.last~" "ido.last" "eshell/" "elpa/" "auto-save-list/" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/scala/" (23127 47065 933324 18000) "com/" "../" "./")
+ ("c:/Users/Dummy/calizarr/.config/" (23207 10069 0 0) "user-dirs.locale" "user-dirs.dirs" "omf/" "fish/" "../" "./")
 
- ("//cibo/argo/argo-pipeline/src/test/resources/pypeline/" (23193 52227 446437 843000) "tomato_gitrs.tsv" "geneIdToNucleotide_Nucleotide.txt" "soybean_tableAK_quoted.tsv" "geneIdToNucleotide_getGenbank_Modified.gb" "attached_genomic_sequence.xml" "independent_genomic_sequence.xml" "geneIdToNucleotide_getGenbank.gb" "geneIdToNucleotide_getGeneResults.xml" "attached_protein_sequence.xml" "independent_gene_table.txt" "target/" "tomato_yaj_gitrs.tsv" "independent_protein_sequence.xml" "attached_gene_table.txt" "xml_files/" "../" "./")
+ ("c:/Users/Dummy/calizarr/.config/fish/functions/" (23207 15449 0 0) "wslf.fish" "wslb.fish" "test_identities.fish" "start_agent.fish" "fish_prompt.fish" "emacs.fish~" "emacs.fish" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/" (23193 52227 438999 618000) "src/" ".idea/" "build.sbt" "lib/" "scripts/" "project/" "README.md" ".ensime_cache/" ".ensime" "target/" "calibration.log" "ensime.sbt" "../" "./")
+ ("c:/Users/Dummy/calizarr/emacs_backup/" (23207 55696 0 0) ".emacs.d/" ".emacs" "../" "./")
 
- ("/cibo/argo/argo-pipeline/src/test/resources/pypeline/" (23193 52227 446437 843000) "tomato_gitrs.tsv" "geneIdToNucleotide_Nucleotide.txt" "soybean_tableAK_quoted.tsv" "geneIdToNucleotide_getGenbank_Modified.gb" "attached_genomic_sequence.xml" "independent_genomic_sequence.xml" "geneIdToNucleotide_getGenbank.gb" "geneIdToNucleotide_getGeneResults.xml" "attached_protein_sequence.xml" "independent_gene_table.txt" "target/" "tomato_yaj_gitrs.tsv" "independent_protein_sequence.xml" "attached_gene_table.txt" "xml_files/" "../" "./")
+ ("c:/Users/Dummy/calizarr/GitHub_Repos/" (23207 14899 0 0) "wslbridge/" "temp" "ssh-agent.fish/" "Misc/" "fish-ssh-agent/" "fatty/" "emacs.ahk/" "apt-cyg" "../" "./")
 
- ("/Users/clizarraga/development/cibo/argo/argo-pipeline/" (23193 52227 438999 618000) "src/" ".idea/" "build.sbt" "lib/" "scripts/" "project/" "README.md" ".ensime_cache/" ".ensime" "target/" "calibration.log" "ensime.sbt" "../" "./")
+ ("c:/Users/Dummy/calizarr/.config/fish/" (23206 56788 0 0) "functions/" "fishd.MSI.x86_64" "config.fish~" "config.fish" "conf.d/" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/scala/com/cibo/argo/pypeline/" (23193 52227 443285 14000) "PubmedArticle.scala" "GeneIdToNucleotide.scala" "GeneIdToRefSeqs.scala" "CommonFunctions.scala" "GeneIdToNucleotideWriter.scala" "XmlParse.scala" "RefSeqWriter.scala" "../" "./")
+ ("c:/Users/Dummy/calizarr/GitHub_Repos/fish-ssh-agent/" (23206 52824 0 0) "README.md" "init.fish" "functions/" ".git/" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/resources/pypeline/" (23193 52227 446437 843000) "tomato_gitrs.tsv" "geneIdToNucleotide_Nucleotide.txt" "soybean_tableAK_quoted.tsv" "geneIdToNucleotide_getGenbank_Modified.gb" "attached_genomic_sequence.xml" "independent_genomic_sequence.xml" "geneIdToNucleotide_getGenbank.gb" "geneIdToNucleotide_getGeneResults.xml" "attached_protein_sequence.xml" "independent_gene_table.txt" "target/" "tomato_yaj_gitrs.tsv" "independent_protein_sequence.xml" "attached_gene_table.txt" "xml_files/" "../" "./")
+ ("c:/Users/Dummy/calizarr/.config/fish/conf.d/" (23205 43441 0 0) "omf.fish" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/whatbestatistics/project/" (23198 43771 628878 974000) "target/" "Versions.scala" "build.properties" "../" "./")
+ ("c:/Users/Dummy/calizarr/GitHub_Repos/ssh-agent.fish/conf.d/" (23205 43489 0 0) "ssh-agent.fish" "../" "./")
 
- ("/Users/clizarraga/.sbt/1.0/plugins/" (23191 10563 920921 364000) "plugins.sbt" "project/" "target/" "../" "./")
+ ("c:/Users/Dummy/Documents/" (23205 43726 0 0) "temp/" "Reflect/" "My Videos/" "My Pictures/" "My Music/" "My Games/" "desktop.ini" "AutoHotKey/" "../" "./")
 
- ("/Users/clizarraga/.sbt/0.13/plugins/" (23071 802 343816 22000) "plugins.sbt" "project/" "target/" "plugins.sbt~" "idea.sbt" "../" "./")
+ ("c:/Users/Dummy/" (23205 49829 0 0) "Videos/" "Templates/" "Start Menu/" "SendTo/" "Searches/" "Saved Games/" "Roaming/" "Recent/" "PrintHood/" "Pictures/" "OneDrive/" "ntuser.ini" "NTUSER.DAT{25f6577f-0592-11e8-8643-cc2f7146625b}.TMContainer00000000000000000002.regtrans-ms" "NTUSER.DAT{25f6577f-0592-11e8-8643-cc2f7146625b}.TMContainer00000000000000000001.regtrans-ms" "NTUSER.DAT{25f6577f-0592-11e8-8643-cc2f7146625b}.TM.blf" "ntuser.dat.LOG2" "ntuser.dat.LOG1" "NTUSER.DAT" "NetHood/" "My Documents/" "Music/" "MicrosoftEdgeBackups/" "Local Settings/" "Links/" "IntelGraphicsProfiles/" "Google Drive/" "Favorites/" "Downloads/" "Documents/" "Desktop/" "Cookies/" "Contacts/" "calizarr/" "Application Data/" "AppData/" "ansel/" "3D Objects/" ".emacs.d/" "../" "./")
 
- ("/Users/clizarraga/.sbt/" (23191 10269 213534 574000) "preloaded/" "0.13/" "boot/" "1.0/" "../" "./")
+ ("c:/Users/Dummy/calizarr/consolas-font-for-powerline/" (23205 43448 0 0) "Powerline Consolas.ttf" "Powerline Consolas Italic.ttf" "Powerline Consolas Bold.ttf" "Powerline Consolas Bold Italic.ttf" ".git/" "../" "./")
 
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline///" (23193 49349 792223 813000) "src/" ".idea/" "build.sbt" "lib/" "scripts/" "project/" "README.md" ".ensime_cache/" ".ensime" "target/" "calibration.log" "ensime.sbt" "../" "./")
+ ("d:/cygwin64/" (23205 43351 0 0) "var/" "usr/" "tmp/" "sbin/" "lib/" "home/" "etc/" "dev/" "Cygwin.ico" "Cygwin.bat" "Cygwin-Terminal.ico" "cygdrive/" "bin/" "../" "./")
 
- ("/Users/clizarraga/Documents/CiBO_Docs/" (23193 45715 623309 421000) "Cesar_Lizaragga_CiBO_Offer.pdf" "Employee Noncompete-Nonsolicit-CDA-Assignment Agreement-June 2016-CAL.pdf" "Reflektive_TJ.org" "CiBOBenefitsSummary2017 v6.pdf" "Cesar_Lizarraga_Offer_Letter_Signed.pdf" "Reflektive_Self.org" "Employee Noncompete-Nonsolicit-CDA-Assignment Agreement-June 2016-CAL-Full.pdf" "../" "./")
+ ("c:/Users/caliz/AppData/Local/Android/Sdk/" (23094 54399 0 0) "tools/" "platforms/" "platform-tools/" "patcher/" "licenses/" "extras/" "emulator/" "build-tools/" ".knownPackages" "../" "./")
 
- ("/Users/clizarraga/Development/Argo/Literature_Mining/Forwards/Phrase_Matching/Tomato/2017-10-29/" (23091 1557 525459 229000) "Filtered_Tomato_Unmatched.csv" "Filtered_Tomato.tsv" "Filtered_Tomato.csv" "Filtered_Tomato_test.tsv" "../" "./")
+ ("c:/Users/caliz/AppData/Local/Android/" (23094 53714 0 0) "Sdk/" "../" "./")
 
- ("~/Development/Argo/Literature_Mining/Forwards/Phrase_Matching/Tomato/2017-10-29/" (23091 1557 525459 229000) "Filtered_Tomato_Unmatched.csv" "Filtered_Tomato.tsv" "Filtered_Tomato.csv" "Filtered_Tomato_test.tsv" "../" "./")
+ ("c:/Users/caliz/AppData/Local/" (23094 53714 0 0) "VirtualStore/" "UnrealEngine/" "TslGame/" "TileDataLayer/" "Temporary Internet Files/" "Temp/" "Steam/" "SquirrelTemp/" "slack/" "Publishers/" "Programs/" "Portrait Displays/" "PlaceholderTileLogoFolder/" "PeerDistRepub/" "PackageStaging/" "Packages/" "NVIDIA Corporation/" "NVIDIA/" "MSI/" "Microsoft_Corporation/" "MicrosoftEdge/" "Microsoft/" "Micro-Star_International_/" "IconCache.db" "hyper/" "History/" "Google/" "Gaijin/" "ElevatedDiagnostics/" "Discord/" "Diagnostics/" "DBG/" "ConnectedDevicesPlatform/" "Comms/" "ChromaTune_MSI/" "CEF/" "AudioSwitch/" "Application Data/" "Android/" "../" "./")
 
- ("/Users/clizarraga/.virtualenvs/LitMining/lib/python3.6/site-packages/" (23052 38311 0 0) "pyflakes/" "autopep8.py" "autopep8-1.3.3-py3.6.egg-info/" "stevedore/" "biopython-1.70.dist-info/" "setuptools-28.8.0.dist-info/" "pipdeptree-0.10.1-py3.6.egg-info/" "virtualenv.py" "pbr/" "scipy/" "pipdeptree.py" "parso/" "pyflakes-1.5.0.dist-info/" "pkg_resources/" "setuptools/" "yapf-0.19.0.dist-info/" "BioSQL/" "virtualenv_support/" "six.py" "nltk-3.2.5-py3.6.egg-info/" "pycodestyle.py" "stevedore-1.26.0.dist-info/" "parso-0.1.0.dist-info/" "importmagic/" "clonevirtualenv.py" "sklearn/" "pip/" "pycodestyle-2.3.1.dist-info/" "yapf/" "numpy/" "numpy-1.13.1.dist-info/" "virtualenv_clone-0.2.6.dist-info/" "pip-9.0.1.dist-info/" "scipy-0.19.1.dist-info/" "__pycache__/" "scikit_learn-0.19.0.dist-info/" "jedi-0.11.0.dist-info/" "virtualfish-1.0.5.dist-info/" "mccabe.py" "bs4/" "pbr-3.1.1.dist-info/" "mccabe-0.6.1.dist-info/" "rope/" "jedi/" "yapftests/" "importmagic-0.1.7.dist-info/" "nltk/" "flake8/" "beautifulsoup4-4.6.0.dist-info/" "easy_install.py" "Bio/" "virtualfish/" "virtualenv-15.1.0.dist-info/" "rope-0.10.7.dist-info/" "flake8-3.4.1.dist-info/" "six-1.10.0.dist-info/" "../" "./")
+ ("c:/Users/caliz/AppData/" (23021 16289 0 0) "Roaming/" "LocalLow/" "Local/" "../" "./")
 
- ("/Users/clizarraga/Documents/Stan/" (23080 18981 889748 981000) "1.1.zip" "linear_regression/" "stan-reference-2.16.0.pdf" "pooled/" "dist/" "die_rolls/" ".Rhistory" "../" "./")
+ ("c:/Users/caliz/" (23094 54182 0 0) "Videos/" "Templates/" "Start Menu/" "SendTo/" "Searches/" "Saved Games/" "Roaming/" "Recent/" "PrintHood/" "Pictures/" "OneDrive/" "ntuser.ini" "NTUSER.DAT{8f9356ac-cd0b-11e7-998f-cc2f713de177}.TMContainer00000000000000000002.regtrans-ms" "NTUSER.DAT{8f9356ac-cd0b-11e7-998f-cc2f713de177}.TMContainer00000000000000000001.regtrans-ms" "NTUSER.DAT{8f9356ac-cd0b-11e7-998f-cc2f713de177}.TM.blf" "NTUSER.DAT{56f2beae-b78d-11e7-b0f5-309c231374af}.TMContainer00000000000000000002.regtrans-ms" "NTUSER.DAT{56f2beae-b78d-11e7-b0f5-309c231374af}.TMContainer00000000000000000001.regtrans-ms" "NTUSER.DAT{56f2beae-b78d-11e7-b0f5-309c231374af}.TM.blf" "NTUSER.DAT{56f2bead-b78d-11e7-b0f5-309c231374af}.TxR.blf" "NTUSER.DAT{56f2bead-b78d-11e7-b0f5-309c231374af}.TxR.2.regtrans-ms" "NTUSER.DAT{56f2bead-b78d-11e7-b0f5-309c231374af}.TxR.1.regtrans-ms" "NTUSER.DAT{56f2bead-b78d-11e7-b0f5-309c231374af}.TxR.0.regtrans-ms" "ntuser.dat.LOG2" "ntuser.dat.LOG1" "NTUSER.DAT" "NetHood/" "My Documents/" "Music/" "MicrosoftEdgeBackups/" "Local Settings/" "Links/" "IntelGraphicsProfiles/" "Favorites/" "Downloads/" "Documents/" "Desktop/" "Cookies/" "Contacts/" "calizarr/" "Application Data/" "AppData/" "ansel/" "AndroidStudioProjects/" "adb/" "3D Objects/" ".local/" ".hyper_plugins/" ".hyper.js" ".gradle/" ".config/" ".AndroidStudio3.0/" ".android/" "../" "./")
 
- ("/Users/clizarraga/Documents/Stan/linear_regression/" (23080 5101 731514 934000) "exercises_2_1_workflow_shinystan.R" "lm.stan" ".Rhistory" "../" "./")
+ ("c:/Users/caliz/calizarr/Music/" (23035 35999 0 0) "../" "./")
 
- ("/Users/clizarraga/Documents/Stan/pooled/" (23081 28875 995578 293000) "partial.rds" "partial_six.rds" "partial_two.rds" "pooled.rds" "partial_three.rds" "3.1.zip" "partial.stan" "partial_six.stan" "partial_four.rds" "unpooled.stan" "workflow.R" "partial_two.stan" "partial_four.stan" "unpooled.rds" "data.csv" "partial_five.stan" "partial_three.stan" "pooled.stan" "partial_five.rds" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/resources/" (23180 29135 677840 975000) "com/" "pypeline/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/cibo/argo/" (23191 9534 884449 875000) "vsd/" "odp/" "pypeline/" "../" "./")
-
- ("/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/Rice_Table_AK_2017-11-02/" (23044 30004 0 0) "rice_gene_list_compiled_final_curated_IDs.tsv" "Rice_Table_AK-2017-11-02_RefSeq.csv" "Rice_Table_AK-2017-11-02_Genomic_2.csv" "Rice_Table_AK-2017-11-02_Genomic.csv" "Rice_Table_AK-2017-11-02_Nucleotide.csv" "Rice_Overchars.fasta" "GBF/" "rice_gene_list_compiled_final_curated_IDs_Table_AK_2017-11-02.tsv" "../" "./")
-
- ("/cibo/argo/argo-pipeline/src/" (23191 10001 113822 985000) ".idea/" "main/" "templates/" "test/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/BioScala/.ensime_cache/" (23192 24775 853189 813000) "index-2.0.4/" "graph-2.0.4/" "../" "./")
-
- ("/Users/" (23061 64832 270661 945000) "admin_local/" "Shared/" ".localized" "clizarraga/" "../" "./")
-
- ("/Users/clizarraga/.emacs.d/" (23192 24730 566523 733000) "magithub/" "elpy-conf.el" "neotree.el" "calf-conf.el" "persp-projectile.el" "remove-bars.el" "elpa/" "recentf" "ido-conf.el" "image-dired/" "network-security.data" "ensime-conf.el" "company-conf.el" "git-conf.el" "dashboard-conf.el" ".emacs.desktop" "auto-save-list/" "vlf-conf.el" "var/" "tramp" "projectile-bookmarks.eld" "ido.last~" "eide/" "abbrev_defs" "eshell/" "dired-conf.el" "ido.last" "snippets/" "ac-comphist.dat" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/BioScala/" (23192 24461 919656 109000) "src/" "build.sbt" ".travis.yml" ".git/" ".travis/" ".gitignore" "project/" "README.md" ".ensime_cache/" "credentials.sbt.enc" ".ensime" "target/" "ensime.sbt" "../" "./")
-
- ("/Users/clizarraga/Documents/Stan/die_rolls/" (23080 2904 119336 150000) "gen_d6.stan" "gen_best_3_of_4_d6.rds" "gen_d6.rds" "gen_best_3_of_4_d6.stan" "gen_best_3_of_4_d6.R" "gen_rollsN_facesK.rds" "gen_d6.R" "gen_rollsN_facesK.stan" "gen_rollsN_facesK.R" ".Rhistory" "../" "./")
-
- ("~/Documents/Stan/die_rolls/" (23080 2904 119336 150000) "gen_d6.stan" "gen_best_3_of_4_d6.rds" "gen_d6.rds" "gen_best_3_of_4_d6.stan" "gen_best_3_of_4_d6.R" "gen_rollsN_facesK.rds" "gen_d6.R" "gen_rollsN_facesK.stan" "gen_rollsN_facesK.R" ".Rhistory" "../" "./")
-
- ("/Users/clizarraga/Documents/Stan/dist/" (23078 63886 921210 713000) "heights.rds" "heights.stan" ".Rapp.history" "workflow.R" "heights.csv" "test.png" ".Rhistory" "../" "./")
-
- ("/Users/clizarraga/Development/Argo/" (23183 14998 130276 268000) "Literature_Mining/" "GeneIDToNucleotide.scala" "Notes/" "MEME/" ".DS_Store" "edirect.tar.gz" "argo_pem_key.txt" "Archival_Nested/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/" (23191 10001 113822 985000) ".idea/" "main/" "templates/" "test/" "../" "./")
-
- ("/cibo/argo/argo-pipeline/src/it/scala/" (23191 7852 813009 77000) "com/" "../" "./")
-
- ("/cibo/argo/argo-pipeline/src/it/" (23191 7852 812963 389000) "scala/" "../" "./")
-
- ("/cibo/argo/argo-pipeline/src/main/" (23127 47065 933270 782000) "scala/" "resources/" "../" "./")
-
- ("argo-pipeline/src/it/scala/com/cibo/argo/pypeline/entrez/" (23191 7982 863422 964000) "EntrezIntegrationSpec.scala" "../" "./")
-
- ("/cibo/argo/argo-pipeline/src/it/scala/com/cibo/argo/pypeline/entrez/" (23191 7852 823973 845000) "EntrezIntegrationSpec.scala" "EntrezClientIntegrationSpec.scala" "../" "./")
-
- ("/Users/clizarraga/.sbt/0.13/" (23071 808 776129 704000) "global.sbt" "credentials.sbt" "dependency/" "target/" "plugins/" "staging/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/phrasematching/" (23189 48525 319114 376000) "common_functions.pyc" "create_rice_gene_dictionary.py" "match_phrases_and_abstracts.py" "create_gene_synonyms_dictionary.py" "common_functions.py" "__init__.pyc" "README.md" "__pycache__/" "create_corn_gene_dictionary.py" "__init__.py" "tests/" "create_generic_dictionary.py" "../" "./")
-
- ("/Users/clizarraga/bioinformatics2018/Scripts/" (23186 13036 524082 883000) "run_test4.fish" "getClustering.py" "getLengthAndReturn.py" "Icon
-" "test.fish" "../" "./")
-
- ("/Users/clizarraga/bioinformatics2018/Output/MCL/" (23186 16071 726908 749000) "dump.test4_seq_bitscore.mci.I5.30" "out.test4_seq_eval.mci.I100" "test4_P2" "dump.test4_seq_eval.mci.I150" "out.test2_seq_eval.mci.I53" "test4_seq_bitscore.dict" "test4_P3" "dump.test3_seq_eval.mci.I53" "test4_answer_I100.tsv" "dump.test4_seq_eval.mci.I20" "out.test6_seq_eval.mci.I53" "dump.test4_seq_eval.mci.I80" "out.test4_seq_eval.mci.I51" "dump.test4_seq_bitscore.mci.I53" "out.test4_seq_eval.mci.I50" "test3_seq_eval_answer_I53.tsv" "test4_answer_I80.tsv" "dump.test4_seq_eval.mci.I50" "test6_seq_eval.abc" "test6_seq_eval.dict" "dump.test4_seq_bitscore.mci.I530" "test1_seq_eval.abc" "test4_seq_bitscore_answer_I53.tsv" "test4_seq_eval.mci" "test3_seq_eval.mci" "test4_seq_eval.mcltree" "test2_seq_eval.dict" "test4_answer_I54.tsv" "dump.test4_seq_eval.mci.I60" "out.test4_seq_eval.mci.I80" "dump.test6_seq_eval.mci.I53" "dump.test4_seq_eval.mci.I51" "dump.test4_seq_eval.mci.I499" "out.test4_seq_eval.mci.I20" "out.test3_seq_eval.mci.I53" "test4_answer_I55.tsv" "test4_answer_I51.tsv" "test2_seq_eval.mci" "test5_seq_eval.mci" "out.test4_seq_bitscore.mci.I53" "test4_seq_eval.count" "dump.test2_seq_eval.mci.I53" "test4_answer_I50.tsv" "test4_answer_I52.tsv" "test5_seq_eval.dict" "dump.test4_seq_eval.mci.I510" "test1_seq_eval.dict" "test4_answer_2.tsv" "test4_seq_bitscore.mci" "test4_answer_I53.tsv" "out.test4_seq_eval.mci.I150" "test4_answer_I8.tsv" "test4_answer_I150.tsv" "test4_P1" "dump.test5_seq_eval.mci.I53" "test5_seq_eval.abc" "test2_seq_eval.abc" "test1_seq_eval_answer_I53.tsv" "test4_seq_eval.base" "test4_answer_I49.tsv" "test4_seq_bitscore.abc" "dump.test4_seq_eval.mci.I100" "test4_seq_eval.dict" "test4_answer_I60.tsv" "test3_seq_eval.abc" "dump.test4_seq_eval.mci.I70" "test4_answer_I70.tsv" "test3_seq_eval.dict" "out.test4_seq_eval.mci.I55" "test4_seq_eval.abc" "out.test4_seq_eval.mci.I52" "test5_seq_eval_answer_I53.tsv" "test1_seq_eval.mci" "test6_seq_eval.mci" "dump.test4_seq_eval.mci.I49" "out.test4_seq_eval.mci.I53" "out.test4_seq_eval.mci.I54" "dump.test1_seq_eval.mci.I53" "dump.test4_seq_eval.mci.I14" "out.test1_seq_eval.mci.I53" "test4_seq_eval_clusters.txt" "test4_answer.tsv" "out.test4_seq_eval.mci.I49" "dump.test4_seq_eval.mci.I53" "dump.test4_seq_eval.mci.I54" "dump.test4_seq_eval.mci.nI55" "test6_seq_eval_answer_I53.tsv" ".DS_Store" "out.test4_seq_eval.mci.I70" "dump.test4_seq_eval.mci.I55" "dump.test4_seq_eval.mci.I52" "out.test5_seq_eval.mci.I53" "test2_seq_eval_answer_I53.tsv" "../" "./")
-
- ("/Users/clizarraga/.emacs.d/eshell/" (23190 57542 389820 674000) "history" "lastdir" "alias" "../" "./")
-
- ("/Users/clizarraga/bioinformatics2018/Output/" (23186 4990 820562 176000) "test4db.nsq" "test4db.nin" "MCL/" "test4db.nhr" "test4blastresults.tsv" "Icon
-" "../" "./")
-
- ("/Users/clizarraga/bioinformatics2018/" (23186 4941 17746 133000) "p5_test3.txt" "p5_test2.txt" "test4_sizes.fasta" "p5_test1.txt" "p1_test_easy.fa" "4.in" "Scripts/" "tests.zip" "p3_test1.zip" "test2.fasta" "p3_test3.zip" "Output/" "p3_test2.zip" "p3_test6.zip" "test4.fasta" "p1_test_hard.fa" "p3_test7.zip" "p3_test5.zip" "test6.fasta" "p3_test4.zip" "test1.fasta" "test3.fasta" "p2_task1.zip" "p2_task3.zip" "p2_task2.zip" "test5.fasta" "../" "./")
-
- ("/Users/clizarraga/Google Drive/bioinformatics2018/Scripts/" (23186 2024 529934 422000) "run_test4.fish" "getClustering.py" "getLengthAndReturn.py" "Icon
-" "../" "./")
-
- ("/Users/clizarraga/Google Drive/bioinformatics2018/Output/MCL/" (23186 654 858993 448000) "seq_eval.mcltree" "seq_eval.abc" "dump.seq_eval.mci.I14" "out.seq_eval.mci.I20" "out.seq_eval.mci.I60" "P1" "seq_eval.base" "out.seq_eval.mci.I14" "dump.seq_eval.mci.I20" "hits.mcl" "seq-eval.dict" "tree.nwk" "seq_eval.mci" "seq_bitscore.abc" "Icon
-" "dump.seq_eval.mci.I60" "P2" "P3" "../" "./")
-
- ("/cibo/argo/cesar-scripts/" (23178 24286 252292 340000) "Literature_Mining/" "dedupe_splice_commands.txt" "biominer/" "dedupe_splice_variants.py" "README.md" "Bash_Pipelines/" "edit-bestTree.py" "make_transcript_length.py" "requirements.txt" "../" "./")
-
- ("~/Development/cibo/argo/cesar-scripts/Literature_Mining/Scripts/Phrase_Matching/" (23178 24286 252165 712000) "create_rice_gene_dictionary.py" "test_create_gene_synonyms_dictionary.py" "match_phrases_and_abstracts.py" "create_gene_synonyms_dictionary.py" "common_functions.py" "test_create_generic_dictionary.py" "test_match_phrases_and_abstracts.py" "create_corn_gene_dictionary.py" "wheat-Senescence-23131300.xml" "wheat-Senescence-23550759_broken.xml" "create_generic_dictionary.py" "test_common_functions.py" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/cesar-scripts/Literature_Mining/Scripts/Phrase_Matching/" (23178 24286 252165 712000) "create_rice_gene_dictionary.py" "test_create_gene_synonyms_dictionary.py" "match_phrases_and_abstracts.py" "create_gene_synonyms_dictionary.py" "common_functions.py" "test_create_generic_dictionary.py" "test_match_phrases_and_abstracts.py" "create_corn_gene_dictionary.py" "wheat-Senescence-23131300.xml" "wheat-Senescence-23550759_broken.xml" "create_generic_dictionary.py" "test_common_functions.py" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/ipgeneration/tests/" (23178 24286 271294 523000) "GBF_test/" "__init__.pyc" "test_geneID_To_RefSeqs.py" "__pycache__/" "test_geneID_To_RefSeqs.pyc" "test_refseq_out.tsv" "test_nucleotide_out_e1000.tsv" "__init__.py" "test_geneID_To_Nucleotide.py" "test_table.tsv" "test_geneID_To_Nucleotide.pyc" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/" (23178 24286 267110 550000) "ipgeneration/" "xmlextraction/" "README.md" "phrasematching/" "__init__.py" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/xmlextraction/" (23178 24286 272227 146000) "__pycache__/" "__init__.py" "common_species.txt" "xml_extraction.py" "biominer.csv" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/cibo/argo/pypeline/entrez/" (23184 15478 56441 47000) "EntrezIntegrationSpec.scala" "EntrezClientIntegrationSpec.scala" "../" "./")
-
- ("/Users/clizarraga/Google Drive/bioinformatics2018/" (23185 61636 314593 682000) "p5_test3.txt" "p5_test2.txt" "p5_test1.txt" "p1_test_easy.fa" "4.in" "tests.zip" "p3_test1.zip" "test2.fasta" "p3_test3.zip" "Output/" "p3_test2.zip" "p3_test6.zip" "test4.fasta" "p1_test_hard.fa" "p3_test7.zip" "p3_test5.zip" "test6.fasta" "p3_test4.zip" "test1.fasta" "Icon
-" "test3.fasta" "p2_task1.zip" "p2_task3.zip" "p2_task2.zip" "test5.fasta" "../" "./")
-
- ("/Users/clizarraga/.config/" (23012 50751 0 0) "hub" "fish/" "filezilla/" "htop/" "biopython/" "configstore/" "omf/" "../" "./")
-
- ("/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/Tomato_Table_AK_2017-11-21/" (23169 46310 91627 913000) "Tomato_Table_AK_2017-11-21_Nucleotide.csv" "Tomato_Table_AK_2017-11-21_Prioritized.tsv" "Tomato_Table_AK_2017-11-21_RefSeqs.csv" "Tomato_Table_AK_2017-11-21_Prioritized_NoNotes_Quoted.tsv" "Tomato_Table_AK_2017-11-21_GenBank.tar.gz" "test_all.csv" "tomato_nominations_deduped.tsv" "Tomato_Table_AK_2017-11-21.tsv" "Tomato_Table_AK_2017-11-21_Prioritized_NoNotes.tsv" ".DS_Store" "tomato_nominations_deduped_quoted.tsv" "GBF/" "../" "./")
-
- ("/cibo/argo/argo-pipeline/src/test/resources/" (23180 29135 677840 975000) "com/" "pypeline/" "../" "./")
-
- ("/cibo/argo/argo-pipeline/src/test/" (23164 32732 802884 797000) "scala/" "resources/" "../" "./")
-
- ("/cibo/argo/" (23164 31849 576152 433000) ".idea/" ".travis.yml" "meme-image/" ".git/" ".travis/" "scripts/" "build-and-run-container.sh" "tim_scripts/" ".gitignore" "justin/" "credentials.sbt.enc" "argo-pipeline/" "argo.iml" "pytextmining/" ".DS_Store" "docker/" "hmmer-base-image/" "cesar-scripts/" "../" "./")
-
- ("/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/2017-10-19_Table_AK/" (23018 17342 0 0) "rice_geneID_RefSeq.csv" "rice_geneID_Nucleotide.csv" "rice_geneID_RefSeq.csv.bak" "Merge_Nucleotide_and_RefSeqs.R" "test.csv" "rice_geneID_RefSeq_NoFilter.csv" ".Rhistory" "../" "./")
-
- ("/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/Table_AK_2017-10-26/" (23043 13947 0 0) "common_functions.py" "Table_AK_Rice.tsv" "sequenceID_To_Symbols_Synonyms.py" "Filtered_Rice_Dict_2017-10-25_Table.tsv" "genes_for_tim.tsv" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/cibo/argo/pypeline/" (23177 28380 460810 856000) "entrez/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/cibo/argo/" (23177 28377 803941 356000) "pypeline/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/cibo/" (23177 28329 727489 347000) "argo/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/com/" (23177 28321 891012 496000) "cibo/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/it/" (23177 28319 151245 119000) "com/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/" (23164 32732 802884 797000) "scala/" "resources/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/" (23164 32732 802942 599000) "com/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/" (23164 32732 802991 928000) "cibo/" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/cibo/" (23164 32732 803032 557000) "argo/" "../" "./")
-
- ("/cibo/argo/cesar-scripts/Literature_Mining/Scripts/Phrase_Matching/" (23170 652 161607 52000) "create_rice_gene_dictionary.py" "test_create_gene_synonyms_dictionary.py" "match_phrases_and_abstracts.py" "create_gene_synonyms_dictionary.py" "common_functions.py" "test_create_generic_dictionary.py" "test_match_phrases_and_abstracts.py" "create_corn_gene_dictionary.py" "wheat-Senescence-23131300.xml" "wheat-Senescence-23550759_broken.xml" "create_generic_dictionary.py" "test_common_functions.py" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/test/scala/com/cibo/argo/pypeline/entrez/" (23172 37698 504961 985000) "EntrezRequestSpec.scala" "EntrezClientSpec.scala" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/argo-pipeline/src/main/scala/com/cibo/argo/pypeline/entrez/" (23172 34162 227190 43000) "Complexity.scala" "DateType.scala" "EntrezClient.scala" "Strand.scala" "Database.scala" "Citation.scala" "EntrezRequest.scala" "UseHistory.scala" "ELinkCommand.scala" "Date.scala" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/pytextmining/phrasematching/tests/" (23164 31840 859033 167000) "test_create_gene_synonyms_dictionary.py" "__init__.pyc" "test_create_generic_dictionary.py" "test_match_phrases_and_abstracts.py" "test_common_functions.pyc" "__pycache__/" "__init__.py" "wheat-Senescence-23131300.xml" "wheat-Senescence-23550759_broken.xml" "test_common_functions.py" "../" "./")
-
- ("/Users/clizarraga/Development/cibo/argo/" (23164 31849 576152 433000) ".idea/" ".travis.yml" "meme-image/" ".git/" ".travis/" "scripts/" "build-and-run-container.sh" "tim_scripts/" ".gitignore" "justin/" "credentials.sbt.enc" "argo-pipeline/" "argo.iml" "pytextmining/" ".DS_Store" "docker/" "hmmer-base-image/" "cesar-scripts/" "../" "./")
-
- ("/Users/clizarraga/.config/fish/functions/" (23015 40921 0 0) "travis.fish" "git.fish" "fish_prompt.fish" "ghp.fish" "ll.fish" "idea.fish" "../" "./")
-
- ("/Users/clizarraga/.config/fish/" (23012 57822 0 0) "conf.d/" "functions/" "fishd.dca90496e5c0" "config.fish" "../" "./")
-
- ("/Users/clizarraga/Development/Argo/Literature_Mining/To_ODP_From_LitMining/" (22979 59365 0 0) "Rice/" ".DS_Store" "../" "./")
-
- ("/Users/clizarraga/.virtualenvs/LitMining/lib/python3.6/site-packages/Bio/Entrez/" (23152 63741 405754 958000) "Parser.py" "DTDs/" "__pycache__/" "__init__.py" "../" "./")
-
- ("/Users/clizarraga/Development/Argo/Literature_Mining/IP_Generation/" (23155 42553 680953 867000) "gene2accession" "geneID_To_Nucleotide.py" "geneID_To_RefSeqs.py" "test.gbf" "2017-10-19_Table_AK/" "#Missing_From_All_Plants.txt#" "Table_AK_2017-10-26/" "Tomato_Yajie_2017-11-27/" "test_against.gb" "Zea_mays.AGPv4.dna.toplevel.fa" "Zea_mays.AGPv4.pep.all.fa" "Zea_mays.AGPv4.cdna.all.fa" "quote_all.py" "Randy_Requested_GenBanks/" "geneID_To_PMID.py" "LawyerTable_2017-09/" "geneID_To_Symbol_Synonym.py" "Rice_NUE_Yajie_2017-11-14/" "Merge_Nucleotide_and_RefSeqs.R" "test.csv" "Soybean_Yajie_TableAK_2017-12-07-21-56/" "rice_name_to_geneid.csv" "Archive/" "Soybean_TableAK_2017-12-05/" "Zea_mays.AGPv4.36.gff3" ".dir-locals.el.bak" ".DS_Store" "Rice_NUE_Yajie_2017-11-09/" "Tomato_Table_AK_2017-11-21/" "Soybean_TableAK_Merged_2017-12-14/" "Rice_GenBankFiles_Yajie_2017-11-07/" "4331696.gbf" "Rice_Table_AK_2017-11-02/" ".Rhistory" "../" "./")
-
- ("/Applications/IntelliJ IDEA CE.app/Contents/bin/" (23156 48682 979228 418000) "format.sh" "log.xml" "libMacNativeKit64.dylib" "fsnotifier" "idea.vmoptions.def" "idea.vmoptions.largemem" "restarter" "appletviewer.policy" "printenv.py" "idea.vmoptions" "idea.properties" "inspect.sh" "../" "./")
-
- ("/Applications/" (23156 45952 419078 828000) "Sublime Text.app/" "System Preferences.app/" "Calendar.app/" "QGIS.app/" "Slack.app/" "Automator.app/" "Microsoft PowerPoint.app/" "App Store.app/" "Reminders.app/" "Launchpad.app/" "Emacs.app/" "KeePassXC.app/" "iTunes.app/" "iTerm.app/" "FileZilla.app/" "IntelliJ IDEA CE.app/" "Calculator.app/" "Microsoft OneNote.app/" "R.app/" "Messages.app/" "Photos.app/" "Stickies.app/" "GarageBand.app/" "Pages.app/" "SnapGene Viewer.app/" "Mission Control.app/" "Maps.app/" "Backup and Sync.app/" "Keynote.app/" "Microsoft Outlook.app/" "FaceTime.app/" "Font Book.app/" "Utilities/" "OpenVPN/" "Time Machine.app/" "Microsoft Excel.app/" "CrashPlan.app/" "Contacts.app/" "Dictionary.app/" "Safari.app/" "Mail.app/" "Adobe Acrobat Reader DC.app/" "Google Drive.app/" "VisualVM.app/" "Microsoft Word.app/" "TextEdit.app/" "iMovie.app/" "Spotify.app/" "Dashboard.app/" "Screenhero.app/" "Preview.app/" ".localized" "Numbers.app/" "Google Chrome.app/" "iBooks.app/" "Image Capture.app/" "Notes.app/" "Steam.app/" ".DS_Store" "TeX/" "Photo Booth.app/" "Chess.app/" "QuickTime Player.app/" "Siri.app/" "DVD Player.app/" "../" "./")
+ ("c:/Users/caliz/calizarr/" (23038 24832 0 0) "wslbridge.exe" "wslbridge-backend" "Videos/" "Templates/" "Public/" "Pictures/" "Music/" "GitHub_Repos/" "fatty/" "emacs.lnk" "Downloads/" "Documents/" "Desktop/" "consolas-font-for-powerline/" ".xsession-errors" ".Xauthority" ".tmux.conf" ".ssh/" ".serverauth.17288" ".serverauth.15708" ".minttyrc" ".local/" ".lesshst" ".gitconfig" ".emacs~" ".emacs.d/" ".emacs" ".dbus/" ".config/" ".cache/" ".bash_history" "../" "./")
 )
 
 ;; ----- ido-unc-hosts-cache -----
