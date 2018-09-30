@@ -1,0 +1,24 @@
+;; Must be loaded first
+(load-file "custom-stuff.el")
+;; Calendar Configuration
+(load-file "calendar-conf.el")
+;; Adding dashboard settings
+(load-file "dashboard-conf.el")
+;; Load Dired settings
+(load-file "dired-conf.el")
+;; Removing emacs *-bars
+(load-file "remove-bars.el")
+;; Adding neotree
+(load-file "neotree.el")
+;; Calendar Framework
+(load-file "calendar-conf.el")
+;; Window resizing shortcuts
+(load-file "winres-conf.el")
+;; Random Stupid Stuff
+(load-file "random-stupid-stuff.el")
+;; Eshell Hooks
+(load-file "eshell-conf.el")
+;; Undo-Tree Conf
+(load-file "undo-tree-conf.el")
+;; Very Large Files settings
+(load-file "vlf-conf.el")

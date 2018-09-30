@@ -1,0 +1,8 @@
+;; Load Company Configuration
+(load-file "company-conf.el")
+;; Load Ido Configuration
+;; (load-file "ido-conf.el")
+;; Load Helm Ido Like Configuration
+(load-file "helm-ido-like-conf.el")
+;; Add in helm settings
+(load-file "helm-conf.el")
