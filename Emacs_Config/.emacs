@@ -77,7 +77,7 @@
  '(ensime-startup-notification nil)
  '(package-selected-packages
    (quote
-    (calfw vlf magit yasnippet-snippets dashboard company-quickhelp company-jedi ido-yes-or-no ido-vertical-mode ido-completing-read+ auto-complete neotree e2wm e2wm-R persp-projectile zoom pretty-mode elscreen doremi stan-mode dirtree fish-mode eimp dired+ expand-region smartparens popup-imenu goto-chg highlight-symbol flx-ido undo-tree projectile ensime elpy csv-mode use-package exec-path-from-shell)))
+    (xahk-mode calfw vlf magit yasnippet-snippets dashboard company-quickhelp company-jedi ido-yes-or-no ido-vertical-mode ido-completing-read+ auto-complete neotree e2wm e2wm-R persp-projectile zoom pretty-mode elscreen doremi stan-mode dirtree fish-mode eimp dired+ expand-region smartparens popup-imenu goto-chg highlight-symbol flx-ido undo-tree projectile ensime elpy csv-mode use-package exec-path-from-shell)))
  '(pop-up-frames nil)
  '(sbt:prefer-nested-projects t)
  '(undo-outer-limit 999999999999999))
@@ -86,6 +86,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Powerline Consolas" :foundry "outline" :slant normal :weight normal :height 113 :width normal))))
  '(company-quickhelp-color-background ((t (:background "#454e51"))))
  '(company-quickhelp-color-foreground ((t (:background "#394143"))))
  '(company-scrollbar-bg ((t (:background "#454e51"))))
@@ -133,6 +134,11 @@
 ;; Window Undo!
 (when (fboundp 'winner-mode)
   (winner-mode 1))
+
+(cond ((string-equal system-type "windows-nt") (load-file "~/.emacs.d/windows-conf.el"))
+      ((string-equal system-type "cygwin") (load-file "~/.emacs.d/cygwin-conf.el"))
+      (t (message "We only account for windows and cygwin right now"))
+      )
 
 (global-set-key (kbd "C-x p") (kbd "C-u -1 C-x o"))
 (global-set-key [24 103] (quote magit-status))

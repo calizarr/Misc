@@ -80,3 +80,5 @@ director
 drop
 ll
 sbt
+ls
+exit
