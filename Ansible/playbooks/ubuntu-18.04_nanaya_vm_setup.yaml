@@ -1,0 +1,88 @@
+---
+- hosts: nanaya_vm
+  remote_user: calizarr
+  vars:
+    brew_packages:
+      - 'docker-compose'
+      - 'docker'
+      - 'git'
+      - 'jq'
+      - 'tmux'
+      - 'pyenv'
+      - 'zsh'
+      - 'zsh-autosuggestions'
+      - 'zsh-completions'
+      - 'zsh-syntax-highlighting'
+      - 'zsh-history-substring-search'
+    brew_cask_packages:
+      - 'chrome'
+      - 'slack-beta'
+      - 'docker'
+    snap_packages:
+      - 'keepassxc'
+    install_linuxbrew_if_missing: true
+    upgrade_homebrew_packages: true
+
+  tasks:
+  - name: Add emacs apt repository
+    become: yes
+    apt_repository:
+      repo: ppa:ansible/ansible
+
+  - name: Apt update and upgrade
+    become: yes
+    apt:
+      upgrade: dist
+      update_cache: yes
+
+  - name: Installing multiple packages (emacs, curl, git)
+    become: yes
+    apt:
+      pkg:
+        - emacs-snapshot
+        - curl
+        - git
+        - build-essential
+        - linuxbrew-wrapper
+      state: present
+
+  - name: Ensure Linuxbrew is installed
+    stat:
+      path: "/home/linuxbrew/.linuxbrew/bin/brew"
+    register: "linuxbrew_check"
+
+  - name: Fail if Linuxbrew is not installed and install_linuxbrew_if_missing is False
+    fail:
+      msg: "Linuxbrew is missing...Install it"
+    when: >-
+      not linuxbrew_check.stat.exists and
+      not install_linuxbrew_if_missing
+
+  - name: Installing Linuxbrew
+    shell: |
+      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+      echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
+    when: >-
+      not linuxbrew_check.stat.exists and
+      install_linuxbrew_if_missing
+
+  - name: Updating Linuxbrew
+    homebrew:
+      update_brew: yes
+    when: linuxbrew_check.stat.exists
+
+  - name: Installing Linuxbrew packages
+    homebrew:
+      name: "{{ item }}"
+      state: present
+      upgrade_all: "{{ upgrade_homebrew_packages }}"
+    with_items: '{{ brew_packages }}'
+    when: linuxbrew_check.stat.exists
+
+  - name: Installing Linuxbrew packages
+    homebrew:
+      name: "{{ item }}"
+      state: present
+      upgrade_all: "{{ upgrade_homebrew_packages }}"
+    with_items: '{{ brew_cask_packages }}'
+    when: linuxbrew_check.stat.exists    
