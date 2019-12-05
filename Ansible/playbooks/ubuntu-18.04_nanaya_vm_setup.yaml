@@ -61,9 +61,6 @@
       not install_linuxbrew_if_missing
 
   - name: Installing Linuxbrew
-    # shell: |
-    #   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
-    #   echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
     shell: |
       git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
       mkdir ~/.linuxbrew/bin
