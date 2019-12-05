@@ -1,8 +1,7 @@
-# Misc
-Random files and scripts
-========================
-  * Bash scripts
-  * Bash commands in a scratch file
-  * Python scripts
-  * R Scripts
+# Miscellaneous Repo #
+
+## Random files and scripts ##
+  * Ansible playbooks for setup
+  * Autohotkey configurations for Windows
+  * DDPSC specific scripts etc.
 
