@@ -1,6 +1,0 @@
-#!usr/bin/perl
-use warnings;
-
-$record = 4;
-print "We're at record ", $record, "\n";
-{

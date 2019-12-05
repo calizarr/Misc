@@ -1,9 +1,0 @@
-#!usr/bin/perl
-use warnings;
-use strict;
-print "Please give me a hexadecimal number.";
-our $input = <STDIN>;
-$input = "0x".$input;
-print "Here it is in decimal form: ",oct($input),"\n";
-
-

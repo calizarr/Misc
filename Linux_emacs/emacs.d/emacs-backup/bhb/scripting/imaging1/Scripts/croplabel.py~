@@ -1,5 +1,0 @@
-from PIL import Image
-directory = ""
-im = Image.open(directory)
-box = (804,1188,804+262,1188+92)
-region = im.crop(box)

@@ -1,2 +1,0 @@
-file = "D:\\bhb\\Imaging\\MySnapshot-side00.png"
-IJ.run("HTPheno (single file)", "pixels=548 millimeters=180 pixel=594 millimeters=180");

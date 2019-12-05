@@ -1,2 +1,0 @@
-;; Load Comint Colors
-(load-file "colors-conf.el")

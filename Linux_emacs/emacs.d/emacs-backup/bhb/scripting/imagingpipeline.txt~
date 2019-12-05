@@ -1,6 +1,0 @@
-There are three major parts to the imaging pipeline.
-1. Take unsorted directory of image files and sort into properly labelled plant directories.
-   - Need to OCR read label to make directory with label name/PID.
-     * This requires either a specific label image (for larger plants) or take the first image and crop (for smaller plants.)
-     * Account for this in the script, should get a prompt choice or cmd line option for "larger"/"smaller" or "crop"/"image".
-   - 

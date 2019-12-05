@@ -1,6 +1,0 @@
-https://emacs.stackexchange.com/questions/18245/making-terminal-emacs-treat-apps-aka-menu-key-as-super-modifier?rq=1
-http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
-https://stackoverflow.com/questions/27418756/is-it-possible-to-make-emacs-interpet-an-fn-key-as-a-modifier-key/27419718#27419718
-https://deskthority.net/keyboards-f2/create-meta-super-hyper-in-windows-t1079.html
-http://ergoemacs.org/emacs/emacs_key-translation-map.html
-http://ergoemacs.org/emacs/emacs_show_key_and_command.html

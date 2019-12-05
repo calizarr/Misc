@@ -1,4 +1,0 @@
-;; persp-projectile
-;; (load-file "persp-projectile.el")
-;; Projectile Emacs
-(load-file "projectile-conf.el")

@@ -1,4 +1,0 @@
-#File to outline how to work with the Brachy genome
-1. Correct the Configuration Script to work with your paths and file names.
-2. Check the QC scripts to see if anything needs to be changed (probably so)
-3. Run QC scripts then aggregate the accessions into one file each.

@@ -1,4 +1,0 @@
-#!usr/bin/perl
-use warnings;
-print"C:\\WINNT\\profiles\\\n";
-print 'C:\WINNT\profiles\',"\n";

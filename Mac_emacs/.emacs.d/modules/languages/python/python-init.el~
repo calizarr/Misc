@@ -1,4 +1,0 @@
-;; Elpy-settings
-(load-file "elpy-conf.el")
-;; python configurations
-(load-file "python-conf.el")
