@@ -3,31 +3,33 @@
   remote_user: calizarr
   vars:
     brew_packages:
-      - 'docker-compose'
       - 'docker'
+      - 'docker-compose'
       - 'git'
+      - 'hub'
       - 'jq'
-      - 'tmux'
       - 'pyenv'
+      - 'tmux'
       - 'zsh'
       - 'zsh-autosuggestions'
       - 'zsh-completions'
-      - 'zsh-syntax-highlighting'
       - 'zsh-history-substring-search'
+      - 'zsh-syntax-highlighting'
     brew_cask_packages:
-      - 'chrome'
-      - 'slack-beta'
       - 'docker'
     snap_packages:
       - 'keepassxc'
+    snap_classic_packages:
+      - 'slack'
     install_linuxbrew_if_missing: true
-    upgrade_homebrew_packages: true
+    upgrade_homebrew_packages: false
 
   tasks:
+
   - name: Add emacs apt repository
     become: yes
     apt_repository:
-      repo: ppa:ansible/ansible
+      repo: ppa:ubuntu-elisp/ppa
 
   - name: Apt update and upgrade
     become: yes
@@ -48,7 +50,7 @@
 
   - name: Ensure Linuxbrew is installed
     stat:
-      path: "/home/linuxbrew/.linuxbrew/bin/brew"
+      path: "$HOME/.linuxbrew/bin/brew"
     register: "linuxbrew_check"
 
   - name: Fail if Linuxbrew is not installed and install_linuxbrew_if_missing is False
@@ -59,30 +61,50 @@
       not install_linuxbrew_if_missing
 
   - name: Installing Linuxbrew
+    # shell: |
+    #   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install)"
+    #   echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
     shell: |
-      /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
-      echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >>~/.profile
+      git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
+      mkdir ~/.linuxbrew/bin
+      ln -s ~/.linuxbrew/Homebrew/bin/brew ~/.linuxbrew/bin
+      echo 'eval $(~/.linuxbrew/bin/brew shellenv)' >>~/.profile
+      eval $(~/.linuxbrew/bin/brew shellenv)
     when: >-
       not linuxbrew_check.stat.exists and
       install_linuxbrew_if_missing
 
+  - name: Ensure Linuxbrew got installed
+    stat:
+      path: "$HOME/.linuxbrew/bin/brew"
+    register: "linuxbrew_check_two"      
+
   - name: Updating Linuxbrew
     homebrew:
-      update_brew: yes
-    when: linuxbrew_check.stat.exists
+      update_homebrew: yes
+    when: linuxbrew_check_two.stat.exists
 
   - name: Installing Linuxbrew packages
     homebrew:
-      name: "{{ item }}"
+      name: "{{ brew_packages }}"
       state: present
       upgrade_all: "{{ upgrade_homebrew_packages }}"
-    with_items: '{{ brew_packages }}'
-    when: linuxbrew_check.stat.exists
+    when: linuxbrew_check_two.stat.exists
 
-  - name: Installing Linuxbrew packages
+  - name: Installing Linuxbrew Cask packages
     homebrew:
-      name: "{{ item }}"
+      name: "{{ brew_cask_packages }}"
       state: present
       upgrade_all: "{{ upgrade_homebrew_packages }}"
-    with_items: '{{ brew_cask_packages }}'
-    when: linuxbrew_check.stat.exists    
+    when: linuxbrew_check_two.stat.exists
+
+  - name: Installing Snap packages
+    become: yes
+    snap:
+      name: "{{ snap_packages }}"
+
+  - name: Installing Snap classic confinment packages
+    become: yes
+    snap:
+      classic: yes
+      name: "{{ snap_classic_packages }}"
