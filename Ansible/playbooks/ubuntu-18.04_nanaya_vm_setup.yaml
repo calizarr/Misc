@@ -21,8 +21,6 @@
       - 'zsh-completions'
       - 'zsh-history-substring-search'
       - 'zsh-syntax-highlighting'
-    brew_cask_packages:
-      - 'docker'
     snap_packages:
       - 'keepassxc'
     snap_classic_packages:
@@ -89,13 +87,6 @@
   - name: Installing Linuxbrew packages
     homebrew:
       name: "{{ brew_packages }}"
-      state: present
-      upgrade_all: "{{ upgrade_homebrew_packages }}"
-    when: linuxbrew_check_two.stat.exists
-
-  - name: Installing Linuxbrew Cask packages
-    homebrew:
-      name: "{{ brew_cask_packages }}"
       state: present
       upgrade_all: "{{ upgrade_homebrew_packages }}"
     when: linuxbrew_check_two.stat.exists
