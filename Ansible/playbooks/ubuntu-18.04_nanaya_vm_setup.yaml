@@ -2,15 +2,19 @@
 - hosts: nanaya_vm
   remote_user: calizarr
   vars:
+    apt_repos:
+      - 'ppa:alexlarsson/flatpak'
+      - 'ppa:ubuntu-elisp/ppa'
     apt_packages:
-      - 'emacs-snapshot'
-      - 'curl'
-      - 'git'
       - 'build-essential'
+      - 'curl'
+      - 'emacs-snapshot'
+      - 'flatpak'
+      - 'git'
       - 'linuxbrew-wrapper'
+      - 'openjdk-11-jdk'
+      - 'terminator'
     brew_packages:
-      - 'docker'
-      - 'docker-compose'
       - 'git'
       - 'hub'
       - 'jq'
@@ -23,6 +27,8 @@
       - 'zsh-syntax-highlighting'
     snap_packages:
       - 'keepassxc'
+      - 'docker'
+      - 'htop'
     snap_classic_packages:
       - 'slack'
     ssh_items:
@@ -31,13 +37,17 @@
       - { src: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub", dest: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub", mode: "u=rw,g=r,o=r" }
     install_linuxbrew_if_missing: true
     upgrade_homebrew_packages: false
+    git_config:
+      user:
+        email: "{{ git_email | default('calizarr@gmail.com') }}"
+        name: "{{ git_user | default('None') }}"
 
   tasks:
 
   - name: Add emacs apt repository
     become: yes
     apt_repository:
-      repo: ppa:ubuntu-elisp/ppa
+      repo: "{{ apt_repos }}"
 
   - name: Apt update and upgrade
     become: yes
@@ -53,7 +63,7 @@
 
   - name: Ensure Linuxbrew is installed
     stat:
-      path: "$HOME/.linuxbrew/bin/brew"
+      path: "{{ ansible_env.HOME }}/.linuxbrew/bin/brew"
     register: "linuxbrew_check"
 
   - name: Fail if Linuxbrew is not installed and install_linuxbrew_if_missing is False
@@ -76,8 +86,8 @@
 
   - name: Ensure Linuxbrew got installed
     stat:
-      path: "$HOME/.linuxbrew/bin/brew"
-    register: "linuxbrew_check_two"      
+      path: "{{ ansible_env.HOME }}/.linuxbrew/bin/brew"
+    register: "linuxbrew_check_two"
 
   - name: Updating Linuxbrew
     homebrew:
@@ -112,12 +122,41 @@
       mode: "{{ item.mode }}"
     with_items: "{{ ssh_items }}"
 
+  - name: Check if emacs repo has already been cloned
+    stat:
+      path: "{{ ansible_env.HOME }}/.emacs.d"
+    register: "emacs_repo"
+
   - name: Get emacs configuration
     git:
       repo: git@github.com:calizarr/.emacs.d.git
       dest: "{{ ansible_env.HOME }}/.emacs.d"
+    when: not emacs_repo.stat.exists
+
 
   - name: Get dotfiles etc. repo
     git:
       repo: git@github.com:calizarr/Misc.git
-      dest: "{{ ansible_env.HOME }}/GitHub_Repos/Misc"
+      dest: "{{ ansible_env.HOME }}/GitHub_Repos"
+
+  - name: Docker post-installations steps
+    become: yes
+    shell: |
+      groupadd docker
+      usermod -aG docker `whoami`
+
+  - name: Set git config
+    shell: |
+      git config --global user.email {{ git_config.user.email }}
+      git config --global user.name "{{ git_config.user.name }}"
+
+  - name: Setting up Oh My Zsh
+    shell: |
+      sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+      ln -s {{ ansible_env.HOME }}/GitHub_Repos/Misc/Config_Files/.zshrc {{ ansible_env.HOME }}/.zshrc
+
+  - name: Screw you Gnome Terminal
+    shell: |
+      gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
+      gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+      
