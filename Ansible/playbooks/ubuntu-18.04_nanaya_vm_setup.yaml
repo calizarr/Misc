@@ -120,4 +120,13 @@
       dest: "{{ item.dest }}"
       mode: "{{ item.mode }}"
     with_items: "{{ ssh_items }}"
-      
+
+  - name: Get emacs configuration
+    git:
+      repo: git@github.com:calizarr/.emacs.d.git
+      dest: "{{ ansible_env.HOME }}/.emacs.d"
+
+  - name: Get dotfiles etc. repo
+    git:
+      repo: git@github.com:calizarr/Misc.git
+      dest: "{{ ansible_env.HOME }}/GitHub_Repos/Misc"
