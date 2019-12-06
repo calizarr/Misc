@@ -2,6 +2,12 @@
 - hosts: nanaya_vm
   remote_user: calizarr
   vars:
+    apt_packages:
+      - 'emacs-snapshot'
+      - 'curl'
+      - 'git'
+      - 'build-essential'
+      - 'linuxbrew-wrapper'
     brew_packages:
       - 'docker'
       - 'docker-compose'
@@ -21,6 +27,10 @@
       - 'keepassxc'
     snap_classic_packages:
       - 'slack'
+    ssh_items:
+      # 0644, u=rw,g-rw,o-rw
+      - { src: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa", dest: "{{ ansible_env.HOME }}/.ssh/id_rsa", mode: "u=rw,g-rw,o-rw" }
+      - { src: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub", dest: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub", mode: "u=rw,g=r,o=r" }
     install_linuxbrew_if_missing: true
     upgrade_homebrew_packages: false
 
@@ -40,12 +50,7 @@
   - name: Installing multiple packages (emacs, curl, git)
     become: yes
     apt:
-      pkg:
-        - emacs-snapshot
-        - curl
-        - git
-        - build-essential
-        - linuxbrew-wrapper
+      pkg: "{{ apt_packages }}"
       state: present
 
   - name: Ensure Linuxbrew is installed
@@ -100,8 +105,19 @@
     snap:
       name: "{{ snap_packages }}"
 
-  - name: Installing Snap classic confinment packages
+  - name: Installing Snap classic confinement packages
     become: yes
     snap:
       classic: yes
       name: "{{ snap_classic_packages }}"
+
+  - name: Set text scaling factor
+    shell: "gsettings set org.gnome.desktop.interface text-scaling-factor 1.3"
+
+  - name: Use WSL SSH key
+    copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      mode: "{{ item.mode }}"
+    with_items: "{{ ssh_items }}"
+      
