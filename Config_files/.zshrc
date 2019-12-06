@@ -201,24 +201,40 @@ eval "$(pyenv init -)"
 # Pyenv Virtualenv
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-# Brew Specifics
-fpath=(/usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
-# fpath=$(fpathClean "$fpath")
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+case "$OSTYPE" in
+    darwin*)
+        # Brew Specifics
+        fpath=(/usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
+        # fpath=$(fpathClean "$fpath")
+        source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+        source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        ;;
+    linux*)
+        # Brew Specifics
+        fpath=($HOMEBREW_PREFIX/share/zsh-completions $HOMEBREW_PREFIX/share/share/zsh/site-functions $fpath)
+        # fpath=$(fpathClean "$fpath")
+        source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+        source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+        source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+        ;;
+esac
 
 # Add in emacs keybindings
 bindkey -e
 
-# Sourcing completions etc.
-for PROFILE_SCRIPT in $( ls $HOME/.zsh_settings/*.zsh ); do
-    # echo "Sourcing $PROFILE_SCRIPT"
-    source $PROFILE_SCRIPT
-done
+if [ -d $HOME/.zsh_settings ]; then
+    # Sourcing completions etc.
+    for PROFILE_SCRIPT in $( ls $HOME/.zsh_settings/*.zsh ); do
+        # echo "Sourcing $PROFILE_SCRIPT"
+        source $PROFILE_SCRIPT
+    done
+fi
 
 TOKENS_FILE="$HOME/tokens/github_tokens.zsh"
-test -e $TOKENS_FILE && source $TOKENS_FILE
+if [ -e $TOKENS_FILE ]; then
+    source $TOKENS_FILE
+fi
 
 # Some crazy autoloading
 # autoload -U bashcompinit && bashcompinit
