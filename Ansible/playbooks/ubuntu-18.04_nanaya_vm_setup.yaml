@@ -10,6 +10,7 @@
       - 'curl'
       - 'emacs-snapshot'
       - 'flatpak'
+      - 'fonts-powerline'
       - 'git'
       - 'linuxbrew-wrapper'
       - 'openjdk-11-jdk'
@@ -159,4 +160,3 @@
     shell: |
       gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
       gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
-      
