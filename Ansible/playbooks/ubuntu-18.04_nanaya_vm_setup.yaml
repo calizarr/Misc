@@ -15,14 +15,17 @@
       - 'fonts-powerline'
       - 'git'
       - 'git'
+      - 'libappindicator1'
       - 'libbz2-dev'
       - 'libffi-dev'
+      - 'libindicator7'
+      - 'liblzma-dev'
       - 'libncurses5-dev'
       - 'libncursesw5-dev'
       - 'libreadline-dev'
       - 'libsqlite3-dev'
       - 'libssl-dev'
-      - 'liblzma-dev'
+      - 'libxss1'
       - 'linuxbrew-wrapper'
       - 'llvm'
       - 'openjdk-11-jdk'
@@ -323,4 +326,15 @@
       delay: 5
       timeout: 300
     when: user_change is changed
-    
+
+  - name: Download Chrome deb
+    get_url:
+      url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      dest: "{{ ansible_env.HOME }}/Downloads/google-chrome-stable_current_amd64.deb"
+      mode: '0755'
+    register: chrome_deb
+
+  - name: Install Chrome
+    become: yes
+    apt:
+      deb: "{{ chrome_deb.dest }}"
