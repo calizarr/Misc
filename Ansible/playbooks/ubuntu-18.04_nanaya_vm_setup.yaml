@@ -36,6 +36,8 @@
       - 'wget'
       - 'xz-utils'
       - 'zlib1g-dev'
+      - 'xautomation' # Mouse binding for back/forward keys
+      - 'x11-utils' # Mouse binding for back/forward keys
 
     system_pip_packages:
       - 'requests' # Needed for terminator themes
@@ -234,11 +236,16 @@
 
   - name: Screw you Gnome Terminal and Animations
     shell: |
-      gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
-      gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+      # gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
+      # gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
+      # Disable All Animations in Ubuntu
       gsettings set org.gnome.desktop.interface enable-animations false
+      # Disable Idling Session
       gsettings set org.gnome.desktop.session idle-delay 0
+      # Disable Screensaver
       gsettings set org.gnome.desktop.screensaver lock-enabled false
+      # Make mouse pointer larger
+      gsettings set org.gnome.desktop.interface cursor-size 48
 
   - name: Create Terminator plugins directory if it does not exists
     file:
@@ -338,3 +345,11 @@
     become: yes
     apt:
       deb: "{{ chrome_deb.dest }}"
+
+  - name: Edit chrome scale factor on linux
+    become: yes
+    lineinfile:
+      path: /usr/share/applications/google-chrome.desktop
+      regexp: '^Exec=/usr/bin/google-chrome-stable .*%U'
+      line: Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=1.5 %U
+      state: present
