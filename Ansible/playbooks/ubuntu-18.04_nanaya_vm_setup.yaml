@@ -69,6 +69,7 @@
     install_linuxbrew_if_missing: true
     upgrade_homebrew_packages: false
     change_shell_zsh: false
+    scaling_4k: "{{ scale_4k | default(false) }} "
     git_config:
       user:
         email: "{{ git_email | default('None') }}"
@@ -102,6 +103,22 @@
     apt:
       pkg: "{{ apt_packages }}"
       state: present
+    register: package_install
+
+  - name: Reboot Ubuntu VM for post package installation
+    become: yes
+    shell: "sleep 6 && reboot"
+    async: 1
+    poll: 0
+    when: package_install is changed
+
+  - name: Wait for the reboot to complete if there was a change
+    wait_for_connection:
+      connect_timeout: 20
+      sleep: 5
+      delay: 5
+      timeout: 300
+    when: package_install is changed
 
   - name: Install system python packages
     become: yes
@@ -159,9 +176,6 @@
     snap:
       classic: yes
       name: "{{ snap_classic_packages }}"
-
-  - name: Set text scaling factor
-    shell: "gsettings set org.gnome.desktop.interface text-scaling-factor 1.3"
 
   - name: Use WSL SSH key
     copy:
@@ -234,18 +248,14 @@
       state: link
     when: dotfiles_repo.stat.exists and not zsh_config.stat.exists
 
-  - name: Screw you Gnome Terminal and Animations
+  - name: Remove Gnome Animations, Screensaver, & Session Idling
     shell: |
-      # gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ next-tab '<Primary>Tab'
-      # gsettings set org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/ prev-tab '<Primary><Shift>Tab'
       # Disable All Animations in Ubuntu
       gsettings set org.gnome.desktop.interface enable-animations false
       # Disable Idling Session
       gsettings set org.gnome.desktop.session idle-delay 0
       # Disable Screensaver
       gsettings set org.gnome.desktop.screensaver lock-enabled false
-      # Make mouse pointer larger
-      gsettings set org.gnome.desktop.interface cursor-size 48
 
   - name: Create Terminator plugins directory if it does not exists
     file:
@@ -353,3 +363,12 @@
       regexp: '^Exec=/usr/bin/google-chrome-stable .*%U'
       line: Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=1.5 %U
       state: present
+    when: scaling_4k
+
+  - name: Gnome mouse pointer and text size for 4k screen
+    shell: |
+      # Make mouse pointer larger, default 25
+      gsettings set org.gnome.desktop.interface cursor-size 48
+      # Make text larger, default 1.0
+      gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
+    when: scaling_4k
