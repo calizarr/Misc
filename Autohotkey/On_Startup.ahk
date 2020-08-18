@@ -24,4 +24,3 @@ if (system_model = model_match) {
 ; #e::Run "C:\xyplorer_full\XYplorer.exe"
 
 #Include ./emacs_new.ahk
-

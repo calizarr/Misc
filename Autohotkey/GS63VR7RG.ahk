@@ -1,4 +1,3 @@
-#NoTrayIcon
 global model_match := Trim("GS63VR 7RG")
 ; model_len := StrLen(model_match)
 

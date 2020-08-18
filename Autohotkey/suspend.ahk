@@ -1,3 +1,4 @@
+#NoTrayIcon
 WM_COMMAND := 0x111
 CMD_RELOAD := 65400
 CMD_EDIT := 65401
@@ -23,3 +24,5 @@ Loop, %id%
 	}
 }
 return
+
+^~:: ExitApp
