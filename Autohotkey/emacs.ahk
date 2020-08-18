@@ -17,50 +17,54 @@ is_pre_spc = 0
 is_target()
 {
     IfWinActive,ahk_class ConsoleWindowClass ; Cygwin
-        Return 1
-IfWinActive,emacs@MSI ;X server emacs
-Return 1
+    Return 1
+    IfWinActive,emacs@MSI ;X server emacs
+    Return 1
     IfWinActive,ahk_class Emacs ; GNU Windows Emacs
-    Return 1
-    IfWinActive,ahk_class MEADOW ; Meadow
-    Return 1
-    IfWinActive,ahk_class cygwin/x X rl-xterm-XTerm-0
-    Return 1
-    IfWinActive,ahk_class MozillaUIWindowClass ; keysnail on Firefox
-    Return 1
-    ; Avoid VMwareUnity with AutoHotkey
-    IfWinActive,ahk_class VMwareUnityHostWndClass
-    Return 1
-    IfWinActive,ahk_class Vim ; GVIM
     Return 1
     IfWinActive,ahk_exe KeePass.exe ; KeePass 2
     Return 1
-    IfWinActive,ahk_class FaTTY
+    IfWinActive,ahk_exe slack.exe ; Slack
     Return 1
-    IfWinActive,ahk_class SWT_Window0 ; Eclipse
-    Return 1
-    IfWinActive,ahk_class Xming X
-    Return 1
-    IfWinActive,ahk_class SunAwtFrame
-    Return 1
-    IfWinActive,ahk_class Emacs ; NTEmacs
-    Return 1
-    IfWinActive,ahk_exe emacs-w32.exe ; XEmacs on Cygwin
-    Return 1
-    ; IfWinActive,ahk_exe slack.exe ; Slack
-    ; Return 1
+    IfWinActive,ahk_class MEADOW ; Meadow
+
+    /*
+     * Return 1
+     * IfWinActive,ahk_class cygwin/x X rl-xterm-XTerm-0
+     * Return 1
+     * IfWinActive,ahk_class MozillaUIWindowClass ; keysnail on Firefox
+     * Return 1
+     * ; Avoid VMwareUnity with AutoHotkey
+     * IfWinActive,ahk_class VMwareUnityHostWndClass
+     * Return 1
+     * IfWinActive,ahk_class Vim ; GVIM
+     * Return 1
+     * IfWinActive,ahk_class FaTTY
+     * Return 1
+     * IfWinActive,ahk_class SWT_Window0 ; Eclipse
+     * Return 1
+     * IfWinActive,ahk_class Xming X
+     * Return 1
+     * IfWinActive,ahk_class SunAwtFrame
+     * Return 1
+     * IfWinActive,ahk_class Emacs ; NTEmacs
+     * Return 1
+     * IfWinActive,ahk_exe emacs-w32.exe ; XEmacs on Cygwin
+     * Return 1
+     */
+
     Else
     Return 0
 }
 
-end_of_buffer()
+move_end_of_buffer()
 {
     Send {End}
     global is_pre_spc = 0
     Return
 }
 
-beginning_of_buffer()
+move_beginning_of_buffer()
 {
     Send {Home}
     global is_pre_spc = 0
@@ -369,12 +373,12 @@ Else
     quit()
     Return
 
-;; ^j::
-;;   If is_target()
-;;     Send %A_ThisHotkey%
-;;   Else
-;;     newline_and_indent()
-;;   Return
+^j::
+  If is_target()
+    Send %A_ThisHotkey%
+  Else
+    newline_and_indent()
+  Return
 
 ^m::
 If is_target()
@@ -516,14 +520,14 @@ Else
 If is_target()
     Send %A_ThisHotkey%
 Else
-    beginning_of_buffer()
+    move_beginning_of_buffer()
     Return
 
 !+>::
 If is_target()
     Send %A_ThisHotkey%
 Else
-    end_of_buffer()
+    move_end_of_buffer()
     Return
 
 !f::
