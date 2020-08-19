@@ -1,4 +1,5 @@
 ; Startup script for AutoHotkey
+#SingleInstance Force
 
 ; #IfWinActive, ahk_class Chrome_WidgetWin_1
 ; !n::SendInput ^n
