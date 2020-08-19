@@ -25,6 +25,12 @@ is_target()
     Return 1
   IfWinActive,ahk_exe WindowsTerminal.exe
     Return 1
+  IfWinActive,ahk_exe Keepass.exe
+    Return 1
+  IfWinActive,ahk_exe slack.exe
+    Return 1
+  IfWinActive,ahk_exe Discord.exe
+    Return 1
   Return 0
 }
 
@@ -35,20 +41,6 @@ is_special()
   IfWinActive,ahk_class Chrome_WidgetWin_1
     Return 1
   Return 0
-}
-
-move_end_of_buffer()
-{
-    Send {End}
-    global is_pre_spc = 0
-    Return
-}
-
-move_beginning_of_buffer()
-{
-    Send {Home}
-    global is_pre_spc = 0
-    Return
 }
 
 delete_char()
@@ -189,6 +181,17 @@ move_beginning_of_line()
   Return
 }
 
+move_beginning_of_buffer()
+{
+    global
+    if (is_pre_spc) {
+        Send ^+{Home}
+    } else {
+        Send ^{Home}
+    }
+    Return
+}
+
 move_end_of_line()
 {
   global
@@ -198,6 +201,17 @@ move_end_of_line()
     Send {END}
   }
   Return
+}
+
+move_end_of_buffer()
+{
+    global
+    if (is_pre_spc) {
+      Send ^+{End}
+    } else {
+      Send ^{End}
+    }
+    Return
 }
 
 previous_line()
@@ -285,6 +299,13 @@ scroll_down()
   } else {
     Send {PgDn}
   }
+  Return
+}
+
+select_all()
+{
+  Send ^{Home}^a
+  global is_pre_x = 0
   Return
 }
 
@@ -480,7 +501,7 @@ scroll_down()
 ^n::
   if (is_target()) {
     Send %A_ThisHotkey%
-  } else if (is_pre_c and is_special()) {
+    } else if (is_pre_c and is_special()) {
     global is_pre_c = 0
     Send %A_ThisHotkey%
   } else {
@@ -541,5 +562,15 @@ scroll_down()
       Send %A_ThisHotkey%
   } else {
       backward_word()
+  }
+  Return
+
+h::
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else if (is_pre_x) {
+      select_all()
+  } else {
+      Send {h}
   }
   Return

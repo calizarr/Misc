@@ -12,7 +12,7 @@ this_pid := ErrorLevel
 control_id := WinExist("ahk_class AutoHotkey ahk_pid " this_pid)
 
 ; Press Ctrl + Home to toggle Pause & Suspend state for all scripts.
-^Home::
+ScrollLock::
 WinGet, id, list, ahk_class AutoHotkey
 Loop, %id%
 {
