@@ -27,6 +27,16 @@ is_special()
   return 0
 }
 
+; check_special() {
+;   if (is_pre_c and is_special()) {
+;     is_pre_c = 0
+;     Send %A_ThisHotkey%
+;     return 1
+;   } else {
+;     return 0
+;   }
+; }
+
 check_target() {
   if (is_target()) {
     Send %A_ThisHotkey%

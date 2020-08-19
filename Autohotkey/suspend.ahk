@@ -1,4 +1,6 @@
 #NoTrayIcon
+#SingleInstance
+
 WM_COMMAND := 0x111
 CMD_RELOAD := 65400
 CMD_EDIT := 65401

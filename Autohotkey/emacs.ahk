@@ -3,6 +3,7 @@
 ;;
 #InstallKeybdHook
 #UseHook
+
 #Include ./emacs_functions.ahk
 
 ; The following line is a contribution of NTEmacs wiki http://www49.atwiki.jp/ntemacs/pages/20.html
@@ -223,17 +224,4 @@ h::
   } else {
     is_pre_spc = 1
   }
-  return
-
-^+h::
-  switch
-  {
-    Case check_target(): return
-    Case check_prefix("select_all", is_pre_x): return
-    Default: Send h
-  }
-  ; x_result := check_prefix("select_all", is_pre_x)
-  ; if not (check_target() or x_result) {
-  ;     Send h
-  ; }
   return
