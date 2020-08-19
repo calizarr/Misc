@@ -3,544 +3,324 @@
 ;;
 #InstallKeybdHook
 #UseHook
+#Include ./emacs_functions.ahk
 
 ; The following line is a contribution of NTEmacs wiki http://www49.atwiki.jp/ntemacs/pages/20.html
 SetKeyDelay 0
 
+; escape for windows/chrome keyboard shortcuts
+is_pre_c = 0
 ; turns to be 1 when ctrl-x is pressed
 is_pre_x = 0
 ; turns to be 1 when ctrl-space is pressed
 is_pre_spc = 0
 
-; Applications you want to disable emacs-like keybindings
-; (Please comment out applications you don't use)
-is_target()
-{
-    IfWinActive,ahk_class ConsoleWindowClass ; Cygwin
-    Return 1
-    IfWinActive,emacs@MSI ;X server emacs
-    Return 1
-    IfWinActive,ahk_class Emacs ; GNU Windows Emacs
-    Return 1
-    IfWinActive,ahk_exe KeePass.exe ; KeePass 2
-    Return 1
-    IfWinActive,ahk_exe slack.exe ; Slack
-    Return 1
-    IfWinActive,ahk_class MEADOW ; Meadow
-
-    /*
-     * Return 1
-     * IfWinActive,ahk_class cygwin/x X rl-xterm-XTerm-0
-     * Return 1
-     * IfWinActive,ahk_class MozillaUIWindowClass ; keysnail on Firefox
-     * Return 1
-     * ; Avoid VMwareUnity with AutoHotkey
-     * IfWinActive,ahk_class VMwareUnityHostWndClass
-     * Return 1
-     * IfWinActive,ahk_class Vim ; GVIM
-     * Return 1
-     * IfWinActive,ahk_class FaTTY
-     * Return 1
-     * IfWinActive,ahk_class SWT_Window0 ; Eclipse
-     * Return 1
-     * IfWinActive,ahk_class Xming X
-     * Return 1
-     * IfWinActive,ahk_class SunAwtFrame
-     * Return 1
-     * IfWinActive,ahk_class Emacs ; NTEmacs
-     * Return 1
-     * IfWinActive,ahk_exe emacs-w32.exe ; XEmacs on Cygwin
-     * Return 1
-     */
-
-    Else
-    Return 0
-}
-
-move_end_of_buffer()
-{
-    Send {End}
-    global is_pre_spc = 0
-    Return
-}
-
-move_beginning_of_buffer()
-{
-    Send {Home}
-    global is_pre_spc = 0
-    Return
-}
-
-delete_char()
-{
-    Send {Del}
-    global is_pre_spc = 0
-    Return
-}
-
-delete_word()
-{
-    Send ^{Right}^{BS}
-    global is_pre_spc = 0
-    Return
-}
-
-delete_backward_char()
-{
-    Send {BS}
-    global is_pre_spc = 0
-    Return
-}
-
-kill_line()
-{
-    Send {ShiftDown}{END}{SHIFTUP}
-    Sleep 50 ;[ms] this value depends on your environment
-    Send ^x
-    global is_pre_spc = 0
-    Return
-}
-
-open_line()
-{
-    Send {END}{Enter}{Up}
-    global is_pre_spc = 0
-    Return
-}
-
-quit()
-{
-    Send {ESC}
-    global is_pre_spc = 0
-    Return
-}
-
-newline()
-{
-    Send {Enter}
-    global is_pre_spc = 0
-    Return
-}
-
-indent_for_tab_command()
-{
-    Send {Tab}
-    global is_pre_spc = 0
-    Return
-}
-
-newline_and_indent()
-{
-    Send {Enter}{Tab}
-    global is_pre_spc = 0
-    Return
-}
-
-isearch_forward()
-{
-    Send ^f
-    global is_pre_spc = 0
-    Return
-}
-
-isearch_backward()
-{
-    Send ^f
-    global is_pre_spc = 0
-    Return
-}
-
-kill_region()
-{
-    Send ^x
-    global is_pre_spc = 0
-    Return
-}
-
-kill_ring_save()
-{
-    Send ^c
-    global is_pre_spc = 0
-    Return
-}
-
-yank()
-{
-    Send ^v
-    global is_pre_spc = 0
-    Return
-}
-
-undo()
-{
-    Send ^z
-    global is_pre_spc = 0
-    Return
-}
-
-find_file()
-{
-    Send ^o
-    global is_pre_x = 0
-    Return
-}
-
-save_buffer()
-{
-    Send, ^s
-    global is_pre_x = 0
-    Return
-}
-
-kill_emacs()
-{
-    Send !{F4}
-    global is_pre_x = 0
-    Return
-}
-
-move_beginning_of_line()
-{
-    global
-    if is_pre_spc
-        Send +{HOME}
-    Else
-        Send {HOME}
-        Return
-}
-
-move_end_of_line()
-{
-    global
-    if is_pre_spc
-        Send +{END}
-    Else
-        Send {END}
-        Return
-}
-
-previous_line()
-{
-    global
-    if is_pre_spc
-        Send +{Up}
-    Else
-        Send {Up}
-        Return
-}
-
-next_line()
-{
-    global
-    if is_pre_spc
-        Send +{Down}
-    Else
-        Send {Down}
-        Return
-}
-
-forward_char()
-{
-    global
-    if is_pre_spc
-        Send +{Right}
-    Else
-        Send {Right}
-        Return
-}
-
-forward_word()
-{
-    global
-    if is_pre_spc
-        Send +^{Right}
-    Else
-        Send ^{Right}
-        Return
-}
-
-backward_char()
-{
-    global
-    if is_pre_spc
-        Send +{Left}
-    Else
-        Send {Left}
-        Return
-}
-
-backward_word()
-{
-    global
-    if is_pre_spc
-        Send +^{Left}
-    Else
-        Send ^{Left}
-        Return
-}
-
-scroll_up()
-{
-    global
-    if is_pre_spc
-        Send +{PgUp}
-    Else
-        Send {PgUp}
-        Return
-}
-
-scroll_down()
-{
-    global
-    if is_pre_spc
-        Send +{PgDn}
-    Else
-        Send {PgDn}
-        Return
-}
-
 
 ^x::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     is_pre_x = 1
-    Return
+  }
+    return
 
 ^f::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
-{
-    If is_pre_x
-        find_file()
-    Else
-        forward_char()
-}
-Return
+  } else if (is_pre_x) {
+    find_file()
+  } else {
+    forward_char()
+  }
+  return
 
 ^c::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
-{
-    If is_pre_x
-        kill_emacs()
-        Else
-        kill_ring_save()        
-}
-Return
+  } else if (is_special()) {
+    is_pre_c = 1
+  } else if (is_pre_x) {
+    kill_emacs()
+  }
+  return
 
 ^d::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     delete_char()
-    Return
-
-!d::
-If is_target()
-	Send %A_ThisHotkey%
-Else
-	delete_word()
-	Return
+  }
+  return
 
 ^h::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     delete_backward_char()
-    Return
+  }
+  return
 
-; ^k::
-; If is_target()
-;     Send %A_ThisHotkey%
-; Else
-;     kill_line()
-;     Return
+^k::
+  if (is_target()) {
+    Send %A_ThisHotkey%
+  } else {
+    kill_line()
+  }
+  return
 
 ; ^o::
 ;   If is_target()
 ;     Send %A_ThisHotkey%
 ;   Else
 ;     open_line()
-;   Return
+;   return
 
 ^g::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     quit()
-    Return
+  }
+  return
 
-^j::
-  If is_target()
-    Send %A_ThisHotkey%
-  Else
-    newline_and_indent()
-  Return
+; ^j::
+;   If is_target()
+;     Send %A_ThisHotkey%
+;   Else
+;     newline_and_indent()
+;   return
 
 ^m::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     newline()
-    Return
+  }
+  return
 
 ^i::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     indent_for_tab_command()
-    Return
+  }
+  return
 
 ^s::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
-{
-    If is_pre_x
-        save_buffer()
-    Else
-        isearch_forward()
-}
-Return
+  } else if (is_pre_x) {
+    save_buffer()
+  } else {
+    isearch_forward()
+  }
+  return
 
 ^r::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     isearch_backward()
-    Return
+  }
+  return
 
 ^w::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else if (is_pre_c and is_special()) {
+    global is_pre_c = 0
+    Send %A_ThisHotkey%
+  } else {
     kill_region()
-    Return
+  }
+  return
 
 !w::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     kill_ring_save()
-    Return
+  }
+  return
 
 ^y::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     yank()
-    Return
+  }
+  return
 
 ^/::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     undo()
-    Return
+  }
+  return
 
-; $^{Space}::
-; ^vk20sc039::
-^Space::
-If is_target()
+;$^{Space}::
+;^vk20sc039::
+^vk20::
+  if (is_target()) {
     Send {CtrlDown}{Space}{CtrlUp}
-Else
-{
-    If is_pre_spc
-        is_pre_spc = 0
-    Else
-        is_pre_spc = 1
-}
-Return
+  } else if (is_pre_spc) {
+    is_pre_spc = 0
+  } else {
+    is_pre_spc = 1
+  }
+  return
 
 ^@::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
-{
-    If is_pre_spc
-        is_pre_spc = 0
-    Else
-        is_pre_spc = 1
-}
-Return
+  } else if (is_pre_spc) {
+    is_pre_spc = 0
+  } else {
+    is_pre_spc = 1
+  }
+  return
 
 ^a::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     move_beginning_of_line()
-    Return
+  }
+  return
 
 ^e::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     move_end_of_line()
-    Return
+  }
+  return
 
 ^p::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     previous_line()
-    Return
+  }
+  return
 
 ^n::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+    } else if (is_pre_c and is_special()) {
+    global is_pre_c = 0
+    Send %A_ThisHotkey%
+  } else {
     next_line()
-    Return
+  }
+  return
 
 ^b::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     backward_char()
-    Return
+  }
+  return
 
 ^v::
-If is_target()
+  if (is_target()) {
     Send %A_ThisHotkey%
-Else
+  } else {
     scroll_down()
-    Return
+  }
+  return
 
 !v::
-If is_target()
-    Send %A_ThisHotkey%
-Else
-    scroll_up()
-    Return
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else {
+      scroll_up()
+  }
+  return
 
 !+<::
-If is_target()
-    Send %A_ThisHotkey%
-Else
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else {
     move_beginning_of_buffer()
-    Return
+  }
+  return
 
 !+>::
-If is_target()
-    Send %A_ThisHotkey%
-Else
-    move_end_of_buffer()
-    Return
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else {
+      move_end_of_buffer()
+  }
+  return
 
 !f::
-If is_target()
-    Send %A_ThisHotkey%
-Else
-    forward_word()
-    Return
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else {
+      forward_word()
+  }
+  return
 
 !b::
-If is_target()
-    Send %A_ThisHotkey%
-Else
-    backward_word()
-    Return
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else {
+      backward_word()
+  }
+  return
 
+h::
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else if (is_pre_x) {
+      select_all()
+  } else {
+      Send h
+  }
+  return
+
+!BS::
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else {
+      Send ^{BS}
+  }
+  return
+
+!d::
+  if (is_target()) {
+      Send %A_ThisHotkey%
+  } else {
+      Send ^{Delete}
+  }
+  return
+
+repeat_is_target() {
+  if (is_target()) {
+      Send %A_ThisHotkey%
+      return 1
+  } else {
+      return 0
+  }
+}
+
+repeat_is_pre_x(function, is_pre_x) {
+  if (is_pre_x) {
+      func(function).Call()
+      return 1
+  } else {
+      return 0
+  }
+}
+
+; ^+h::target_mixin("else if (is_pre_x) { select_all() } else { Send h }")
+^+h::
+  ; target_result := repeat_is_target()
+  ; x_result := repeat_is_pre_x(func("select_all"), is_pre_x)
+  if not (repeat_is_target() or repeat_is_pre_x("select_all", is_pre_x)) {
+      Send h
+  }
+  return
