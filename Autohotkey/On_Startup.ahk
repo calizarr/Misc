@@ -9,7 +9,7 @@
 
 #Include ./GS63VR7RG.ahk
 
-Run, autohotkey ./suspend.ahk
+; Run, autohotkey ./suspend.ahk
 
 system_model := get_system_model(StrLen(model_match))
 

@@ -1,5 +1,5 @@
 #NoTrayIcon
-#SingleInstance
+#SingleInstance Force
 
 WM_COMMAND := 0x111
 CMD_RELOAD := 65400

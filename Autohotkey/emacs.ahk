@@ -41,8 +41,14 @@ is_pre_spc = 0
   return
 
 ^d::
-  if not check_target()
-    delete_char()
+  switch
+  {
+    Case check_target(): return
+    Case is_pre_c and is_special():
+       global is_pre_c = 0
+       Send %A_ThisHotkey%
+    Default: delete_char()
+  }
   return
 
 ^h::
@@ -194,16 +200,18 @@ h::
   }
   return
 
-!BS::
-  if not check_target()
+;; Backspace was a pain
+!$~BS::
+  if (not check_target()) {
     Send ^{BS}
+  }
   return
 
 !d::
   if not check_target()
     Send ^{Delete}
   return
-
+  
 ;$^{Space}::
 ;^vk20sc039::
 ^vk20::

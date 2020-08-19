@@ -7,6 +7,8 @@ is_target()
     return 1
   IfWinActive,ahk_class Emacs ; NTEmacs
     return 1
+  IfWinActive,ahk_exe emacs.exe ; NTEmacs
+    return 1
   IfWinActive,ahk_exe WindowsTerminal.exe
     return 1
   IfWinActive,ahk_exe Keepass.exe
