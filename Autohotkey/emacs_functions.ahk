@@ -27,6 +27,24 @@ is_special()
   return 0
 }
 
+check_target() {
+  if (is_target()) {
+    Send %A_ThisHotkey%
+    return 1
+  } else {
+    return 0
+  }
+}
+
+check_prefix(function, is_pre) {
+  if (is_pre) {
+    func(function).Call()
+    return 1
+  } else {
+    return 0
+  }
+}
+
 delete_char()
 {
   Send {Del}

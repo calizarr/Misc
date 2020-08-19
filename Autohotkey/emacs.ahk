@@ -17,55 +17,41 @@ is_pre_spc = 0
 
 
 ^x::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     is_pre_x = 1
-  }
-    return
+  return
 
 ^f::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else if (is_pre_x) {
-    find_file()
-  } else {
-    forward_char()
+  switch
+  {
+    Case check_target(): return
+    Case check_prefix("find_file", is_pre_x): return
+    Default: forward_char()
   }
   return
 
 ^c::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else if (is_special()) {
-    is_pre_c = 1
-  } else if (is_pre_x) {
-    kill_emacs()
+  switch
+  {
+    Case check_target(): return
+    Case is_special(): is_pre_c = 1
+    Case check_prefix("kill_emacs", is_pre_x): return
   }
   return
 
 ^d::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     delete_char()
-  }
   return
 
 ^h::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     delete_backward_char()
-  }
   return
 
 ^k::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     kill_line()
-  }
   return
 
 ; ^o::
@@ -76,11 +62,8 @@ is_pre_spc = 0
 ;   return
 
 ^g::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     quit()
-  }
   return
 
 ; ^j::
@@ -91,72 +74,133 @@ is_pre_spc = 0
 ;   return
 
 ^m::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     newline()
-  }
   return
 
 ^i::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     indent_for_tab_command()
-  }
   return
 
 ^s::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else if (is_pre_x) {
-    save_buffer()
-  } else {
-    isearch_forward()
+  switch
+  {
+    Case check_target(): return
+    Case check_prefix("save_buffer", is_pre_x): return
+    Default: isearch_forward()
   }
   return
 
 ^r::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     isearch_backward()
-  }
   return
 
 ^w::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else if (is_pre_c and is_special()) {
-    global is_pre_c = 0
-    Send %A_ThisHotkey%
-  } else {
-    kill_region()
+  switch
+  {
+    Case check_target(): return
+    Case is_pre_c and is_special():
+       global is_pre_c = 0
+       Send %A_ThisHotkey%
+    Default: kill_region()
   }
   return
 
 !w::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     kill_ring_save()
-  }
   return
 
 ^y::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     yank()
-  }
   return
 
 ^/::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
+  if not check_target()
     undo()
+  return
+
+^a::
+  if not check_target()
+    move_beginning_of_line()
+  return
+
+^e::
+  if not check_target()
+    move_end_of_line()
+  return
+
+^p::
+  if not check_target()
+    previous_line()
+  return
+
+^n::
+  switch
+  {
+    Case check_target(): return
+    Case is_pre_c and is_special():
+       global is_pre_c = 0
+       Send %A_ThisHotkey%
+    Default: next_line()
   }
+  return
+
+^b::
+  if not check_target()
+    backward_char()
+  return
+
+^v::
+  if not check_target()
+    scroll_down()
+  return
+
+!v::
+  if not check_target()
+    scroll_up()
+  return
+
+!+<::
+  if not check_target()
+    move_beginning_of_buffer()
+  return
+
+!+>::
+  if not check_target()
+    move_end_of_buffer()
+  return
+
+!f::
+  if not check_target()
+    forward_word()
+  return
+
+!b::
+  if not check_target()
+    backward_word()
+  return
+
+h::
+  switch
+  {
+    Case check_target(): return
+    Case check_prefix("select_all", is_pre_x): return
+    Default: Send h
+  }
+  return
+
+!BS::
+  if not check_target()
+    Send ^{BS}
+  return
+
+!d::
+  if not check_target()
+    Send ^{Delete}
   return
 
 ;$^{Space}::
@@ -181,146 +225,15 @@ is_pre_spc = 0
   }
   return
 
-^a::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
-    move_beginning_of_line()
-  }
-  return
-
-^e::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
-    move_end_of_line()
-  }
-  return
-
-^p::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
-    previous_line()
-  }
-  return
-
-^n::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-    } else if (is_pre_c and is_special()) {
-    global is_pre_c = 0
-    Send %A_ThisHotkey%
-  } else {
-    next_line()
-  }
-  return
-
-^b::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
-    backward_char()
-  }
-  return
-
-^v::
-  if (is_target()) {
-    Send %A_ThisHotkey%
-  } else {
-    scroll_down()
-  }
-  return
-
-!v::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else {
-      scroll_up()
-  }
-  return
-
-!+<::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else {
-    move_beginning_of_buffer()
-  }
-  return
-
-!+>::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else {
-      move_end_of_buffer()
-  }
-  return
-
-!f::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else {
-      forward_word()
-  }
-  return
-
-!b::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else {
-      backward_word()
-  }
-  return
-
-h::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else if (is_pre_x) {
-      select_all()
-  } else {
-      Send h
-  }
-  return
-
-!BS::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else {
-      Send ^{BS}
-  }
-  return
-
-!d::
-  if (is_target()) {
-      Send %A_ThisHotkey%
-  } else {
-      Send ^{Delete}
-  }
-  return
-
-repeat_is_target() {
-  if (is_target()) {
-      Send %A_ThisHotkey%
-      return 1
-  } else {
-      return 0
-  }
-}
-
-repeat_is_pre_x(function, is_pre_x) {
-  if (is_pre_x) {
-      func(function).Call()
-      return 1
-  } else {
-      return 0
-  }
-}
-
-; ^+h::target_mixin("else if (is_pre_x) { select_all() } else { Send h }")
 ^+h::
-  ; target_result := repeat_is_target()
-  ; x_result := repeat_is_pre_x(func("select_all"), is_pre_x)
-  if not (repeat_is_target() or repeat_is_pre_x("select_all", is_pre_x)) {
-      Send h
+  switch
+  {
+    Case check_target(): return
+    Case check_prefix("select_all", is_pre_x): return
+    Default: Send h
   }
+  ; x_result := check_prefix("select_all", is_pre_x)
+  ; if not (check_target() or x_result) {
+  ;     Send h
+  ; }
   return
