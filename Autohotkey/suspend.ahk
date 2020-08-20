@@ -27,4 +27,4 @@ Loop, %id%
 }
 return
 
-^~:: ExitApp
+; ^~:: ExitApp

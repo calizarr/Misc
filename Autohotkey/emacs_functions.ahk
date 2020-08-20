@@ -3,19 +3,19 @@
 is_target()
 {
   ; Avoid VMwareUnity with AutoHotkey
-  IfWinActive,ahk_class VMwareUnityHostWndClass
+  if WinActive("ahk_class VMwareUnityHostWndClass")
     return 1
-  IfWinActive,ahk_class Emacs ; NTEmacs
+  if WinActive("ahk_class Emacs")
     return 1
-  IfWinActive,ahk_exe emacs.exe ; NTEmacs
+  if WinActive("ahk_exe emacs.exe")
     return 1
-  IfWinActive,ahk_exe WindowsTerminal.exe
+  if WinActive("ahk_exe WindowsTerminal.exe")
     return 1
-  IfWinActive,ahk_exe Keepass.exe
+  if WinActive("ahk_exe Keepass.exe")
     return 1
-  IfWinActive,ahk_exe slack.exe
+  if WinActive("ahk_exe slack.exe")
     return 1
-  IfWinActive,ahk_exe Discord.exe
+  if WinActive("ahk_exe Discord.exe")
     return 1
   return 0
 }
@@ -24,20 +24,10 @@ is_target()
 ; e.g. Chrome: `C-c C-w` (close window), `C-c C-n` (new window)
 is_special()
 {
-  IfWinActive,ahk_class Chrome_WidgetWin_1
+  if WinActive("ahk_exe chrome.exe")
     return 1
   return 0
 }
-
-; check_special() {
-;   if (is_pre_c and is_special()) {
-;     is_pre_c = 0
-;     Send %A_ThisHotkey%
-;     return 1
-;   } else {
-;     return 0
-;   }
-; }
 
 check_target() {
   if (is_target()) {

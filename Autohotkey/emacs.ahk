@@ -201,11 +201,10 @@ h::
   return
 
 ;; Backspace was a pain
-!$~BS::
-  if (not check_target()) {
-    Send ^{BS}
-  }
-  return
+; !$~BS::
+;   if not check_target()
+;     Send ^{BS}
+;   return
 
 !d::
   if not check_target()

@@ -11,18 +11,21 @@
 
 ; Run, autohotkey ./suspend.ahk
 
-system_model := get_system_model(StrLen(model_match))
-
-#IfWinActive, ahk_class Emacs
-; RCtrl::AppsKey
+; system_model := get_system_model(StrLen(model_match))
+system_model := get_system_model()
 if (system_model = model_match) {
   MsgBox, % "You are using the laptop: " system_model
-  RCtrl::RWin ;; Allows resizing of Emacs window on Laptop
 } else {
-  MsgBox, "All is well!"
+  MsgBox, % "You are using this model: " system_model
 }
-; RAlt::F13
-#IfWinActive
+
+#If WinActive("ahk_class Emacs") and (system_model = model_match)
+RCtrl::Rwin
+#If
+
+#If WinActive("ahk_class Emacs") and (system_model != model_match)
+RCtrl::RCtrl
+#If
 
 ; #e::Run "C:\xyplorer_full\XYplorer.exe"
 
