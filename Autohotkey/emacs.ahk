@@ -6,6 +6,8 @@
 
 #Include ./emacs_functions.ahk
 
+SendMode InputThenPlay
+
 ; The following line is a contribution of NTEmacs wiki http://www49.atwiki.jp/ntemacs/pages/20.html
 SetKeyDelay 0
 
@@ -45,8 +47,8 @@ is_pre_spc = 0
   {
     Case check_target(): return
     Case is_pre_c and is_special():
-       global is_pre_c = 0
-       Send %A_ThisHotkey%
+      global is_pre_c = 0
+      Send %A_ThisHotkey%
     Default: delete_char()
   }
   return
@@ -109,8 +111,8 @@ is_pre_spc = 0
   {
     Case check_target(): return
     Case is_pre_c and is_special():
-       global is_pre_c = 0
-       Send %A_ThisHotkey%
+      global is_pre_c = 0
+      Send %A_ThisHotkey%
     Default: kill_region()
   }
   return
@@ -141,17 +143,24 @@ is_pre_spc = 0
   return
 
 ^p::
-  if not check_target()
-    previous_line()
+  switch
+  {
+    Case is_pass():
+      previous_line()
+    Case check_target(): return
+    Default: previous_line()
+  }
   return
 
 ^n::
   switch
   {
-    Case check_target(): return
+    Case is_pass():
+      next_line()
     Case is_pre_c and is_special():
-       global is_pre_c = 0
-       Send %A_ThisHotkey%
+      global is_pre_c = 0
+      Send %A_ThisHotkey%
+    Case check_target(): return
     Default: next_line()
   }
   return

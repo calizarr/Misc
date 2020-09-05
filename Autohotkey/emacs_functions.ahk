@@ -1,3 +1,5 @@
+SendMode InputThenPlay
+
 ; Applications you want to disable emacs-like keybindings
 ; (Please comment out applications you don't use)
 is_target()
@@ -25,6 +27,17 @@ is_target()
 is_special()
 {
   if WinActive("ahk_exe chrome.exe")
+    return 1
+  if WinActive("ahk_exe Keepass.exe")
+    return 1
+  if WinActive("ahk_exe firefox.exe")
+    return 1
+  return 0
+}
+
+is_pass()
+{
+  if WinActive("ahk_exe Keepass.exe")
     return 1
   return 0
 }
@@ -179,6 +192,7 @@ move_beginning_of_line()
   global
   if (is_pre_spc) {
     Send +{HOME}
+    is_pre_spc = 0
   } else {
     Send {HOME}
   }
