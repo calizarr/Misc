@@ -27,6 +27,9 @@ RCtrl::Rwin
 RCtrl::RCtrl
 #If
 
+; +CapsLock::CapsLock
+; CapsLock::LCtrl
+
 ; #e::Run "C:\xyplorer_full\XYplorer.exe"
 
 #Include ./emacs.ahk
