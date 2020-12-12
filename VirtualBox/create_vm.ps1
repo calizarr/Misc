@@ -29,6 +29,13 @@ Function DryRunVerboseExec {
 Write-Host "The VM name will be: $Name"
 Write-Host "The VM machine folder path name will be: $BaseFolder"
 
+# Set up and create the NAT Network
+
+$NetworkCommand = "VBoxManage natnetwork add --netname 'NatNetwork' --network '10.0.2.0/24' --enable --dhcp on"
+$NetworkStartCommand = "VBoxManage natnetwork start --netname 'NatNetwork'"
+DryRunVerboseExec($NetworkCommand)
+DryRunVerboseExec($NetworkStartCommand)
+
 # Create and register the Ubuntu Virtual Machine
 $CreateCommand =  "VBoxManage createvm --name $Name --ostype Ubuntu_64 --basefolder $BaseFolder --register"
 DryRunVerboseExec($CreateCommand)
@@ -39,7 +46,7 @@ $FlagArray = @(
     "--hwvirtex on", "--x2apic on", "--pae on", "--nestedpaging on", "--nested-hw-virt on",
     "--accelerate3d on", "--biosapic x2apic", "--graphicscontroller vboxsvga",
     "--clipboard-mode bidirectional", "--draganddrop bidirectional",
-    "--nic1 natnetwork", "--usbxhci on"
+    "--nic1 natnetwork", "--nat-network1 'NatNetwork'", "--usbxhci on"
     )
 $DefaultFlags = $FlagArray -join(" ")
 $ModifyCommand = "VBoxManage modifyvm $Name --memory $RamSize --vram $VRamSize --cpus $CpuCount"
