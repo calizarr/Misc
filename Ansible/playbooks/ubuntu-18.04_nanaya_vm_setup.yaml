@@ -1,6 +1,6 @@
 ---
 - hosts: nanaya_vm
-  remote_user: calizarr
+  remote_user: "{{ remote_user | default('calizarr') }}"
 
   vars:
     apt_repos:
