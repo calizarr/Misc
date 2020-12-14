@@ -3,7 +3,7 @@ param(
     [string] $BaseFolder,
     [string] $IsoFile,
     [string] $HddSize = "256000",
-    [string] $CpuCount = "2",
+    [string] $CpuCount = "4",
     [string] $RamSize = "8192",
     [string] $VRamSize = "256",
     [bool] $DryRun = $false,
@@ -38,7 +38,8 @@ $FlagArray = @(
     "--hwvirtex on", "--x2apic on", "--pae on", "--nestedpaging on", "--nested-hw-virt on",
     "--accelerate3d on", "--biosapic x2apic", "--graphicscontroller 'VMSVGA'",
     "--clipboard-mode bidirectional", "--draganddrop bidirectional",
-    "--nic1 nat", "--nic2 hostonly", "--hostonlyadapter2 'VirtualBox Host-Only Ethernet Adapter'","--usbxhci on"
+    "--nic1 nat", "--nic2 hostonly", "--hostonlyadapter2 'VirtualBox Host-Only Ethernet Adapter #2'",
+    "--cableconnected2 off","--usbxhci on"
     )
 $DefaultFlags = $FlagArray -join(" ")
 $ModifyCommand = "VBoxManage modifyvm $Name --memory $RamSize --vram $VRamSize --cpus $CpuCount"
