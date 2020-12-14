@@ -23,6 +23,8 @@
       - 'libncurses5-dev'
       - 'libncursesw5-dev'
       - 'libreadline-dev'
+      - 'libsdl2-2.0-0'
+      - 'libsdl2-dev'
       - 'libsqlite3-dev'
       - 'libssl-dev'
       - 'libxss1'
@@ -31,30 +33,37 @@
       - 'openjdk-11-jdk'
       - 'python-openssl'
       - 'python-pip' # Needed for terminator themes
+      - 'qt5-default'
       - 'terminator'
       - 'tk-dev'
       - 'wget'
+      - 'x11-utils' # Mouse binding for back/forward keys
+      - 'xautomation' # Mouse binding for back/forward keys
       - 'xz-utils'
       - 'zlib1g-dev'
-      - 'xautomation' # Mouse binding for back/forward keys
-      - 'x11-utils' # Mouse binding for back/forward keys
 
     system_pip_packages:
       - 'requests' # Needed for terminator themes
 
     brew_packages:
+      - 'fd'
+      - 'fzf'
+      - 'gcc'
       - 'git'
       - 'hub'
       - 'jq'
+      - 'kube-ps1'
       - 'pyenv'
       - 'pyenv-virtualenv'
+      - 'ripgrep'
+      - 'the_silver_searcher'
       - 'tmux'
+      - 'yq'
       - 'zsh'
       - 'zsh-autosuggestions'
       - 'zsh-completions'
       - 'zsh-history-substring-search'
       - 'zsh-syntax-highlighting'
-      - 'gcc'
 
     snap_packages:
       - 'keepassxc'
@@ -117,8 +126,8 @@
     wait_for_connection:
       connect_timeout: 20
       sleep: 5
-      delay: 5
-      timeout: 300
+      delay: 180
+      timeout: 900
     when: package_install is changed
 
   - name: Install system python packages
@@ -360,8 +369,8 @@
       groups: docker
       append: yes
       create_home: no
-      shell: "{{ ansible_env.HOME }}/.linuxbrew/bin/zsh"
-    when: change_shell_zsh
+      shell: "/home/linuxbrew/.linuxbrew/bin/zsh"
+    when: change_shell_zsh | bool
     register: user_change
 
   - name: Reboot Ubuntu VM for Groups etc
@@ -375,8 +384,8 @@
     wait_for_connection:
       connect_timeout: 20
       sleep: 5
-      delay: 5
-      timeout: 300
+      delay: 180
+      timeout: 900
     when: user_change is changed
 
   - name: Download Chrome deb
