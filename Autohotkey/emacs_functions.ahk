@@ -145,7 +145,6 @@ kill_region()
 kill_ring_save()
 {
   Send ^c
-  Send {END}
   global is_pre_spc = 0
   return
 }
