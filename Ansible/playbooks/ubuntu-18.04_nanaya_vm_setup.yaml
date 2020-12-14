@@ -1,6 +1,6 @@
 ---
 - hosts: nanaya_vm
-  remote_user: calizarr
+  remote_user: "{{ remote_usr | default('calizarr') }}"
 
   vars:
     apt_repos:
@@ -54,6 +54,7 @@
       - 'zsh-completions'
       - 'zsh-history-substring-search'
       - 'zsh-syntax-highlighting'
+      - 'gcc'
 
     snap_packages:
       - 'keepassxc'
@@ -69,14 +70,14 @@
     install_linuxbrew_if_missing: true
     upgrade_homebrew_packages: false
     change_shell_zsh: false
-    scaling_4k: "{{ scale_4k | default(false) }} "
+    scaling_4k: "{{ scale_4k | default(false) }}"
     git_config:
       user:
         email: "{{ git_email | default('None') }}"
         name: "{{ git_user | default('None') }}"
 
     python_settings:
-      latest: "{{ python_latest | default('3.8.0') }}"
+      latest: "{{ python_latest | default('3.9.0') }}"
       pyenv_init: |
         # Load pyenv automatically by appending
         # the following to ~/.bashrc:
@@ -127,7 +128,7 @@
 
   - name: Ensure Linuxbrew is installed
     stat:
-      path: "{{ ansible_env.HOME }}/.linuxbrew/bin/brew"
+      path: "/home/linuxbrew/.linuxbrew"
     register: "linuxbrew_check"
 
   - name: Fail if Linuxbrew is not installed and install_linuxbrew_if_missing is False
@@ -137,32 +138,39 @@
       not linuxbrew_check.stat.exists and
       not install_linuxbrew_if_missing
 
+  - name: Create /home/linuxbrew
+    become: yes
+    file:
+      path: /home/linuxbrew
+      state: directory
+      mode: u=rwx,g=rwx,o=rwx
+
   - name: Installing Linuxbrew
     shell: |
-      git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew
-      mkdir ~/.linuxbrew/bin
-      ln -s ~/.linuxbrew/Homebrew/bin/brew ~/.linuxbrew/bin
-      echo 'eval $(~/.linuxbrew/bin/brew shellenv)' >> ~/.profile
-      echo 'eval $(~/.linuxbrew/bin/brew shellenv)' >> ~/.bashrc
-      eval $(~/.linuxbrew/bin/brew shellenv)
+      CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.profile
+      echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.bashrc
+      eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
     when: >-
       not linuxbrew_check.stat.exists and
       install_linuxbrew_if_missing
 
   - name: Ensure Linuxbrew got installed
     stat:
-      path: "{{ ansible_env.HOME }}/.linuxbrew/bin/brew"
+      path: "/home/linuxbrew/.linuxbrew"
     register: "linuxbrew_check_two"
 
   - name: Updating Linuxbrew
     homebrew:
       update_homebrew: yes
+      path: /home/linuxbrew/.linuxbrew/bin/
     when: linuxbrew_check_two.stat.exists
 
   - name: Installing Linuxbrew packages
     homebrew:
       name: "{{ brew_packages }}"
       state: present
+      path: /home/linuxbrew/.linuxbrew/bin/
       upgrade_all: "{{ upgrade_homebrew_packages }}"
     when: linuxbrew_check_two.stat.exists
 
@@ -208,6 +216,13 @@
       accept_hostkey: yes
     when: not dotfiles_repo.stat.exists
 
+  - name: Get Tmux configuration file and symlink
+    file:
+      src: "{{ ansible_env.HOME }}/GitHub_Repos/Misc/Config_files/tmux_conf_2.9_and_above"
+      dest: "{{ ansible_env.HOME }}/.tmux.conf"
+      state: link
+    when: dotfiles_repo.stat.exists
+
   - name: Set git config
     shell: |
       git config --global user.email {{ git_config.user.email }}
@@ -236,17 +251,30 @@
       path: "{{ ansible_env.HOME }}/.zshrc"
     when: omz_set.changed
 
-  - name: Check if zshrc already exists.
+  - name: Check if zsh repo has already been cloned
     stat:
-      path: "{{ ansible_env.HOME }}/.zshrc"
+      path: "{{ ansible_env.HOME }}/.zsh.d"
+    register: zsh_repo
+
+  - name: Get zsh configuration
+    git:
+      repo: git@github.com:calizarr/.zsh.d.git
+      dest: "{{ ansible_env.HOME }}/.zsh.d"
+      accept_hostkey: yes
+    when: not zsh_repo.stat.exists
+
+  - name: Check if .zshenv already exists.
+    stat:
+      path: "{{ ansible_env.HOME }}/.zshenv"
     register: zsh_config
 
-  - name: Placing a symbolic link to .zshrc
-    file:
-      src: "{{ ansible_env.HOME }}/GitHub_Repos/Misc/Config_files/.zshrc"
-      dest: "{{ ansible_env.HOME }}/.zshrc"
-      state: link
-    when: dotfiles_repo.stat.exists and not zsh_config.stat.exists
+  - name: Creating the .zshenv to point to .zsh.d repo
+    copy:
+      dest: ~/.zshenv
+      content: |
+        ZDOTDIR="$HOME/.zsh.d"
+        source "$ZDOTDIR/.zshenv"
+    when: not zsh_config.stat.exists
 
   - name: Remove Gnome Animations, Screensaver, & Session Idling
     shell: |
@@ -292,7 +320,8 @@
         [profiles]
           [[default]]
             background_darkness = 0.7
-            background_type = transparent
+            # background_type = transparent
+            background_type = solid
             cursor_color = "#aaaaaa"
             font = DejaVu Sans Mono 11
             palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
@@ -309,6 +338,12 @@
   - name: Check if pyenv initialization has been added to .profile
     blockinfile:
       path: "{{ ansible_env.HOME }}/.profile"
+      block: "{{ python_settings.pyenv_init }}"
+      state: present
+
+  - name: Check if pyenv initialization has been added to .bashrc
+    blockinfile:
+      path: "{{ ansible_env.HOME }}/.bashrc"
       block: "{{ python_settings.pyenv_init }}"
       state: present
 
@@ -363,7 +398,7 @@
       regexp: '^Exec=/usr/bin/google-chrome-stable .*%U'
       line: Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=1.5 %U
       state: present
-    when: scaling_4k
+    when: scaling_4k | bool
 
   - name: Gnome mouse pointer and text size for 4k screen
     shell: |
@@ -371,4 +406,4 @@
       gsettings set org.gnome.desktop.interface cursor-size 48
       # Make text larger, default 1.0
       gsettings set org.gnome.desktop.interface text-scaling-factor 1.3
-    when: scaling_4k
+    when: scaling_4k | bool
