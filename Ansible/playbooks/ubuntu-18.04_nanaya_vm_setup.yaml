@@ -286,7 +286,7 @@
         source "$ZDOTDIR/.zshenv"
     when: not zsh_config.stat.exists
 
-  - name: Remove Gnome Animations, Screensaver, & Session Idling
+  - name: Remove Gnome Animations, Screensaver, Session Idling, Change key-theme
     shell: |
       # Disable All Animations in Ubuntu
       gsettings set org.gnome.desktop.interface enable-animations false
@@ -294,6 +294,9 @@
       gsettings set org.gnome.desktop.session idle-delay 0
       # Disable Screensaver
       gsettings set org.gnome.desktop.screensaver lock-enabled false
+      # Change to emacs key-theme
+      gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+      # settings set org.gnome.desktop.interface gtk-key-theme "Default"
 
   - name: Create Terminator plugins directory if it does not exists
     file:
