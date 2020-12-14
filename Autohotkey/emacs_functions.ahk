@@ -21,6 +21,8 @@ is_target()
     return 1
   if WinActive("ahk_exe Code - Insiders.exe")
     return 1
+  if WinActive("ahk_exe vcxsrv.exe")
+    return 1
   return 0
 }
 
@@ -143,6 +145,7 @@ kill_region()
 kill_ring_save()
 {
   Send ^c
+  Send {END}
   global is_pre_spc = 0
   return
 }
