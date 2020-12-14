@@ -296,7 +296,7 @@
       gsettings set org.gnome.desktop.screensaver lock-enabled false
       # Change to emacs key-theme
       gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
-      # settings set org.gnome.desktop.interface gtk-key-theme "Default"
+      # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
   - name: Create Terminator plugins directory if it does not exists
     file:
