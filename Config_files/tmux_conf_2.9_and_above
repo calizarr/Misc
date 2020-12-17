@@ -1,11 +1,23 @@
-set -g default-shell $SHELL 
-set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+set -g default-shell $SHELL
+
+if-shell "uname -s | grep -q Darwin" {
+  set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+} {
+  # Use system clipboard linux
+  set -s set-clipboard off
+  bind -T copy-mode C-w send -X copy-pipe-and-cancel 'xclip -sel clip -i > /dev/null'
+  bind -T copy-mode M-w send -X copy-pipe-and-cancel 'xclip -sel clip -i > /dev/null'
+  bind -T copy-mode MouseDragEnd1Pane send -X copy-pipe-and-cancel 'xclip -sel clip -i > /dev/null'
+}
 # set -g default-shell /usr/local/bin/fish
 # set -g default-command "reattach-to-user-namespace -l /usr/local/bin/fish"
 # remap prefix from 'C-b' to 'C-a'
 unbind C-b
 set-option -g prefix C-z
 bind-key C-z send-prefix
+
+
+
 
 # remapping tmux to use screen keys.
 bind k confirm kill-window
@@ -18,7 +30,7 @@ bind C-p previous-window
 bind C-c new-window
 
 # Screen specific configs
-# displays * 
+# displays *
 unbind *
 bind * list-clients
 
@@ -56,7 +68,7 @@ set -g status-justify centre
 set -g status-bg default
 set -g status-fg colour12
 set -g status-interval 2
-    
+
 # # messaging
 set -g message-style fg=black,bg=yellow
 # set -g message-style bg=yellow
@@ -152,7 +164,7 @@ set -g message-style bg=colour166,fg=colour232,bold
 
 ## List of plugins
 # set -g @plugin 'tmux-plugins/tpm'
-# set -g @plugin 'tmux-plugins/tmux-sensible' 
+# set -g @plugin 'tmux-plugins/tmux-sensible'
 
 ## TMUX plugins
 # set -g @plugin 'tmux-plugins/tmux-resurrect'
