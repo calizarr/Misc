@@ -21,6 +21,8 @@ is_target()
     return 1
   if WinActive("ahk_exe Code - Insiders.exe")
     return 1
+  if WinActive("ahk_exe vcxsrv.exe")
+    return 1
   return 0
 }
 

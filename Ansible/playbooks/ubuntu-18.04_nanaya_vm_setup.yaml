@@ -23,6 +23,8 @@
       - 'libncurses5-dev'
       - 'libncursesw5-dev'
       - 'libreadline-dev'
+      - 'libsdl2-2.0-0'
+      - 'libsdl2-dev'
       - 'libsqlite3-dev'
       - 'libssl-dev'
       - 'libxss1'
@@ -31,30 +33,38 @@
       - 'openjdk-11-jdk'
       - 'python-openssl'
       - 'python-pip' # Needed for terminator themes
+      - 'qt5-default'
       - 'terminator'
       - 'tk-dev'
       - 'wget'
+      - 'x11-utils' # Mouse binding for back/forward keys
+      - 'xautomation' # Mouse binding for back/forward keys
+      - 'xclip'
       - 'xz-utils'
       - 'zlib1g-dev'
-      - 'xautomation' # Mouse binding for back/forward keys
-      - 'x11-utils' # Mouse binding for back/forward keys
 
     system_pip_packages:
       - 'requests' # Needed for terminator themes
 
     brew_packages:
+      - 'fd'
+      - 'fzf'
+      - 'gcc'
       - 'git'
       - 'hub'
       - 'jq'
+      - 'kube-ps1'
       - 'pyenv'
       - 'pyenv-virtualenv'
+      - 'ripgrep'
+      - 'the_silver_searcher'
       - 'tmux'
+      - 'yq'
       - 'zsh'
       - 'zsh-autosuggestions'
       - 'zsh-completions'
       - 'zsh-history-substring-search'
       - 'zsh-syntax-highlighting'
-      - 'gcc'
 
     snap_packages:
       - 'keepassxc'
@@ -117,8 +127,8 @@
     wait_for_connection:
       connect_timeout: 20
       sleep: 5
-      delay: 5
-      timeout: 300
+      delay: 180
+      timeout: 900
     when: package_install is changed
 
   - name: Install system python packages
@@ -276,7 +286,7 @@
         source "$ZDOTDIR/.zshenv"
     when: not zsh_config.stat.exists
 
-  - name: Remove Gnome Animations, Screensaver, & Session Idling
+  - name: Remove Gnome Animations, Screensaver, Session Idling, Change key-theme
     shell: |
       # Disable All Animations in Ubuntu
       gsettings set org.gnome.desktop.interface enable-animations false
@@ -284,6 +294,9 @@
       gsettings set org.gnome.desktop.session idle-delay 0
       # Disable Screensaver
       gsettings set org.gnome.desktop.screensaver lock-enabled false
+      # Change to emacs key-theme
+      gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+      # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
   - name: Create Terminator plugins directory if it does not exists
     file:
@@ -321,13 +334,58 @@
           [[default]]
             background_darkness = 0.7
             # background_type = transparent
-            background_type = solid
+            background_type = "solid"
             cursor_color = "#aaaaaa"
             font = DejaVu Sans Mono 11
             palette = "#000000:#cc0000:#4e9a06:#c4a000:#3465a4:#75507b:#06989a:#d3d7cf:#555753:#ef2929:#8ae234:#fce94f:#729fcf:#ad7fa8:#34e2e2:#eeeeec"
             show_titlebar = False
             use_system_font = False
       dest: "{{ ansible_env.HOME}}/.config/terminator/config"
+
+  - name: Set Terminator Tab CSS
+    copy:
+      dest: "{{ ansible_env.HOME }}/.config/gtk-3.0/gtk.css"
+      content: |
+        .terminator-terminal-window notebook tab {
+            background-color: #222;
+            padding: 0.2em;
+            border: 0;
+            border-color: #444;
+            border-style: solid;
+            border-width: 1px;
+        }
+
+        .terminator-terminal-window notebook tab:checked {
+            background-color: #000;
+            background-image: none;
+        }
+
+        .terminator-terminal-window notebook tab label {
+            color: #ddd;
+        }
+
+        .terminator-terminal-window notebook tab:checked label {
+            color: #76C802;
+            font-weight: 500;
+        }
+
+        .terminator-terminal-window notebook tab button {
+            padding: 0;
+            background-color: transparent;
+            color: #ccc;
+        }
+
+        .terminator-terminal-window notebook header {
+            background-color: #444;
+        }
+
+        .terminator-terminal-window notebook tab button:hover {
+            border: 0;
+            background-image: none;
+            border-color: #444;
+            border-style: solid;
+            border-width: 1px;
+        }
 
   - name: Set default user python via pyenv
     shell: |
@@ -360,8 +418,8 @@
       groups: docker
       append: yes
       create_home: no
-      shell: "{{ ansible_env.HOME }}/.linuxbrew/bin/zsh"
-    when: change_shell_zsh
+      shell: "/home/linuxbrew/.linuxbrew/bin/zsh"
+    when: change_shell_zsh | bool
     register: user_change
 
   - name: Reboot Ubuntu VM for Groups etc
@@ -375,8 +433,8 @@
     wait_for_connection:
       connect_timeout: 20
       sleep: 5
-      delay: 5
-      timeout: 300
+      delay: 180
+      timeout: 900
     when: user_change is changed
 
   - name: Download Chrome deb
