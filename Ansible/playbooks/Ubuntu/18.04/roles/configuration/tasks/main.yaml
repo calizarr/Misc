@@ -1,0 +1,44 @@
+---
+- name: Use WSL SSH key
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items: "{{ ssh_items }}"
+
+- name: Check if emacs repo has already been cloned
+  stat:
+    path: "{{ ansible_env.HOME }}/.emacs.d"
+  register: "emacs_repo"
+
+- name: Get emacs configuration
+  git:
+    repo: git@github.com:calizarr/.emacs.d.git
+    dest: "{{ ansible_env.HOME }}/.emacs.d"
+    accept_hostkey: yes
+  when: not emacs_repo is exists
+
+- name: Check if dotfiles repo has already been cloned
+  stat:
+    path: "{{ ansible_env.HOME }}/GitHub_Repos/Misc"
+  register: "dotfiles_repo"
+
+- name: Get dotfiles etc. repo
+  git:
+    repo: git@github.com:calizarr/Misc.git
+    dest: "{{ ansible_env.HOME}}/GitHub_Repos/Misc"
+    accept_hostkey: yes
+  when: not dotfiles_repo is exists
+
+- name: Get Tmux configuration file and symlink
+  file:
+    src: "{{ ansible_env.HOME }}/GitHub_Repos/Misc/Config_files/tmux_conf_2.9_and_above"
+    dest: "{{ ansible_env.HOME }}/.tmux.conf"
+    state: link
+  when: dotfiles_repo is exists
+
+- name: Set git config
+  shell: |
+    git config --global user.email {{ git_config.user.email }}
+    git config --global user.name "{{ git_config.user.name }}"
+    git config --global --add oh-my-zsh.hide-dirty 1

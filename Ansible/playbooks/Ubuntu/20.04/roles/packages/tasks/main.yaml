@@ -1,0 +1,42 @@
+---
+- name: Add hashicorp GPG key
+  become: yes
+  apt_key:
+    keyserver: https://apt.releases.hashicorp.com/gpg
+    state: present
+
+- name: Add apt repositories
+  become: yes
+  apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - "{{ apt_repos }}"
+
+- name: Apt update and upgrade
+  become: yes
+  apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: Installing multiple packages (emacs, curl, git)
+  become: yes
+  apt:
+    pkg: "{{ apt_packages }}"
+    state: present
+  register: package_install
+
+- name: Install system python packages
+  become: yes
+  pip:
+    name: "{{ system_pip_packages }}"
+
+- name: Installing Snap packages
+  become: yes
+  snap:
+    name: "{{ snap_packages }}"
+
+- name: Installing Snap classic confinement packages
+  become: yes
+  snap:
+    classic: yes
+    name: "{{ snap_classic_packages }}"

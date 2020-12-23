@@ -160,16 +160,21 @@ function fpathClean() {
 ## PATH Fixing and changing local variables
 
 if [ "$(file /cibo)" = "/cibo: directory" ]; then
-    export PATH=/cibo/shared-scripts:$HOME/.local/bin:/usr/local/opt/swagger-codegen@2/bin:$PATH
+    export PATH="/cibo/shared-scripts:$HOME/.local/bin:${PATH+:$PATH}"
+else
+    export PATH="$HOME/.local/bin/:${PATH+:$PATH}"
 fi
 export PATH=$(pathClean $PATH)
 
-
-PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+case "$OSTYPE" in
+    darwin*)
+        PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+        PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+        PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+        PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+        PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+        ;;
+esac
 
 # SSH SETTINGS.
 
@@ -201,19 +206,16 @@ eval "$(pyenv init -)"
 # Pyenv Virtualenv
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
+# Brew Specifics
 case "$OSTYPE" in
     darwin*)
-        # Brew Specifics
         fpath=(/usr/local/share/zsh-completions /usr/local/share/zsh/site-functions $fpath)
-        # fpath=$(fpathClean "$fpath")
         source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
         source /usr/local/share/zsh-history-substring-search/zsh-history-substring-search.zsh
         source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
         ;;
     linux*)
-        # Brew Specifics
         fpath=($HOMEBREW_PREFIX/share/zsh-completions $HOMEBREW_PREFIX/share/share/zsh/site-functions $fpath)
-        # fpath=$(fpathClean "$fpath")
         source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
         source $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh
         source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

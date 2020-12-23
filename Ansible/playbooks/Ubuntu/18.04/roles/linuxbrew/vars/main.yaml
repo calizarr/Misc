@@ -1,0 +1,26 @@
+---
+brew_packages:
+  - 'argocd'
+  - 'fd'
+  - 'fzf'
+  - 'gcc'
+  - 'git'
+  - 'helm'
+  - 'hub'
+  - 'jq'
+  - 'kube-ps1'
+  - 'pyenv'
+  - 'pyenv-virtualenv'
+  - 'ripgrep'
+  - 'the_silver_searcher'
+  - 'tmux'
+  - 'yq'
+  - 'zsh'
+  - 'zsh-autosuggestions'
+  - 'zsh-completions'
+  - 'zsh-history-substring-search'
+  - 'zsh-syntax-highlighting'
+
+install_linuxbrew_if_missing: true
+linuxbrew_path: "/home/linuxbrew"
+upgrade_linuxbrew_packages: false

@@ -1,0 +1,8 @@
+---
+python_settings:
+  latest: "{{ python_latest | default('3.9.0') }}"
+  pyenv_init: |
+    # Load pyenv automatically by appending
+    # the following to ~/.bashrc:
+
+    eval "$(pyenv init -)"  

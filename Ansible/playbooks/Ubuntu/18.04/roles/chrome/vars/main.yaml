@@ -1,0 +1,2 @@
+---
+scaling_4k: "{{ scale_4k | default(false) }}"

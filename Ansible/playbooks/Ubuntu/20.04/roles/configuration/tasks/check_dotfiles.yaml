@@ -1,0 +1,5 @@
+---
+- name: Check if dotfiles repo has already been cloned
+  stat:
+    path: "{{ ansible_env.HOME }}/GitHub_Repos/Misc"
+  register: "dotfiles_repo"

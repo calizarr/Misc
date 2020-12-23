@@ -1,0 +1,45 @@
+---
+- name: Check if Linuxbrew is installed
+  import_tasks: check_linuxbrew.yaml
+
+- name: Fail if Linuxbrew is not installed and install_linuxbrew_if_missing is False
+  fail:
+    msg: "Linuxbrew is missing...Install it"
+  when: >-
+    not linuxbrew_check is exists | bool and
+    not install_linuxbrew_if_missing | bool
+
+- name: Create /home/linuxbrew
+  become: yes
+  file:
+    path: "{{ linuxbrew_path }}"
+    state: directory
+    mode: u=rwx,g=rwx,o=rwx
+  when: not linuxbrew_check is exists | bool
+
+- name: Installing Linuxbrew
+  shell: |
+    CI=1 /bin/bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)'
+    echo 'eval $({{ linuxbrew_path }}/.linuxbrew/bin/brew shellenv)' >> ~/.profile
+    echo 'eval $({{ linuxbrew_path }}/.linuxbrew/bin/brew shellenv)' >> ~/.bashrc
+    eval $({{ linuxbrew_path }}/.linuxbrew/bin/brew shellenv)
+  when: >-
+    not linuxbrew_check is exists | bool and
+    install_linuxbrew_if_missing | bool
+
+- name: Check if Linuxbrew is installed
+  import_tasks: check_linuxbrew.yaml
+
+- name: Updating Linuxbrew
+  homebrew:
+    update_homebrew: yes
+    path: "{{ linuxbrew_path }}/.linuxbrew/bin/"
+  when: linuxbrew_check is exists | bool
+
+- name: Installing Linuxbrew packages
+  homebrew:
+    name: "{{ brew_packages }}"
+    state: present
+    path: "{{ linuxbrew_path }}/.linuxbrew/bin/"
+    upgrade_all: "{{ upgrade_linuxbrew_packages }}" | bool
+  when: linuxbrew_check is exists | bool

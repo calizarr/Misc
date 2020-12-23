@@ -1,0 +1,60 @@
+---
+- hosts: "{{ host | default('nanaya_vm') }}"
+  remote_user: "{{ remote_usr | default('calizarr') }}"
+
+  tasks:
+
+  - name: Disable new user setup
+    lineinfile:
+      path: /etc/gdm3/custom.conf
+      insertafter: "[daemon]"
+      line: "InitialSetupEnable=False"
+      state: present
+
+  - name: Create .local/bin
+    file:
+      path: "{{ ansible_env.HOME }}/.local/bin"
+      state: directory
+    mode: u=rwx,g=rwx,o=rx
+      
+  - name: Install Apt / Snap / System pip packages
+    include_role:
+      name: './roles/packages'
+
+  - name: Reboot Ubuntu VM post package installation
+    include_role:
+      name: './roles/reboot'
+    when: package_install is changed
+
+  - name: Install linuxbrew
+    include_role:
+      name: './roles/linuxbrew'
+
+  - name: Configure ssh, emacs, tmux, git
+    include_role:
+      name: './roles/configuration'
+
+  - name: Change gnome via gsettings etc.
+    include_role:
+      name: './roles/gnome_settings'
+
+  - name: Configure Terminator
+    include_role:
+      name: './roles/terminator'
+
+  - name: Configure pyenv
+    include_role:
+      name: './roles/pyenvs'
+
+  - name: Chrome Installation and Configuration
+    include_role:
+      name: './roles/chrome'
+
+  - name: Install zsh, oh-my-zsh, and configure
+    include_role:
+      name: './roles/zsh'
+
+  - name: Reboot Ubuntu VM post package installation
+    include_role:
+      name: './roles/reboot'
+    when: user_change is changed

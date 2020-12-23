@@ -1,0 +1,5 @@
+---
+- name: Ensure Linuxbrew got installed
+  stat:
+    path: "{{ linuxbrew_path }}/.linuxbrew"
+  register: "linuxbrew_check"
