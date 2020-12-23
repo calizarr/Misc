@@ -1,0 +1,57 @@
+---
+- name: Check for oh-my-zsh directory
+  stat:
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  register: oh_my_zsh_dir
+
+- name: Download Oh My Zsh install file
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: "/tmp/oh-my-zsh_install.sh"
+    mode: '0755'
+  register: omz_install
+
+- name: Setting up Oh My Zsh
+  command: source {{ ansible_env.HOME }}/.profile && sh {{ omz_install.dest }} --unattended
+  when: not oh_my_zsh_dir.stat.exists | bool
+
+- name: Delete OMZ .zshrc
+  file:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    state: absent
+
+- name: Check if zsh repo has already been cloned
+  stat:
+    path: "{{ ansible_env.HOME }}/.zsh.d"
+  register: zsh_repo
+
+- name: Get zsh configuration
+  git:
+    repo: git@github.com:calizarr/.zsh.d.git
+    dest: "{{ ansible_env.HOME }}/.zsh.d"
+    accept_hostkey: yes
+  when: not zsh_repo.stat.exists | bool
+
+- name: Creating the .zshenv to point to .zsh.d repo
+  copy:
+    dest: ~/.zshenv
+    content: |
+      ZDOTDIR="$HOME/.zsh.d"
+      source "$ZDOTDIR/.zshenv"
+
+- name: Docker post-installations steps
+  become: yes
+  group:
+    name: docker
+    state: present      
+
+- name: User specific options
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes
+    create_home: no
+    shell: "{{ linuxbrew_path }}/.linuxbrew/bin/zsh"
+  when: change_shell_zsh | bool
+  register: user_change

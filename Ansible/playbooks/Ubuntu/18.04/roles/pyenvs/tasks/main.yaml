@@ -1,0 +1,18 @@
+---
+- name: Set default user python via pyenv
+  shell: |
+    . {{ ansible_env.HOME }}/.profile && \
+    pyenv install -s {{ python_settings.latest }} && \
+    pyenv global {{ python_settings.latest }}
+
+- name: Check if pyenv initialization has been added to .profile
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    block: "{{ python_settings.pyenv_init }}"
+    state: present
+
+- name: Check if pyenv initialization has been added to .bashrc
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    block: "{{ python_settings.pyenv_init }}"
+    state: present

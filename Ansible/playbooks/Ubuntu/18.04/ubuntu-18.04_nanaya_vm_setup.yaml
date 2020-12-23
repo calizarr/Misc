@@ -1,5 +1,5 @@
 ---
-- hosts: nanaya_vm
+- hosts: "{{ host | default('nanaya_vm') }}"
   remote_user: "{{ remote_usr | default('calizarr') }}"
 
   vars:
@@ -77,8 +77,10 @@
       # 0644, u=rw,g-rw,o-rw
       - { src: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa", dest: "{{ ansible_env.HOME }}/.ssh/id_rsa", mode: "u=rw,g-rw,o-rw" }
       - { src: "{{ lookup('env', 'HOME') }}/.ssh/id_rsa.pub", dest: "{{ ansible_env.HOME }}/.ssh/id_rsa.pub", mode: "u=rw,g=r,o=r" }
+      
     install_linuxbrew_if_missing: true
-    upgrade_homebrew_packages: false
+    linuxbrew_path: "/home/linuxbrew"
+    upgrade_linuxbrew_packages: false
     change_shell_zsh: false
     scaling_4k: "{{ scale_4k | default(false) }}"
     git_config:
@@ -138,7 +140,7 @@
 
   - name: Ensure Linuxbrew is installed
     stat:
-      path: "/home/linuxbrew/.linuxbrew"
+      path: "{{ linuxbrew_path }}/.linuxbrew"
     register: "linuxbrew_check"
 
   - name: Fail if Linuxbrew is not installed and install_linuxbrew_if_missing is False
@@ -146,43 +148,43 @@
       msg: "Linuxbrew is missing...Install it"
     when: >-
       not linuxbrew_check.stat.exists and
-      not install_linuxbrew_if_missing
+      not install_linuxbrew_if_missing | bool
 
   - name: Create /home/linuxbrew
     become: yes
     file:
-      path: /home/linuxbrew
+      path: "{{ linuxbrew_path }}"
       state: directory
       mode: u=rwx,g=rwx,o=rwx
 
   - name: Installing Linuxbrew
     shell: |
-      CI=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.profile
-      echo 'eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)' >> ~/.bashrc
-      eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+      CI=1 /bin/bash -c '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)'
+      echo 'eval $({{ linuxbrew_path }}/.linuxbrew/bin/brew shellenv)' >> ~/.profile
+      echo 'eval $({{ linuxbrew_path }}/.linuxbrew/bin/brew shellenv)' >> ~/.bashrc
+      eval $({{ linuxbrew_path }}/.linuxbrew/bin/brew shellenv)
     when: >-
       not linuxbrew_check.stat.exists and
-      install_linuxbrew_if_missing
+      install_linuxbrew_if_missing | bool
 
   - name: Ensure Linuxbrew got installed
     stat:
-      path: "/home/linuxbrew/.linuxbrew"
-    register: "linuxbrew_check_two"
+      path: "{{ linuxbrew_path }}/.linuxbrew"
+    register: "linuxbrew_check"
 
   - name: Updating Linuxbrew
     homebrew:
       update_homebrew: yes
       path: /home/linuxbrew/.linuxbrew/bin/
-    when: linuxbrew_check_two.stat.exists
+    when: linuxbrew_check.stat.exists
 
   - name: Installing Linuxbrew packages
     homebrew:
       name: "{{ brew_packages }}"
       state: present
       path: /home/linuxbrew/.linuxbrew/bin/
-      upgrade_all: "{{ upgrade_homebrew_packages }}"
-    when: linuxbrew_check_two.stat.exists
+      upgrade_all: "{{ upgrade_linuxbrew_packages }}" | bool
+    when: linuxbrew_check.stat.exists
 
   - name: Installing Snap packages
     become: yes
@@ -237,6 +239,7 @@
     shell: |
       git config --global user.email {{ git_config.user.email }}
       git config --global user.name "{{ git_config.user.name }}"
+      git config --global --add oh-my-zsh.hide-dirty 1
 
   - name: Check for oh-my-zsh directory
     stat:
@@ -295,8 +298,8 @@
       # Disable Screensaver
       gsettings set org.gnome.desktop.screensaver lock-enabled false
       # Change to emacs key-theme
-      gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
-      # gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
+      # gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs"
+      gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
 
   - name: Create Terminator plugins directory if it does not exists
     file:
@@ -418,7 +421,7 @@
       groups: docker
       append: yes
       create_home: no
-      shell: "/home/linuxbrew/.linuxbrew/bin/zsh"
+      shell: "{{ linuxbrew_path }}/.linuxbrew/bin/zsh"
     when: change_shell_zsh | bool
     register: user_change
 

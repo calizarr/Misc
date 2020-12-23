@@ -1,0 +1,52 @@
+---
+apt_repos:
+  - 'ppa:alexlarsson/flatpak'
+  - 'ppa:ubuntu-elisp/ppa'
+  - "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+apt_packages:
+  - 'build-essential'
+  - 'curl'
+  - 'emacs-snapshot'
+  - 'flatpak'
+  - 'fonts-powerline'
+  - 'git'
+  - 'git'
+  - 'libappindicator1'
+  - 'libbz2-dev'
+  - 'libffi-dev'
+  - 'libindicator7'
+  - 'liblzma-dev'
+  - 'libncurses5-dev'
+  - 'libncursesw5-dev'
+  - 'libreadline-dev'
+  - 'libsdl2-2.0-0'
+  - 'libsdl2-dev'
+  - 'libsqlite3-dev'
+  - 'libssl-dev'
+  - 'libxss1'
+  - 'llvm'
+  - 'openjdk-11-jdk'
+  - 'python-openssl'
+  - 'python3-pip' # Needed for terminator themes
+  - 'qt5-default'
+  - 'terminator'
+  - 'terraform'
+  - 'tk-dev'
+  - 'vault'
+  - 'wget'
+  - 'x11-utils' # Mouse binding for back/forward keys
+  - 'xautomation' # Mouse binding for back/forward keys
+  - 'xclip'
+  - 'xz-utils'
+  - 'zlib1g-dev'
+
+system_pip_packages:
+  - 'requests' # Needed for terminator themes
+
+snap_packages:
+  - 'keepassxc'
+  - 'docker'
+  - 'htop'
+snap_classic_packages:
+  - 'slack'
