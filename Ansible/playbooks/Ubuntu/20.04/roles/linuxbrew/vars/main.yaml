@@ -7,7 +7,10 @@ brew_packages:
   - 'hub'
   - 'hub'
   - 'jq'
+  - 'krew'
   - 'kube-ps1'
+  - 'kubectl'
+  - 'kustomize'
   - 'pyenv'
   - 'pyenv-virtualenv'
   - 'ripgrep'
@@ -21,5 +24,4 @@ brew_packages:
   - 'zsh-syntax-highlighting'
 
 install_linuxbrew_if_missing: true
-linuxbrew_path: "/home/linuxbrew"
 upgrade_linuxbrew_packages: false

@@ -1,0 +1,18 @@
+---
+krew_packages:
+  - 'deprecations'
+  - 'example'
+  - 'get-all'
+  - 'ingress-nginx'
+  - 'neat'
+  - 'node-shell'
+  - 'pod-dive'
+  - 'prompt'
+  - 'tail'
+  - 'tree'
+  - 'view-allocations'
+  - 'view-secret'
+  - 'view-utilization'
+  - 'who-can'
+
+argo_version: "v2.11.3"

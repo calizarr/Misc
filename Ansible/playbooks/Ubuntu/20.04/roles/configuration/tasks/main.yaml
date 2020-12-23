@@ -1,18 +1,18 @@
 ---
 - name: Use WSL SSH key
-  copy:
+  ansible.builtin.copy:
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
     mode: "{{ item.mode }}"
-  with_items: "{{ ssh_items }}"
+  loop: "{{ ssh_items | flatten(levels=1) }}"
 
 - name: Check if emacs repo has already been cloned
-  stat:
+  ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.emacs.d"
   register: "emacs_repo"
 
 - name: Get emacs configuration
-  git:
+  ansible.builtin.git:
     repo: git@github.com:calizarr/.emacs.d.git
     dest: "{{ ansible_env.HOME }}/.emacs.d"
     accept_hostkey: yes
@@ -22,7 +22,7 @@
   include_tasks: ./check_dotfiles.yaml
 
 - name: Get dotfiles etc. repo
-  git:
+  ansible.builtin.git:
     repo: git@github.com:calizarr/Misc.git
     dest: "{{ ansible_env.HOME}}/GitHub_Repos/Misc"
     accept_hostkey: yes
@@ -32,15 +32,15 @@
   include_tasks: ./check_dotfiles.yaml  
 
 - name: Get Tmux configuration file and symlink
-  file:
+  ansible.builtin.file:
     src: "{{ ansible_env.HOME }}/GitHub_Repos/Misc/Config_files/tmux_conf_2.9_and_above"
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
     state: link
   when: dotfiles_repo.stat.exists
 
 - name: Set global git config via iteration
-  git_config:
+  ansible.builtin.git_config:
     name: "{{ item.name }}"
     scope: global
     value: "{{ item.value }}"
-  with_items: "{{ git_config.user }}"
+  loop: "{{ git_config.user | flatten(levels=1) }}"

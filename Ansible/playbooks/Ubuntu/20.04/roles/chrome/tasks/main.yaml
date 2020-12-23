@@ -1,5 +1,5 @@
 - name: Download Chrome deb
-  get_url:
+  ansible.builtin.get_url:
     url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
     dest: "{{ ansible_env.HOME }}/Downloads/google-chrome-stable_current_amd64.deb"
     mode: '0755'
@@ -7,12 +7,12 @@
 
 - name: Install Chrome
   become: yes
-  apt:
+  ansible.builtin.apt:
     deb: "{{ chrome_deb.dest }}"
 
 - name: Edit chrome scale factor on linux
   become: yes
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /usr/share/applications/google-chrome.desktop
     regexp: '^Exec=/usr/bin/google-chrome-stable .*%U'
     line: Exec=/usr/bin/google-chrome-stable --force-device-scale-factor=1.5 %U

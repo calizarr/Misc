@@ -1,7 +1,7 @@
 ---
 - name: Gnome mouse pointer and text size for 4k screen
   command: "{{ item }}"
-  with_items:
+  loop:
     # Make mouse pointer larger, default 25
     - gsettings set org.gnome.desktop.interface cursor-size 48
     # Make text larger, default 1.0
@@ -10,7 +10,7 @@
 
 - name: Remove Gnome Animations, Screensaver, Session Idling, Change key-theme
   command: "{{ item }}"
-  with_items:
+  loop:
     # Disable All Animations in Ubuntu
     - gsettings set org.gnome.desktop.interface enable-animations false
     # Disable Idling Session
@@ -19,4 +19,4 @@
     - gsettings set org.gnome.desktop.screensaver lock-enabled false
     # Change to emacs key-theme
     # gsettings set org.gnome.desktop.interface gtk-key-theme "Emacs
-    - gsettings set org.gnome.desktop.interface gtk-key-theme "Default"
+    # - gsettings set org.gnome.desktop.interface gtk-key-theme "Default"

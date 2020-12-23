@@ -1,0 +1,33 @@
+---
+- name: Add Krew to Path
+  ansible.builtin.lineinfile:
+    line: export PATH=${PATH}:${HOME}/.krew/bin
+    insertafter: EOF
+    path: "{{ item }}"
+    state: present
+  loop:
+    - "{{ ansible_env.HOME }}/.profile"
+    - "{{ ansible_env.HOME }}/.bashrc"
+
+- name: Install Krew Packages with Kubectl
+  command: "{{ linuxbrew_path}}/.linuxbrew/bin/kubectl krew install {{ item }}"
+  loop: "{{ krew_packages }}"
+
+- name: Retrieve Argo Binary
+  ansible.builtin.get_url:
+    url: "https://github.com/argoproj/argo/releases/download/{{ argo_version }}/argo-linux-amd64.gz"
+    dest: "{{ ansible_env.HOME }}/Downloads/argo-linux-amd64.gz"
+    mode: u=rwx,g=rwx,o=r
+  register: ansible_gz
+
+- name: Gunzip Argo Binary
+  shell: "gunzip {{ ansible_gz.dest }}"
+  args:
+    removes: "{{ ansible_gz.dest }}"
+
+- name: Change modes for argo binary
+  ansible.builtin.copy:
+    src: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/argo"
+    remote_src: yes
+    mode: u=rwx,g=rwx,o=x

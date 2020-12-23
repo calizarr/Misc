@@ -1,18 +1,18 @@
 ---
 - name: Create Terminator plugins directory if it does not exists
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.config/terminator/plugins"
     state: directory
     mode: '0755'
 
 - name: Install Terminator themes via wget
-  get_url:
+  ansible.builtin.get_url:
     url: https://git.io/v5Zww
     dest: "{{ ansible_env.HOME }}/.config/terminator/plugins/terminator-themes.py"
     mode: '0755'
 
 - name: Copy Terminator Config to Proper Directory
-  copy:
+  ansible.builtin.copy:
     content: |
       [global_config]
         borderless = True
@@ -44,7 +44,7 @@
     dest: "{{ ansible_env.HOME}}/.config/terminator/config"
 
 - name: Set Terminator Tab CSS
-  copy:
+  ansible.builtin.copy:
     dest: "{{ ansible_env.HOME }}/.config/gtk-3.0/gtk.css"
     content: |
       .terminator-terminal-window notebook tab {

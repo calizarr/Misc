@@ -1,0 +1,73 @@
+---
+- hosts: "{{ host | default('nanaya_vm') }}"
+  remote_user: "{{ remote_usr | default('calizarr') }}"
+
+  vars:
+    linuxbrew_path: "/home/linuxbrew"
+
+  environment:
+    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ linuxbrew_path }}/.linuxbrew/bin:{{ ansible_env.PATH }}:{{ linuxbrew_path }}/.linuxbrew/sbin:{{ ansible_env.HOME }}/.krew/bin"
+    HOMEBREW_PREFIX: "{{ linuxbrew_path }}/.linuxbrew"
+    HOMEBREW_CELLAR: "{{ linuxbrew_path }}/.linuxbrew/Cellar"
+    HOMEBREW_REPOSITORY: "{{ linuxbrew_path }}/.linuxbrew/Homebrew"
+
+  tasks:
+  - name: "Create .local/bin"
+    ansible.builtin.file:
+      path: "{{ ansible_env.HOME }}/.local/bin"
+      state: directory
+      mode: u=rwx,g=rwx,o=rx
+
+  - name: Install Apt / Snap / System pip packages
+    include_role:
+      name: './roles/packages'
+
+  - name: Reboot Ubuntu VM post package installation
+    become: yes
+    reboot:
+      connect_timeout: 20
+      msg: "Reboot initiated post package installation"
+      pre_reboot_delay: 6
+      post_reboot_delay: 30
+      reboot_timeout: 600
+
+  - name: Install linuxbrew
+    include_role:
+      name: './roles/linuxbrew'
+
+  - name: Configure ssh, emacs, tmux, git
+    include_role:
+      name: './roles/configuration'
+
+  - name: Change gnome via gsettings etc.
+    include_role:
+      name: './roles/gnome_settings'
+
+  - name: Configure Terminator
+    include_role:
+      name: './roles/terminator'
+
+  - name: Configure pyenv
+    include_role:
+      name: './roles/pyenvs'
+
+  - name: Chrome Installation and Configuration
+    include_role:
+      name: './roles/chrome'
+
+  - name: Add Kubernetes Krew Packages
+    include_role:
+      name: './roles/kubernetes'
+
+  - name: Install zsh, oh-my-zsh, and configure
+    include_role:
+      name: './roles/zsh'
+
+  - name: Reboot Ubuntu VM after ansible playbook has finished
+    become: yes
+    reboot:
+      connect_timeout: 20
+      msg: "Final reboot initiated before machine is operational"
+      pre_reboot_delay: 6
+      post_reboot_delay: 30
+      reboot_timeout: 600

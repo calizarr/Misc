@@ -1,32 +1,32 @@
 ---
 - name: Check for oh-my-zsh directory
-  stat:
+  ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.oh-my-zsh"
   register: oh_my_zsh_dir
 
 - name: Download Oh My Zsh install file
-  get_url:
+  ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: "/tmp/oh-my-zsh_install.sh"
     mode: '0755'
   register: omz_install
 
 - name: Setting up Oh My Zsh
-  command: source {{ ansible_env.HOME }}/.profile && sh {{ omz_install.dest }} --unattended
+  command: "sh {{ omz_install.dest }} --unattended"
   when: not oh_my_zsh_dir.stat.exists | bool
-
+  
 - name: Delete OMZ .zshrc
-  file:
+  ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.zshrc"
     state: absent
 
 - name: Check if zsh repo has already been cloned
-  stat:
+  ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.zsh.d"
   register: zsh_repo
 
 - name: Get zsh configuration
-  git:
+  ansible.builtin.git:
     repo: git@github.com:calizarr/.zsh.d.git
     dest: "{{ ansible_env.HOME }}/.zsh.d"
     accept_hostkey: yes
@@ -39,19 +39,17 @@
       ZDOTDIR="$HOME/.zsh.d"
       source "$ZDOTDIR/.zshenv"
 
-- name: Docker post-installations steps
+- name: Add zsh to valid shells
   become: yes
-  group:
-    name: docker
-    state: present      
+  ansible.builtin.lineinfile:
+    line: "{{ linuxbrew_path }}/.linuxbrew/bin/zsh"
+    insertafter: EOF
+    path: /etc/shells
+    state: present
 
-- name: User specific options
-  become: yes
-  user:
-    name: "{{ ansible_user }}"
-    groups: docker
-    append: yes
-    create_home: no
-    shell: "{{ linuxbrew_path }}/.linuxbrew/bin/zsh"
-  when: change_shell_zsh | bool
-  register: user_change
+- name: Change shell to zsh
+  expect:
+    command: "chsh -s {{ linuxbrew_path }}/.linuxbrew/bin/zsh"
+    responses:
+      (?i)password: "{{ ansible_become_pass }}"
+    creates: ".shell_is_zsh"

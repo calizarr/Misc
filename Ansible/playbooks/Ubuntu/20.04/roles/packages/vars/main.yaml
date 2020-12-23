@@ -1,17 +1,28 @@
 ---
+apt_keys:
+  - https://apt.releases.hashicorp.com/gpg
+  - https://download.docker.com/linux/ubuntu/gpg
+
 apt_repos:
   - 'ppa:alexlarsson/flatpak'
   - 'ppa:ubuntu-elisp/ppa'
-  - "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  - "deb [arch=amd64] https://apt.releases.hashicorp.com {{ lsb_release.stdout }} main"
+  - "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
 
 apt_packages:
+  - 'apt-transport-https'
   - 'build-essential'
+  - 'ca-certificates'
+  - 'containerd.io'
   - 'curl'
+  - 'docker-ce'
+  - 'docker-ce-cli'
   - 'emacs-snapshot'
   - 'flatpak'
   - 'fonts-powerline'
   - 'git'
   - 'git'
+  - 'gnupg-agent'
   - 'libappindicator1'
   - 'libbz2-dev'
   - 'libffi-dev'
@@ -30,6 +41,7 @@ apt_packages:
   - 'python-openssl'
   - 'python3-pip' # Needed for terminator themes
   - 'qt5-default'
+  - 'software-properties-common'
   - 'terminator'
   - 'terraform'
   - 'tk-dev'
@@ -46,7 +58,6 @@ system_pip_packages:
 
 snap_packages:
   - 'keepassxc'
-  - 'docker'
   - 'htop'
 snap_classic_packages:
   - 'slack'

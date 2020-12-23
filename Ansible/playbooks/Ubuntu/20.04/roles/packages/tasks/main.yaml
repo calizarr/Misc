@@ -1,16 +1,20 @@
 ---
-- name: Add hashicorp GPG key
+- name: Add GPG keys
   become: yes
-  apt_key:
-    keyserver: https://apt.releases.hashicorp.com/gpg
+  ansible.builtin.apt_key:
+    url: "{{ item }}"
     state: present
+  loop: "{{ apt_keys }}"
+
+- name: Get lsb_release -cs
+  command: lsb_release -cs
+  register: lsb_release
 
 - name: Add apt repositories
   become: yes
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: "{{ item }}"
-  with_items:
-    - "{{ apt_repos }}"
+  loop: "{{ apt_repos }}"
 
 - name: Apt update and upgrade
   become: yes
@@ -20,23 +24,36 @@
 
 - name: Installing multiple packages (emacs, curl, git)
   become: yes
-  apt:
+  ansible.builtin.apt:
     pkg: "{{ apt_packages }}"
     state: present
   register: package_install
 
 - name: Install system python packages
   become: yes
-  pip:
+  ansible.builtin.pip:
     name: "{{ system_pip_packages }}"
 
 - name: Installing Snap packages
   become: yes
-  snap:
+  ansible.builtin.snap:
     name: "{{ snap_packages }}"
 
 - name: Installing Snap classic confinement packages
   become: yes
-  snap:
+  ansible.builtin.snap:
     classic: yes
     name: "{{ snap_classic_packages }}"
+
+- name: Docker post-installations steps
+  become: yes
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add docker group to main user
+  become: yes
+  user:
+    name: "{{ ansible_user }}"
+    groups: docker
+    append: yes    
