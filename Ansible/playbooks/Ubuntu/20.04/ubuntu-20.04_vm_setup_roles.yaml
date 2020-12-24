@@ -6,7 +6,7 @@
     linuxbrew_path: "/home/linuxbrew"
 
   environment:
-    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ linuxbrew_path }}/.linuxbrew/bin:{{ ansible_env.PATH }}:{{ linuxbrew_path }}/.linuxbrew/sbin:{{ ansible_env.HOME }}/.krew/bin"
+    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ linuxbrew_path }}/.linuxbrew/bin:{{ ansible_env.PATH }}:{{ linuxbrew_path }}/.linuxbrew/sbin:{{ ansible_env.HOME }}/.krew/bin:{{ ansible_env.HOME }}/.pyenv/bin"
     HOMEBREW_PREFIX: "{{ linuxbrew_path }}/.linuxbrew"
     HOMEBREW_CELLAR: "{{ linuxbrew_path }}/.linuxbrew/Cellar"
     HOMEBREW_REPOSITORY: "{{ linuxbrew_path }}/.linuxbrew/Homebrew"
@@ -18,9 +18,21 @@
       state: directory
       mode: u=rwx,g=rwx,o=rx
 
-  - name: Install Apt / Snap / System pip packages
+  - name: Install packages
     include_role:
       name: './roles/packages'
+
+  - name: Install linuxbrew
+    include_role:
+      name: './roles/linuxbrew'
+
+  - name: Configure ssh, emacs, tmux, git
+    include_role:
+      name: './roles/configuration'
+
+  - name: Install zsh, oh-my-zsh, and configure
+    include_role:
+      name: './roles/zsh'
 
   - name: Reboot Ubuntu VM post package installation
     become: yes
@@ -30,14 +42,6 @@
       pre_reboot_delay: 6
       post_reboot_delay: 30
       reboot_timeout: 600
-
-  - name: Install linuxbrew
-    include_role:
-      name: './roles/linuxbrew'
-
-  - name: Configure ssh, emacs, tmux, git
-    include_role:
-      name: './roles/configuration'
 
   - name: Change gnome via gsettings etc.
     include_role:
@@ -59,9 +63,9 @@
     include_role:
       name: './roles/kubernetes'
 
-  - name: Install zsh, oh-my-zsh, and configure
+  - name: GCCEMACS
     include_role:
-      name: './roles/zsh'
+      name: './roles/gccemacs'
 
   - name: Reboot Ubuntu VM after ansible playbook has finished
     become: yes

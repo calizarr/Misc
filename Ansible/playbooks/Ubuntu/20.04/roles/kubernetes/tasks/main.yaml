@@ -7,7 +7,7 @@
     state: present
   loop:
     - "{{ ansible_env.HOME }}/.profile"
-    - "{{ ansible_env.HOME }}/.bashrc"
+    # - "{{ ansible_env.HOME }}/.bashrc"
 
 - name: Install Krew Packages with Kubectl
   command: "{{ linuxbrew_path}}/.linuxbrew/bin/kubectl krew install {{ item }}"
@@ -21,13 +21,15 @@
   register: ansible_gz
 
 - name: Gunzip Argo Binary
-  shell: "gunzip {{ ansible_gz.dest }}"
+  shell: "gunzip -f {{ ansible_gz.dest }}"
   args:
     removes: "{{ ansible_gz.dest }}"
+    creates: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
 
 - name: Change modes for argo binary
   ansible.builtin.copy:
     src: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
     dest: "{{ ansible_env.HOME }}/.local/bin/argo"
     remote_src: yes
+    force: yes
     mode: u=rwx,g=rwx,o=x

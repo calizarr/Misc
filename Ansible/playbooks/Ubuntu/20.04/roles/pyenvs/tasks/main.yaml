@@ -1,5 +1,17 @@
 ---
-- name: Install the latest python version
+- name: Download pyenv installer
+  get_url:
+    url: https://pyenv.run
+    dest: "{{ ansible_env.HOME }}/Downloads/pyenv.sh"
+    mode: u=rwx,g=rwx,o=r
+  register: pyenv_sh
+
+- name: Install pyenv
+  command: "bash -c {{ pyenv_sh.dest }}"
+  args:
+    creates: "{{ ansible_env.HOME }}/.pyenv"
+
+- name: Install the latest python versiona
   command: "pyenv install -s {{ python_settings.latest }}"
 
 - name: Set the latest python version as global
@@ -11,8 +23,8 @@
     block: "{{ python_settings.pyenv_init }}"
     state: present
 
-- name: Check if pyenv initialization has been added to .bashrc
-  ansible.builtin.blockinfile:
-    path: "{{ ansible_env.HOME }}/.bashrc"
-    block: "{{ python_settings.pyenv_init }}"
-    state: present
+# - name: Check if pyenv initialization has been added to .bashrc
+#   ansible.builtin.blockinfile:
+#     path: "{{ ansible_env.HOME }}/.bashrc"
+#     block: "{{ python_settings.pyenv_init }}"
+#     state: present

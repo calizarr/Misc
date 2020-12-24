@@ -5,4 +5,5 @@ python_settings:
     # Load pyenv automatically by appending
     # the following to ~/.bashrc:
 
-    eval "$(pyenv init -)"  
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)
