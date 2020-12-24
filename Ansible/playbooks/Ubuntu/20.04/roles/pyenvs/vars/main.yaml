@@ -6,4 +6,4 @@ python_settings:
     # the following to ~/.bashrc:
 
     eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)
+    eval "$(pyenv virtualenv-init -)"

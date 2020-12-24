@@ -17,6 +17,13 @@
 - name: Set the latest python version as global
   command: "pyenv global {{ python_settings.latest }}"
 
+- name: Add pyenv to PATH
+  ansible.builtin.lineinfile:
+    path: "{{ ansible_env.HOME }}/.profile"
+    line: "export PATH=${HOME}/.pyenv/bin:${PATH}"
+    insertafter: EOF
+    state: present
+
 - name: Check if pyenv initialization has been added to .profile
   ansible.builtin.blockinfile:
     path: "{{ ansible_env.HOME }}/.profile"

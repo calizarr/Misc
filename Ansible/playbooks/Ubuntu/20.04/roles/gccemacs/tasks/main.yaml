@@ -1,0 +1,47 @@
+---
+- name: gccemacs - apt packages etc
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+  loop:
+    - 'ppa:ubuntu-toolchain-r/ppa'
+
+- name: gccemacs - allow source packages
+  become: yes
+  ansible.builtin.replace:
+    backup: yes
+    path: /etc/apt/sources.list
+    regexp: '^#\s*(deb-src.*)$'
+    replace: '\1'
+
+- name: gccemacs - apt update and install
+  become: yes
+  apt:
+    update_cache: yes
+    pkg: "{{ gccemacs_apt_packages }}"
+    state: present
+
+- name: gccemacs - get emacs dependencies
+  become: yes
+  apt:
+    pkg: emacs
+    state: build-dep
+
+- name: gccemacs - get git repository
+  ansible.builtin.git:
+    repo: https://git.savannah.gnu.org/git/emacs.git
+    dest: "{{ gccemacs_dest }}"
+    accept_hostkey: yes
+    version: feature/native-comp
+
+- name: gccemacs - Configure and run
+  shell: |
+    ./autogen.sh && \
+    ./configure --with-nativecomp --with-json --with-mailutils --prefix=$HOME/.local --disable-silent-rules --program-prefix=gcc --with-modules=yes --with-x=yes --with-x-toolkit=gtk3 --with-xwidgets=yes && \
+    make -j ${JOBS} && make install
+  args:
+    chdir: "{{ gccemacs_dest }}"
+    creates: "{{ ansible_env.HOME }}/.local/bin/gccemacs"
+  environment:
+    - CC: "gcc-10"
+    - JOBS: 3
