@@ -6,8 +6,7 @@
     path: "{{ item }}"
     state: present
   loop:
-    - "{{ ansible_env.HOME }}/.profile"
-    # - "{{ ansible_env.HOME }}/.bashrc"
+    - "{{ ansible_env.HOME }}/.bashrc"
 
 - name: Install Krew Packages with Kubectl
   command: "{{ linuxbrew_path}}/.linuxbrew/bin/kubectl krew install {{ item }}"

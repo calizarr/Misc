@@ -25,14 +25,13 @@
     not linuxbrew_check.stat.exists | bool and
     install_linuxbrew_if_missing | bool
 
-- name: Add Linuxbrew to .profile and .bashrc
+- name: Add Linuxbrew to .bashrc
   ansible.builtin.lineinfile:
     line: "eval $({{ linuxbrew_path }}/.linuxbrew/bin/brew shellenv)"
     insertafter: EOF
     path: "{{ item }}"
     state: present
   loop:
-    - "{{ ansible_env.HOME }}/.profile"
     - "{{ ansible_env.HOME }}/.bashrc"
 
 - name: Check if Linuxbrew is installed
