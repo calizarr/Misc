@@ -18,7 +18,7 @@
 
 - name: Apt update and upgrade
   become: yes
-  apt:
+  ansible.builtin.apt:
     upgrade: dist
     update_cache: yes
 
@@ -53,7 +53,7 @@
 
 - name: Add docker group to main user
   become: yes
-  user:
+  ansible.builtin.user:
     name: "{{ ansible_user }}"
     groups: docker
     append: yes    

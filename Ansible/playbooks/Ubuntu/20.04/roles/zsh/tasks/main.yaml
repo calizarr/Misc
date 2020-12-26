@@ -33,23 +33,15 @@
   when: not zsh_repo.stat.exists | bool
 
 - name: Creating the .zshenv to point to .zsh.d repo
-  copy:
-    dest: ~/.zshenv
+  ansible.builtin.copy:
+    dest: "{{ ansible_env.HOME }}/.zshenv"
     content: |
       ZDOTDIR="$HOME/.zsh.d"
       source "$ZDOTDIR/.zshenv"
 
-- name: Add zsh to valid shells
-  become: yes
-  ansible.builtin.lineinfile:
-    line: "{{ linuxbrew_path }}/.linuxbrew/bin/zsh"
-    insertafter: EOF
-    path: /etc/shells
-    state: present
-
 - name: Change shell to zsh
   expect:
-    command: "chsh -s {{ linuxbrew_path }}/.linuxbrew/bin/zsh"
+    command: "chsh -s /usr/bin/zsh"
     responses:
       (?i)password: "{{ ansible_become_pass }}"
     creates: ".shell_is_zsh"

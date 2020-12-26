@@ -16,3 +16,4 @@ krew_packages:
   - 'who-can'
 
 argo_version: "v2.11.3"
+argocd_version: "v1.8.1"

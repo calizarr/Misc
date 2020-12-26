@@ -1,0 +1,24 @@
+---
+- name: sdkman - download shell script
+  ansible.builtin.get_url:
+    url: https://get.sdkman.io
+    dest: "{{ ansible_env.HOME }}/Downloads/sdkman_install.sh"
+    mode: u=rwx,g=rwx,o=r
+  register: sdkman_sh
+
+- name: sdkman - install
+  command: "bash {{ sdkman_sh.dest }}"
+  args:
+    creates: "{{ ansible_env.HOME }}/.sdkman"
+
+- name: sdkman - add sdkman to .bashrc
+  ansible.builtin.blockinfile:
+    path: "{{ bash_rc }}"
+    block: "{{ sdkman_init }}"
+    state: present
+
+- name: sdkman - install packages
+  shell: |
+    /bin/bash -c ". {{ ansible_env.HOME }}/.sdkman/bin/sdkman-init.sh && \
+    sdk install {{ item.name }} {{ item.identifier }}"
+  loop: "{{ sdkman_packages | flatten(levels=1) }}"

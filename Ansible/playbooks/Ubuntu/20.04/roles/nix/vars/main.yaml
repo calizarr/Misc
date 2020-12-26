@@ -1,0 +1,33 @@
+---
+nix_packages:
+  # - 'nixpkgs.scala'
+  - 'nixpkgs.ag'
+  - 'nixpkgs.awscli2'
+  - 'nixpkgs.fd'
+  - 'nixpkgs.fzf'
+  - 'nixpkgs.gitAndTools.hub'
+  - 'nixpkgs.gnupg'
+  - 'nixpkgs.jq'
+  - 'nixpkgs.kubectl'
+  - 'nixpkgs.kubernetes-helm'
+  - 'nixpkgs.kustomize'
+  - 'nixpkgs.ripgrep'
+  - 'nixpkgs.silver-searcher'
+  - 'nixpkgs.tmux'
+  - 'nixpkgs.yq-go'
+  # - 'nixpkgs.zsh'
+  - 'nixpkgs.zsh-autosuggestions'
+  - 'nixpkgs.zsh-completions'
+  - 'nixpkgs.zsh-history-substring-search'
+  - 'nixpkgs.zsh-syntax-highlighting'
+
+nix_visual_packages:
+  # - 'nixpkgs.docker'
+  - 'nixpkgs.jetbrains.idea-community'
+  - 'nixpkgs.slack'
+  - 'nixpkgs.sublime3'
+
+nix_init: |
+  if [ -e {{ ansible_env.HOME }}/.nix-profile/etc/profile.d/nix.sh ]; then
+    . {{ ansible_env.HOME }}/.nix-profile/etc/profile.d/nix.sh
+  fi

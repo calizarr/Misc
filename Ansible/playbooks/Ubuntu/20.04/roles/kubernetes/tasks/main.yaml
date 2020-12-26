@@ -1,34 +1,60 @@
 ---
-- name: Add Krew to Path
+- name: kubernetes - Install Krew
+  shell: |
+    (
+      set -x; cd "$(mktemp -d)" &&
+      curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
+      tar zxvf krew.tar.gz &&
+      KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_$(uname -m | sed -e 's/x86_64/amd64/' -e 's/arm.*$/arm/')" &&
+      "$KREW" install krew
+    )
+  args:
+    creates: "{{ ansible_env.HOME }}/.krew"
+
+- name: kubernetes - Add Krew to Path
   ansible.builtin.lineinfile:
-    line: export PATH=${PATH}:${HOME}/.krew/bin
+    line: export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
     insertafter: EOF
     path: "{{ item }}"
     state: present
   loop:
     - "{{ ansible_env.HOME }}/.bashrc"
 
-- name: Install Krew Packages with Kubectl
-  command: "{{ linuxbrew_path}}/.linuxbrew/bin/kubectl krew install {{ item }}"
+- name: kubernetes - Install Krew Packages with Kubectl
+  command: "kubectl krew install {{ item }}"
   loop: "{{ krew_packages }}"
 
-- name: Retrieve Argo Binary
+- name: kubernetes - Get Argo Binary
   ansible.builtin.get_url:
     url: "https://github.com/argoproj/argo/releases/download/{{ argo_version }}/argo-linux-amd64.gz"
     dest: "{{ ansible_env.HOME }}/Downloads/argo-linux-amd64.gz"
     mode: u=rwx,g=rwx,o=r
-  register: ansible_gz
+  register:argo_gz
 
-- name: Gunzip Argo Binary
-  shell: "gunzip -f {{ ansible_gz.dest }}"
+- name: kubernetes - Unpack Argo Binary
+  shell: "gunzip -f {{ argo_gz.dest }}"
   args:
     removes: "{{ ansible_gz.dest }}"
     creates: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
 
-- name: Change modes for argo binary
+- name: kubernetes - Copy Argo binary to Path
   ansible.builtin.copy:
-    src: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
+    src: "{{ argo_gz.dest | dirname }}/argo-linux-amd64"
     dest: "{{ ansible_env.HOME }}/.local/bin/argo"
     remote_src: yes
     force: yes
     mode: u=rwx,g=rwx,o=x
+
+- name: kubernetes - Get ArgoCD binary
+  ansible.builtin.get_url:
+    url: "curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/{{ argocd_version }}/argocd-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/Downloads/argocd-linux-amd64"
+    mode: u=rwx,g=rwx,o=r
+    register: argocd
+
+- name: kubernetes - Copy ArgoCD binary to PATH
+  src: "{{ argocd.dest | dirname }}/argocd-linux-amd64"
+  dest: "{{ ansible_env.HOME }}/.local/bin/argocd"
+  remote_src: yes
+  force: yes
+  mode: u=rwx,g=rwx,o=x
