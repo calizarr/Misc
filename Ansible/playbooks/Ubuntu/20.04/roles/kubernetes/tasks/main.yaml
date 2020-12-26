@@ -29,13 +29,13 @@
     url: "https://github.com/argoproj/argo/releases/download/{{ argo_version }}/argo-linux-amd64.gz"
     dest: "{{ ansible_env.HOME }}/Downloads/argo-linux-amd64.gz"
     mode: u=rwx,g=rwx,o=r
-  register:argo_gz
+  register: argo_gz
 
 - name: kubernetes - Unpack Argo Binary
   shell: "gunzip -f {{ argo_gz.dest }}"
   args:
-    removes: "{{ ansible_gz.dest }}"
-    creates: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
+    removes: "{{ argo_gz.dest }}"
+    creates: "{{ argo_gz.dest | dirname }}/argo-linux-amd64"
 
 - name: kubernetes - Copy Argo binary to Path
   ansible.builtin.copy:
@@ -47,14 +47,21 @@
 
 - name: kubernetes - Get ArgoCD binary
   ansible.builtin.get_url:
-    url: "curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/{{ argocd_version }}/argocd-linux-amd64"
+    url: "https://github.com/argoproj/argo-cd/releases/download/{{ argocd_version }}/argocd-linux-amd64"
     dest: "{{ ansible_env.HOME }}/Downloads/argocd-linux-amd64"
     mode: u=rwx,g=rwx,o=r
-    register: argocd
+  register: argocd
 
 - name: kubernetes - Copy ArgoCD binary to PATH
-  src: "{{ argocd.dest | dirname }}/argocd-linux-amd64"
-  dest: "{{ ansible_env.HOME }}/.local/bin/argocd"
-  remote_src: yes
-  force: yes
-  mode: u=rwx,g=rwx,o=x
+  ansible.builtin.copy:
+    src: "{{ argocd.dest | dirname }}/argocd-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/argocd"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=x
+
+- name: kubernetes - Get kube-ps1 prompt
+  ansible.builtin.git:
+    repo: git@github.com:jonmosco/kube-ps1.git
+    dest: "{{ ansible_env.HOME }}/.local/share/kube-ps1"
+    accept_hostkey: yes

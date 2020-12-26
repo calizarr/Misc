@@ -28,6 +28,6 @@ nix_visual_packages:
   - 'nixpkgs.sublime3'
 
 nix_init: |
-  if [ -e {{ ansible_env.HOME }}/.nix-profile/etc/profile.d/nix.sh ]; then
-    . {{ ansible_env.HOME }}/.nix-profile/etc/profile.d/nix.sh
+  if [ -e $HOME/.nix-profile/etc/profile.d/nix.sh ]; then
+    . $HOME/.nix-profile/etc/profile.d/nix.sh
   fi

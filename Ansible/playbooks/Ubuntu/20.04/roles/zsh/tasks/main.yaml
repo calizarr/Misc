@@ -1,45 +1,45 @@
 ---
-- name: Check for oh-my-zsh directory
+- name: ZSH - Check for oh-my-zsh directory
   ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.oh-my-zsh"
   register: oh_my_zsh_dir
 
-- name: Download Oh My Zsh install file
+- name: ZSH - Download Oh My Zsh install file
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
     dest: "/tmp/oh-my-zsh_install.sh"
     mode: '0755'
   register: omz_install
 
-- name: Setting up Oh My Zsh
+- name: ZSH - Setting up Oh My Zsh
   command: "sh {{ omz_install.dest }} --unattended"
   when: not oh_my_zsh_dir.stat.exists | bool
   
-- name: Delete OMZ .zshrc
+- name: ZSH - Delete OMZ .zshrc
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.zshrc"
     state: absent
 
-- name: Check if zsh repo has already been cloned
+- name: ZSH - Check if zsh repo has already been cloned
   ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.zsh.d"
   register: zsh_repo
 
-- name: Get zsh configuration
+- name: ZSH - Get zsh configuration
   ansible.builtin.git:
     repo: git@github.com:calizarr/.zsh.d.git
     dest: "{{ ansible_env.HOME }}/.zsh.d"
     accept_hostkey: yes
   when: not zsh_repo.stat.exists | bool
 
-- name: Creating the .zshenv to point to .zsh.d repo
+- name: ZSH - Creating the .zshenv to point to .zsh.d repo
   ansible.builtin.copy:
     dest: "{{ ansible_env.HOME }}/.zshenv"
     content: |
       ZDOTDIR="$HOME/.zsh.d"
       source "$ZDOTDIR/.zshenv"
 
-- name: Change shell to zsh
+- name: ZSH - Change shell to zsh
   expect:
     command: "chsh -s /usr/bin/zsh"
     responses:
