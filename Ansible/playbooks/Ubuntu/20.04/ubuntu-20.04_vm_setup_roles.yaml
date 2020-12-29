@@ -37,7 +37,7 @@
 
   - name: GCCEMACS
     include_role:
-      name: './roles/gccemacs'      
+      name: './roles/gccemacs'
 
   - name: Configure ssh, emacs, tmux, git
     include_role:

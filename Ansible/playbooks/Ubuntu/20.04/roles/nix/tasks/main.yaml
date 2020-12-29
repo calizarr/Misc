@@ -24,4 +24,4 @@
     marker_end: "NIX END"
 
 - name: nix - install packages
-  command: "nix-env --install --attr {{ nix_packages | join (' ') }}"
+  command: "nix-env --max-jobs auto --install --attr {{ nix_packages | join (' ') }}"

@@ -44,4 +44,4 @@
     creates: "{{ ansible_env.HOME }}/.local/bin/gccemacs"
   environment:
     - CC: "gcc-10"
-    - JOBS: 3
+    - JOBS: 22
