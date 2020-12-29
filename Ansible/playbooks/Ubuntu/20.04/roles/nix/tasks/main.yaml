@@ -24,4 +24,24 @@
     marker_end: "NIX END"
 
 - name: nix - install packages
-  command: "nix-env --max-jobs auto --install --attr {{ nix_packages | join (' ') }}"
+  command: "nix-env --cores 0 --max-jobs auto --install --attr {{ nix_packages | join (' ') }}"
+
+- name: nix - Add fzf file
+  ansible.builtin.copy:
+    content: |
+      # Setup fzf
+
+      checkBinary=$(which fzf-share)
+      checkResult=$?
+
+      if [[ $? -eq 0 ]] ; then
+          # Auto-completion
+          # ---------------
+          if [[ $- == *i* ]]; then
+              source $(fzf-share)/completion.zsh
+          fi
+          # Key bindings
+          # ------------
+          source $(fzf-share)/key-bindings.zsh
+      fi
+    dest: "{{ ansible_env.HOME }}/.fzf.zsh"
