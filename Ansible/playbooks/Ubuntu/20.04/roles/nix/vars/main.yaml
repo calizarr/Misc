@@ -1,12 +1,14 @@
 ---
 nix_packages:
   # - 'nixpkgs.scala'
+  # - 'nixpkgs.zsh'
   - 'nixpkgs.ag'
   - 'nixpkgs.awscli2'
   - 'nixpkgs.fd'
   - 'nixpkgs.fzf'
   - 'nixpkgs.gitAndTools.hub'
   - 'nixpkgs.gnupg'
+  - 'nixpkgs.htop'
   - 'nixpkgs.jq'
   - 'nixpkgs.kubectl'
   - 'nixpkgs.kubernetes-helm'
@@ -15,7 +17,6 @@ nix_packages:
   - 'nixpkgs.silver-searcher'
   - 'nixpkgs.tmux'
   - 'nixpkgs.yq-go'
-  # - 'nixpkgs.zsh'
   - 'nixpkgs.zsh-autosuggestions'
   - 'nixpkgs.zsh-completions'
   - 'nixpkgs.zsh-history-substring-search'
