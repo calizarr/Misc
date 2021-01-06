@@ -60,8 +60,84 @@
     force: yes
     mode: u=rwx,g=rwx,o=x
 
+- name: kubernetes - Get Stern Version
+  shell: |
+    curl -Ls https://github.com/wercker/stern/releases/latest | grep tag_name | uniq | awk -F'tag_name=' '{print $2}' | awk -F'&amp' '{print $1}'
+  register: stern_version
+
+- name: kubernetes - Get Stern binary
+  ansible.builtin.get_url:
+    url: "https://github.com/wercker/stern/releases/download/{{ stern_version.stdout }}/stern_linux_amd64"
+    dest: "{{ ansible_env.HOME }}/Downloads/stern_linux_amd64"
+    mode: u=rwx,g=rwx,o=r
+  register: stern
+
+- name: kubernetes - Copy Stern binary to PATH
+  ansible.builtin.copy:
+    src: "{{ stern.dest | dirname }}/stern_linux_amd_64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/stern"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=x
+
+- name: kubernetes - Get Kops Version
+  shell: |
+    curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)
+  register: kops_version
+
+- name: kubernetes - Get Kops binary
+  ansible.builtin.get_url:
+    url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version.stdout }}/kops-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/Downloads/kops-linux-amd64"
+    mode: u=rwx,g=rwx,o=r
+  register: kops
+
+- name: kubernetes - Copy Kops binary to PATH
+  ansible.builtin.copy:
+    src: "{{ kops.dest | dirname }}/kops-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/kops"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=r
+
+- name: kubernetes - Get kubectx and kubens version
+  shell: |
+    curl -Ls https://github.com/ahmetb/kubectx/releases/latest | grep tag_name | uniq | awk -F'tag_name=' '{print $2}' | awk -F'&amp' '{print $1}'
+  register: kubectx_version
+
+- name: kubernetes - Get kubectx binary
+  ansible.builtin.get_url:
+    url: "https://github.com/ahmetb/kubectx/releases/download/{{ kubectx_version.stdout }}/kubectx_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    dest: "{{ ansible_env.HOME }}/Downloads/kubectx_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    mode: u=rwx,g=rwx,o=r
+  register: kubectx
+
+- name: kubernetes - Copy kubectx binary to PATH
+  ansible.builtin.copy:
+    src: "{{ kubectx.dest | dirname }}/kubectx_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    dest: "{{ ansible_env.HOME }}/.local/bin/kubectx"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=r
+
+- name: kubernetes - Get kubens binary
+  ansible.builtin.get_url:
+    url: "https://github.com/ahmetb/kubectx/releases/download/{{ kubectx_version.stdout }}/kubens_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    dest: "{{ ansible_env.HOME }}/Downloads/kubens_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    mode: u=rwx,g=rwx,o=r
+  register: kubens
+
+- name: kubernetes - Copy kubens binary to PATH
+  ansible.builtin.copy:
+    src: "{{ kubens.dest | dirname }}/kubens_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    dest: "{{ ansible_env.HOME }}/.local/bin/kubens"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=r    
+
 - name: kubernetes - Get kube-ps1 prompt
   ansible.builtin.git:
     repo: git@github.com:jonmosco/kube-ps1.git
     dest: "{{ ansible_env.HOME }}/.local/share/kube-ps1"
+
     accept_hostkey: yes
