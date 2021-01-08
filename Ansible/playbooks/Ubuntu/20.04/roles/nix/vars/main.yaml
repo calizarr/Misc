@@ -7,7 +7,7 @@ nix_packages:
   - 'nixpkgs.fd'
   - 'nixpkgs.fzf'
   - 'nixpkgs.gitAndTools.hub'
-  - 'nixpkgs.gnupg'
+  # - 'nixpkgs.gnupg'
   - 'nixpkgs.htop'
   - 'nixpkgs.jq'
   - 'nixpkgs.kubectl'
