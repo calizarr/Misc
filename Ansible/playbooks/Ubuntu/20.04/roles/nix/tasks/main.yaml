@@ -26,6 +26,13 @@
 - name: nix - install packages
   command: "nix-env --cores 0 --max-jobs auto --install --attr {{ nix_packages | join (' ') }}"
 
+  # Necessary because of a bug in nix on both NixOS and non-NixOS systems
+  # See: https://github.com/NixOS/nix/issues/599#issuecomment-147200966
+  # Or https://github.com/NixOS/nix/issues/599#issuecomment-153885553
+  # Or https://github.com/NixOS/nixpkgs/issues/57957#issuecomment-478125749
+- name: nix - install glibc-locales (special)
+  command: "nix-env --cores 0 --max-jobs auto --install glibc-locales"
+
 - name: nix - Add fzf file
   ansible.builtin.copy:
     content: |
