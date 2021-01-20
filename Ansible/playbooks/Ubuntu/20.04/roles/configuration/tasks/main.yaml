@@ -29,7 +29,7 @@
   when: not dotfiles_repo.stat.exists
 
 - name: Check if dotfiles repo has been cloned
-  include_tasks: ./check_dotfiles.yaml  
+  include_tasks: ./check_dotfiles.yaml
 
 - name: Get Tmux configuration file and symlink
   ansible.builtin.file:
@@ -37,6 +37,12 @@
     dest: "{{ ansible_env.HOME }}/.tmux.conf"
     state: link
   when: dotfiles_repo.stat.exists
+
+- name: tmux - get TPM plugin system
+  ansible.builtin.git:
+    repo: git@github.com:tmux-plugins/tpm.git
+    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+    accept_hostkey: yes
 
 - name: Set global git config via iteration
   ansible.builtin.git_config:

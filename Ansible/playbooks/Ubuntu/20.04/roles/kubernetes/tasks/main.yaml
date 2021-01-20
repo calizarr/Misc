@@ -1,34 +1,154 @@
 ---
-- name: Add Krew to Path
+- name: kubernetes - Install Krew
+  shell: |
+    (
+      set -x; cd "$(mktemp -d)" &&
+      curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz" &&
+      tar zxvf krew.tar.gz &&
+      KREW=./krew-"$(uname | tr '[:upper:]' '[:lower:]')_$(uname -m | sed -e 's/x86_64/amd64/' -e 's/arm.*$/arm/')" &&
+      "$KREW" install krew
+    )
+  args:
+    creates: "{{ ansible_env.HOME }}/.krew"
+
+- name: kubernetes - Add Krew to Path
   ansible.builtin.lineinfile:
-    line: export PATH=${PATH}:${HOME}/.krew/bin
+    line: export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
     insertafter: EOF
     path: "{{ item }}"
     state: present
   loop:
     - "{{ ansible_env.HOME }}/.bashrc"
 
-- name: Install Krew Packages with Kubectl
-  command: "{{ linuxbrew_path}}/.linuxbrew/bin/kubectl krew install {{ item }}"
+- name: kubernetes - Install Krew Packages with Kubectl
+  command: "kubectl krew install {{ item }}"
   loop: "{{ krew_packages }}"
 
-- name: Retrieve Argo Binary
+- name: kubernetes - Get Argo Binary
   ansible.builtin.get_url:
     url: "https://github.com/argoproj/argo/releases/download/{{ argo_version }}/argo-linux-amd64.gz"
     dest: "{{ ansible_env.HOME }}/Downloads/argo-linux-amd64.gz"
     mode: u=rwx,g=rwx,o=r
-  register: ansible_gz
+  register: argo_gz
 
-- name: Gunzip Argo Binary
-  shell: "gunzip -f {{ ansible_gz.dest }}"
+- name: kubernetes - Unpack Argo Binary
+  shell: "gunzip -f {{ argo_gz.dest }}"
   args:
-    removes: "{{ ansible_gz.dest }}"
-    creates: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
+    removes: "{{ argo_gz.dest }}"
+    creates: "{{ argo_gz.dest | dirname }}/argo-linux-amd64"
 
-- name: Change modes for argo binary
+- name: kubernetes - Copy Argo binary to Path
   ansible.builtin.copy:
-    src: "{{ ansible_gz.dest | dirname }}/argo-linux-amd64"
+    src: "{{ argo_gz.dest | dirname }}/argo-linux-amd64"
     dest: "{{ ansible_env.HOME }}/.local/bin/argo"
     remote_src: yes
     force: yes
     mode: u=rwx,g=rwx,o=x
+
+- name: kubernetes - Get ArgoCD binary
+  ansible.builtin.get_url:
+    url: "https://github.com/argoproj/argo-cd/releases/download/{{ argocd_version }}/argocd-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/Downloads/argocd-linux-amd64"
+    mode: u=rwx,g=rwx,o=r
+  register: argocd
+
+- name: kubernetes - Copy ArgoCD binary to PATH
+  ansible.builtin.copy:
+    src: "{{ argocd.dest | dirname }}/argocd-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/argocd"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=x
+
+- name: kubernetes - Get Stern Version
+  shell: |
+    curl -Ls https://github.com/wercker/stern/releases/latest | grep tag_name | uniq | awk -F'tag_name=' '{print $2}' | awk -F'&amp' '{print $1}'
+  register: stern_version
+
+- name: kubernetes - Get Stern binary
+  ansible.builtin.get_url:
+    url: "https://github.com/wercker/stern/releases/download/{{ stern_version.stdout }}/stern_linux_amd64"
+    dest: "{{ ansible_env.HOME }}/Downloads/stern_linux_amd64"
+    mode: u=rwx,g=rwx,o=r
+  register: stern
+
+- name: kubernetes - Copy Stern binary to PATH
+  ansible.builtin.copy:
+    src: "{{ stern.dest | dirname }}/stern_linux_amd64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/stern"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=x
+
+- name: kubernetes - Get Kops Version
+  shell: |
+    curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4
+  register: kops_version
+
+- name: kubernetes - Get Kops binary
+  ansible.builtin.get_url:
+    url: "https://github.com/kubernetes/kops/releases/download/{{ kops_version.stdout }}/kops-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/Downloads/kops-linux-amd64"
+    mode: u=rwx,g=rwx,o=r
+  register: kops
+
+- name: kubernetes - Copy Kops binary to PATH
+  ansible.builtin.copy:
+    src: "{{ kops.dest | dirname }}/kops-linux-amd64"
+    dest: "{{ ansible_env.HOME }}/.local/bin/kops"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=r
+
+- name: kubernetes - Get kubectx and kubens version
+  shell: |
+    curl -Ls https://github.com/ahmetb/kubectx/releases/latest | grep tag_name | uniq | awk -F'tag_name=' '{print $2}' | awk -F'&amp' '{print $1}'
+  register: kubectx_version
+
+- name: kubernetes - Get kubectx tarball
+  ansible.builtin.get_url:
+    url: "https://github.com/ahmetb/kubectx/releases/download/{{ kubectx_version.stdout }}/kubectx_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    dest: "{{ ansible_env.HOME }}/Downloads/kubectx_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    mode: u=rwx,g=rwx,o=r
+  register: kubectx_gz
+
+- name: kubernetes - Unpack kubectx tarball
+  command: "tar xzf {{ kubectx_gz.dest }}"
+  args:
+    removes: "{{ kubectx_gz.dest }}"
+    creates: "{{ kubectx_gz.dest | dirname }}/kubectx"
+
+- name: kubernetes - Copy kubectx binary to PATH
+  ansible.builtin.copy:
+    src: "{{ kubectx_gz.dest | dirname }}/kubectx"
+    dest: "{{ ansible_env.HOME }}/.local/bin/kubectx"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=r
+
+- name: kubernetes - Get kubens tarball
+  ansible.builtin.get_url:
+    url: "https://github.com/ahmetb/kubectx/releases/download/{{ kubectx_version.stdout }}/kubens_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    dest: "{{ ansible_env.HOME }}/Downloads/kubens_{{ kubectx_version.stdout }}_linux_x86_64.tar.gz"
+    mode: u=rwx,g=rwx,o=r
+  register: kubens_gz
+
+- name: kubernetes - Unpack kubens tarball
+  command: "tar xzf {{ kubens_gz.dest }}"
+  args:
+    removes: "{{ kubens_gz.dest }}"
+    creates: "{{ kubens_gz.dest | dirname }}/kubens"
+
+- name: kubernetes - Copy kubens binary to PATH
+  ansible.builtin.copy:
+    src: "{{ kubens_gz.dest | dirname }}/kubens"
+    dest: "{{ ansible_env.HOME }}/.local/bin/kubens"
+    remote_src: yes
+    force: yes
+    mode: u=rwx,g=rwx,o=r
+
+- name: kubernetes - Get kube-ps1 prompt
+  ansible.builtin.git:
+    repo: git@github.com:jonmosco/kube-ps1.git
+    dest: "{{ ansible_env.HOME }}/.local/share/kube-ps1"
+    accept_hostkey: yes

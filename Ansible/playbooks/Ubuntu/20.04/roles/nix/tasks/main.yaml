@@ -1,0 +1,54 @@
+---
+- name: nix - download shell script
+  ansible.builtin.get_url:
+    url: https://nixos.org/nix/install
+    dest: "{{ ansible_env.HOME }}/Downloads/nix_install.sh"
+    mode: u=rwx,g=rwx,o=r
+  register: nix_env_sh
+
+- name: nix - install
+  ansible.builtin.expect:
+    command: "bash {{ nix_env_sh.dest }}"
+    creates: /nix
+    responses:
+      (?i)password: "{{ ansible_become_pass }}"
+  environment:
+    - NIX_INSTALLER_NO_MODIFY_PROFILE: 1
+
+- name: nix - add nix to .bashrc
+  ansible.builtin.blockinfile:
+    path: "{{ bash_rc }}"
+    block: "{{ nix_init }}"
+    state: present
+    marker_begin: "NIX BEGIN"
+    marker_end: "NIX END"
+
+- name: nix - install packages
+  command: "nix-env --cores 0 --max-jobs auto --install --attr {{ nix_packages | join (' ') }}"
+
+  # Necessary because of a bug in nix on both NixOS and non-NixOS systems
+  # See: https://github.com/NixOS/nix/issues/599#issuecomment-147200966
+  # Or https://github.com/NixOS/nix/issues/599#issuecomment-153885553
+  # Or https://github.com/NixOS/nixpkgs/issues/57957#issuecomment-478125749
+- name: nix - install glibc-locales (special)
+  command: "nix-env --cores 0 --max-jobs auto --install glibc-locales"
+
+- name: nix - Add fzf file
+  ansible.builtin.copy:
+    content: |
+      # Setup fzf
+
+      checkBinary=$(which fzf-share)
+      checkResult=$?
+
+      if [[ $? -eq 0 ]] ; then
+          # Auto-completion
+          # ---------------
+          if [[ $- == *i* ]]; then
+              source $(fzf-share)/completion.zsh
+          fi
+          # Key bindings
+          # ------------
+          source $(fzf-share)/key-bindings.zsh
+      fi
+    dest: "{{ ansible_env.HOME }}/.fzf.zsh"

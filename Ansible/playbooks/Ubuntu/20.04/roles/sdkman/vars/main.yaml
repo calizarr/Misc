@@ -1,0 +1,9 @@
+sdkman_packages:
+  - { name: "java", identifier: "11.0.9.hs-adpt" }
+  - { name: "sbt", identifier: "1.4.6" }
+  - { name: "scala", identifier: "2.13.4" }
+
+sdkman_init: |
+  #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+  export SDKMAN_DIR="$HOME/.sdkman"
+  [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"

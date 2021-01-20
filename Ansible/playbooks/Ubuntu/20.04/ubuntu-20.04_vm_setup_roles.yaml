@@ -3,28 +3,41 @@
   remote_user: "{{ remote_usr | default('calizarr') }}"
 
   vars:
-    linuxbrew_path: "/home/linuxbrew"
+    bash_rc: "{{ ansible_env.HOME }}/.bashrc"
+    nix_bins: "{{ ansible_env.HOME }}/.nix-profile/bin"
 
   environment:
-    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ linuxbrew_path }}/.linuxbrew/bin:{{ ansible_env.PATH }}:{{ linuxbrew_path }}/.linuxbrew/sbin:{{ ansible_env.HOME }}/.krew/bin:{{ ansible_env.HOME }}/.pyenv/bin"
-    HOMEBREW_PREFIX: "{{ linuxbrew_path }}/.linuxbrew"
-    HOMEBREW_CELLAR: "{{ linuxbrew_path }}/.linuxbrew/Cellar"
-    HOMEBREW_REPOSITORY: "{{ linuxbrew_path }}/.linuxbrew/Homebrew"
+    PATH: "{{ ansible_env.HOME }}/.nix-profile/bin:{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.HOME }}/.pyenv/bin:{{ ansible_env.HOME }}/.krew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
+    NIX_PROFILES: "/nix/var/nix/profiles/default {{ ansible_env.HOME }}/.nix-profile"
+    NIX_PATH: "{{ ansible_env.HOME }}/.nix-defexpr/channels"
+    NIX_SSL_CERT_FILE: "/etc/ssl/certs/ca-certificates.crt"
 
   tasks:
-  - name: "Create .local/bin"
+  - name: Create .local/bin
     ansible.builtin.file:
       path: "{{ ansible_env.HOME }}/.local/bin"
       state: directory
       mode: u=rwx,g=rwx,o=rx
 
-  - name: Install packages
+  - name: Installing packages
     include_role:
       name: './roles/packages'
 
-  - name: Install linuxbrew
+  - name: Installing Nix
     include_role:
-      name: './roles/linuxbrew'
+      name: './roles/nix'
+
+  - name: Configure pyenv
+    include_role:
+      name: './roles/pyenvs'
+
+  - name: Install Sdkman
+    include_role:
+      name: './roles/sdkman'
+
+  - name: GCCEMACS
+    include_role:
+      name: './roles/gccemacs'
 
   - name: Configure ssh, emacs, tmux, git
     include_role:
@@ -51,21 +64,13 @@
     include_role:
       name: './roles/terminator'
 
-  - name: Configure pyenv
-    include_role:
-      name: './roles/pyenvs'
-
   - name: Chrome Installation and Configuration
     include_role:
       name: './roles/chrome'
 
-  - name: Add Kubernetes Krew Packages
+  - name: Add Kubernetes Plugins And Binaries
     include_role:
       name: './roles/kubernetes'
-
-  - name: GCCEMACS
-    include_role:
-      name: './roles/gccemacs'
 
   - name: Reboot Ubuntu VM after ansible playbook has finished
     become: yes
