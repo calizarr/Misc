@@ -113,10 +113,12 @@
   register: kubectx_gz
 
 - name: kubernetes - Unpack kubectx tarball
-  command: "tar xzf {{ kubectx_gz.dest }}"
-  args:
-    removes: "{{ kubectx_gz.dest }}"
-    creates: "{{ kubectx_gz.dest | dirname }}/kubectx"
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: "{{ kubectx_gz.dest }}"
+    dest: "{{ kubectx_gz.dest | dirname }}"
+    exclude:
+      - "LICENSE"
 
 - name: kubernetes - Copy kubectx binary to PATH
   ansible.builtin.copy:
@@ -134,10 +136,12 @@
   register: kubens_gz
 
 - name: kubernetes - Unpack kubens tarball
-  command: "tar xzf {{ kubens_gz.dest }}"
-  args:
-    removes: "{{ kubens_gz.dest }}"
-    creates: "{{ kubens_gz.dest | dirname }}/kubens"
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: "{{ kubens_gz.dest }}"
+    dest: "{{ kubens_gz.dest | dirname }}"
+    exclude:
+      - "LICENSE"
 
 - name: kubernetes - Copy kubens binary to PATH
   ansible.builtin.copy:
