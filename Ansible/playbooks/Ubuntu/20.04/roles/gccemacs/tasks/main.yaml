@@ -32,16 +32,16 @@
     repo: https://git.savannah.gnu.org/git/emacs.git
     dest: "{{ gccemacs_dest }}"
     accept_hostkey: yes
-    version: feature/native-comp
 
 - name: gccemacs - Configure and run
   shell: |
     ./autogen.sh && \
-    ./configure --with-nativecomp --with-json --with-mailutils --prefix=$HOME/.local --disable-silent-rules --program-prefix=gcc --with-modules=yes --with-x=yes --with-x-toolkit=gtk3 --with-xwidgets=yes && \
+    ./configure --with-native-compilation --with-json --with-mailutils --prefix=$HOME/.local --disable-silent-rules --program-prefix=gcc --with-modules=yes --with-x=yes --with-x-toolkit=gtk3 --with-xwidgets=yes && \
     make -j ${JOBS} && make install
   args:
     chdir: "{{ gccemacs_dest }}"
     creates: "{{ ansible_env.HOME }}/.local/bin/gccemacs"
   environment:
     - CC: "gcc-10"
+    - CXX: "gcc-10"
     - JOBS: 22

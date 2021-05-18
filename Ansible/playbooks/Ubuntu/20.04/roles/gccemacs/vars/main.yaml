@@ -1,6 +1,7 @@
 ---
 gccemacs_apt_packages:
   - gcc-10
+  - g++-10
   - libgccjit-10-dev
   - libgccjit0
   - libglib2.0-dev
