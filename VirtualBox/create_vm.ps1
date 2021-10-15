@@ -36,7 +36,7 @@ DryRunVerboseExec($CreateCommand)
 # --nic1 natnetwork --nat-network1 NatNetwork 
 $FlagArray = @(
     "--hwvirtex on", "--x2apic on", "--pae on", "--nestedpaging on", "--nested-hw-virt on",
-    "--accelerate3d on", "--biosapic x2apic", "--graphicscontroller 'VMSVGA'",
+    "--accelerate3d on", "--graphicscontroller 'VMSVGA'",
     "--clipboard-mode bidirectional", "--draganddrop bidirectional",
     "--nic1 nat", "--nic2 hostonly", "--hostonlyadapter2 'VirtualBox Host-Only Ethernet Adapter #2'",
     "--cableconnected2 off","--usbxhci on"
