@@ -64,7 +64,9 @@
 
 - name: kubernetes - Get Kops Version
   shell: |
-    curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4
+    export PROJECT_NAME=kops
+    export REPO_NAME=kubernetes
+    curl -Ls -X GET https://api.github.com/repos/${REPO_NAME}/${PROJECT_NAME}/releases | grep -w tag_name | uniq | awk -F'"tag_name":' '{print $2}' | head -n1 | awk '{gsub(/"/, "", $1)} {gsub(/,/, "", $1)} {print $1}'
   register: kops_version
 
 - name: kubernetes - Get Kops binary
@@ -84,7 +86,9 @@
 
 - name: kubernetes - Get kubectx and kubens version
   shell: |
-    curl -Ls https://github.com/ahmetb/kubectx/releases/latest | grep tag_name | uniq | awk -F'tag_name=' '{print $2}' | awk -F'&amp' '{print $1}'
+    PROJECT_NAME=kubectx
+    REPO_NAME=ahmetb
+    curl -Ls -X GET https://api.github.com/repos/${REPO_NAME}/${PROJECT_NAME}/releases | grep -w tag_name | uniq | awk -F'"tag_name":' '{print $2}' | head -n1 | awk '{gsub(/"/, "", $1)} {gsub(/,/, "", $1)} {print $1}'
   register: kubectx_version
 
 - name: kubernetes - Get kubectx tarball
