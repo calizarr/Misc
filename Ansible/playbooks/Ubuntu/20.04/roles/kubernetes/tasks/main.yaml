@@ -62,26 +62,6 @@
     force: yes
     mode: u=rwx,g=rwx,o=x
 
-- name: kubernetes - Get Stern Version
-  shell: |
-    curl -Ls https://github.com/wercker/stern/releases/latest | grep tag_name | uniq | awk -F'tag_name=' '{print $2}' | awk -F'&amp' '{print $1}'
-  register: stern_version
-
-- name: kubernetes - Get Stern binary
-  ansible.builtin.get_url:
-    url: "https://github.com/wercker/stern/releases/download/{{ stern_version.stdout }}/stern_linux_amd64"
-    dest: "{{ ansible_env.HOME }}/Downloads/stern_linux_amd64"
-    mode: u=rwx,g=rwx,o=r
-  register: stern
-
-- name: kubernetes - Copy Stern binary to PATH
-  ansible.builtin.copy:
-    src: "{{ stern.dest | dirname }}/stern_linux_amd64"
-    dest: "{{ ansible_env.HOME }}/.local/bin/stern"
-    remote_src: yes
-    force: yes
-    mode: u=rwx,g=rwx,o=x
-
 - name: kubernetes - Get Kops Version
   shell: |
     curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4
