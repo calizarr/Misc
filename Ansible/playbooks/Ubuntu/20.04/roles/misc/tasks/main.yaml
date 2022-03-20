@@ -1,0 +1,26 @@
+---
+- name: Add functions
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/install_things.sh"
+    insertafter: EOF
+    block: |
+      {{ item.value }}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK {{ item.name }}"
+    create: yes
+    mode: u+rwx
+  loop: "{{ functions }}"
+
+- name: Install all the things
+  command: "sh {{ ansible_env.HOME }}/install_things.sh"
+  become: yes
+  args:
+    creates: /usr/local/bin/fd
+
+- name: Install FZF - Clone
+  ansible.builtin.git:
+    repo: git@github.com:junegunn/fzf.git
+    dest: "{{ ansible_env.HOME }}/.fzf"
+    accept_hostkey: yes
+
+- name: Install FZF - Run install script
+  command: "bash {{ ansible_env.HOME }}/.fzf/install --all"

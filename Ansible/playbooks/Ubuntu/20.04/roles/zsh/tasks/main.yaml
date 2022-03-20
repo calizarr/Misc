@@ -14,11 +14,18 @@
 - name: ZSH - Setting up Oh My Zsh
   command: "sh {{ omz_install.dest }} --unattended"
   when: not oh_my_zsh_dir.stat.exists | bool
-  
+
 - name: ZSH - Delete OMZ .zshrc
   ansible.builtin.file:
     path: "{{ ansible_env.HOME }}/.zshrc"
     state: absent
+
+- name: ZSH - Get plugins
+  ansible.builtin.git:
+    repo: "https://github.com/zsh-users/{{ item }}.git"
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/{{ item }}"
+    accept_hostkey: yes
+  loop: "{{ plugins }}"
 
 - name: ZSH - Check if zsh repo has already been cloned
   ansible.builtin.stat:

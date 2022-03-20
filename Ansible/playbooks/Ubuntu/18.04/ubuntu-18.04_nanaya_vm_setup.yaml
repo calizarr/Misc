@@ -4,7 +4,6 @@
 
   vars:
     apt_repos:
-      - 'ppa:alexlarsson/flatpak'
       - 'ppa:ubuntu-elisp/ppa'
 
     apt_packages:
@@ -28,7 +27,6 @@
       - 'libsqlite3-dev'
       - 'libssl-dev'
       - 'libxss1'
-      - 'linuxbrew-wrapper'
       - 'llvm'
       - 'openjdk-11-jdk'
       - 'python-openssl'

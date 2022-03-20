@@ -1,11 +1,15 @@
 ---
-- name: Use WSL SSH key
-  ansible.builtin.copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    mode: "{{ item.mode }}"
-  loop: "{{ ssh_items | flatten(levels=1) }}"
+- name: Check if emacs repo is a stub
+  ansible.builtin.find:
+    path: "{{ ansible_env.HOME }}/.emacs.d/"
+  register: "emacs_files_found"
 
+- name: Remove initial .emacs.d
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.emacs.d"
+    state: absent
+  when: emacs_files_found.matched == 0
+    
 - name: Check if emacs repo has already been cloned
   ansible.builtin.stat:
     path: "{{ ansible_env.HOME }}/.emacs.d"
@@ -27,9 +31,6 @@
     dest: "{{ ansible_env.HOME}}/GitHub_Repos/Misc"
     accept_hostkey: yes
   when: not dotfiles_repo.stat.exists
-
-- name: Check if dotfiles repo has been cloned
-  include_tasks: ./check_dotfiles.yaml
 
 - name: Get Tmux configuration file and symlink
   ansible.builtin.file:

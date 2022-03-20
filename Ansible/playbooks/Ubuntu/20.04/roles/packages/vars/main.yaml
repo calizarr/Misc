@@ -4,7 +4,6 @@ apt_keys:
   - https://download.docker.com/linux/ubuntu/gpg
 
 apt_repos:
-  - 'ppa:alexlarsson/flatpak'
   - 'ppa:ubuntu-elisp/ppa'
   - "deb [arch=amd64] https://apt.releases.hashicorp.com {{ lsb_release.stdout }} main"
   - "deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ lsb_release.stdout }} stable"
@@ -18,10 +17,11 @@ apt_packages:
   - 'docker-ce'
   - 'docker-ce-cli'
   - 'emacs-snapshot'
-  - 'flatpak'
   - 'fonts-powerline'
   - 'git'
   - 'gnupg-agent'
+  - 'htop'
+  - 'jq'
   - 'libappindicator1'
   - 'libbz2-dev'
   - 'libffi-dev'
@@ -36,14 +36,15 @@ apt_packages:
   - 'libssl-dev'
   - 'libxss1'
   - 'llvm'
-  - 'openjdk-11-jdk'
   - 'python-openssl'
   - 'python3-pip' # Needed for terminator themes
   - 'qt5-default'
+  - 'silversearcher-ag'
   - 'software-properties-common'
   - 'terminator'
   - 'terraform'
   - 'tk-dev'
+  - 'tmux'
   - 'vault'
   - 'wget'
   - 'x11-utils' # Mouse binding for back/forward keys
@@ -55,8 +56,3 @@ apt_packages:
 
 system_pip_packages:
   - 'requests' # Needed for terminator themes
-
-snap_packages:
-  - 'keepassxc'
-snap_classic_packages:
-  - 'slack'

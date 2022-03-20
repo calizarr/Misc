@@ -4,13 +4,9 @@
 
   vars:
     bash_rc: "{{ ansible_env.HOME }}/.bashrc"
-    nix_bins: "{{ ansible_env.HOME }}/.nix-profile/bin"
 
   environment:
-    PATH: "{{ ansible_env.HOME }}/.nix-profile/bin:{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.HOME }}/.pyenv/bin:{{ ansible_env.HOME }}/.krew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-    NIX_PROFILES: "/nix/var/nix/profiles/default {{ ansible_env.HOME }}/.nix-profile"
-    NIX_PATH: "{{ ansible_env.HOME }}/.nix-defexpr/channels"
-    NIX_SSL_CERT_FILE: "/etc/ssl/certs/ca-certificates.crt"
+    PATH: "{{ ansible_env.HOME }}/.local/bin:{{ ansible_env.HOME }}/.pyenv/bin:{{ ansible_env.HOME }}/.krew/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
 
   tasks:
   - name: Create .local/bin
@@ -22,10 +18,6 @@
   - name: Installing packages
     include_role:
       name: './roles/packages'
-
-  - name: Installing Nix
-    include_role:
-      name: './roles/nix'
 
   - name: Configure pyenv
     include_role:
@@ -43,22 +35,26 @@
     include_role:
       name: './roles/configuration'
 
+  - name: Installing MISC
+    include_role:
+      name: './roles/misc'
+
   - name: Install zsh, oh-my-zsh, and configure
     include_role:
       name: './roles/zsh'
 
-  - name: Reboot Ubuntu VM post package installation
-    become: yes
-    reboot:
-      connect_timeout: 20
-      msg: "Reboot initiated post package installation"
-      pre_reboot_delay: 6
-      post_reboot_delay: 30
-      reboot_timeout: 600
+#  - name: Reboot Ubuntu VM post package installation
+#    become: yes
+#    reboot:
+#      connect_timeout: 20
+#      msg: "Reboot initiated post package installation"
+#      pre_reboot_delay: 6
+#      post_reboot_delay: 30
+#      reboot_timeout: 600
 
-  - name: Change gnome via gsettings etc.
-    include_role:
-      name: './roles/gnome_settings'
+#  - name: Change gnome via gsettings etc.
+#    include_role:
+#      name: './roles/gnome_settings'
 
   - name: Configure Terminator
     include_role:
@@ -68,15 +64,15 @@
     include_role:
       name: './roles/chrome'
 
-  - name: Add Kubernetes Plugins And Binaries
-    include_role:
-      name: './roles/kubernetes'
+#  - name: Add Kubernetes Plugins And Binaries
+#    include_role:
+#      name: './roles/kubernetes'
 
-  - name: Reboot Ubuntu VM after ansible playbook has finished
-    become: yes
-    reboot:
-      connect_timeout: 20
-      msg: "Final reboot initiated before machine is operational"
-      pre_reboot_delay: 6
-      post_reboot_delay: 30
-      reboot_timeout: 600
+#  - name: Reboot Ubuntu VM after ansible playbook has finished
+#    become: yes
+#    reboot:
+#      connect_timeout: 20
+#      msg: "Final reboot initiated before machine is operational"
+#      pre_reboot_delay: 6
+#      post_reboot_delay: 30
+#      reboot_timeout: 600

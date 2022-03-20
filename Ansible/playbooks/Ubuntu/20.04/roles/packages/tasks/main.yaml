@@ -34,17 +34,6 @@
   ansible.builtin.pip:
     name: "{{ system_pip_packages }}"
 
-- name: Installing Snap packages
-  become: yes
-  ansible.builtin.snap:
-    name: "{{ snap_packages }}"
-
-- name: Installing Snap classic confinement packages
-  become: yes
-  ansible.builtin.snap:
-    classic: yes
-    name: "{{ snap_classic_packages }}"
-
 - name: Docker post-installations steps
   become: yes
   ansible.builtin.group:

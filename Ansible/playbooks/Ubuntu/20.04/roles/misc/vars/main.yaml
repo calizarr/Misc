@@ -1,0 +1,84 @@
+---
+functions:
+  - name: SETUP
+    value: |
+      #!/usr/bin/bash
+      set -x
+      cd /tmp
+  - name: GITHUB_GET_LATEST
+    value: |
+      github_get_latest_version() {
+      REPO_NAME="$1"
+      PROJECT_NAME="$2"
+      echo $(curl -Ls -X GET https://api.github.com/repos/${REPO_NAME}/${PROJECT_NAME}/releases | grep -w tag_name | uniq | awk -F'"tag_name":' '{print $2}' | head -n1 | awk '{gsub(/"/, "", $1)} {gsub(/,/, "", $1)} {print $1}')
+      }  
+  - name: HUB
+    value: |
+      install_hub() {
+      # Install Hub directly from GitHub
+      REPO_NAME="github"
+      PROJECT_NAME="hub"
+      HUB_VERSION=$(github_get_latest_version "github" "hub")
+      HUB_FILENAME="hub-linux-amd64-${HUB_VERSION}.tgz"
+      curl -Lo $HUB_FILENAME "https://github.com/${REPO_NAME}/${PROJECT_NAME}/releases/download/${HUB_VERSION}/${HUB_FILENAME}"
+      tar xvzf $HUB_FILENAME
+      sudo ${HUB_FILENAME%.*}/./install
+      }
+  - name: AWSCLI
+    value: |
+      install_awscli() {
+      # Install AWS Cli v2 directly from Amazon
+      curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+      unzip awscliv2.zip
+      sudo ./aws/install
+      }
+  - name: KUBECTL
+    value: |
+      install_kubectl() {
+      KUBERNETES_VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+      curl -LO "https://storage.googleapis.com/kubernetes-release/release/${KUBERNETES_VERSION}/bin/linux/amd64/kubectl"
+      chmod +x kubectl
+      sudo install kubectl /usr/local/bin
+      }
+  - name: HELM
+    value: |
+      install_helm() {
+      curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+      chmod 700 get_helm.sh
+      ./get_helm.sh
+      }
+  - name: YQ_GO
+    value: |
+      install_yq_go() {
+      VERSION=$(github_get_latest_version "mikefarah" "yq")
+      BINARY="yq_linux_amd64"
+      wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O yq
+      chmod +x ./yq
+      sudo install yq /usr/local/bin/
+      }
+  - name: RIPGREP
+    value: |
+      install_ripgrep() {
+      VERSION=$(github_get_latest_version "BurntSushi" "ripgrep")
+      BINARY="ripgrep-${VERSION}-x86_64-unknown-linux-musl"
+      wget https://github.com/BurntSushi/ripgrep/releases/download/${VERSION}/${BINARY}.tar.gz
+      tar xvzf ${BINARY}.tar.gz
+      sudo install $BINARY/rg /usr/local/bin
+      }
+  - name: FD
+    value: |
+      install_fd() {
+      VERSION=$(github_get_latest_version "sharkdp" "fd")
+      BINARY="fd-${VERSION}-x86_64-unknown-linux-gnu"
+      wget https://github.com/sharkdp/fd/releases/download/${VERSION}/${BINARY}.tar.gz
+      tar xvzf ${BINARY}.tar.gz
+      sudo install $BINARY/fd /usr/local/bin
+      }
+  - name: run
+    value: |
+      install_hub
+      install_awscli
+      install_kubectl
+      install_helm
+      install_ripgrep
+      install_fd
